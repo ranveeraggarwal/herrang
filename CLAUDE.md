@@ -5,6 +5,11 @@ Mobile-first, offline-capable companion for Herräng Dance Camp 2026, live at
 schedule and every committed daily program ship in the initial payload, no
 backend, no runtime data fetches.
 
+**Read `AGENTS.md` too** — this file covers commands, data, and time-boundary
+logic; `AGENTS.md` covers voice and design, and has a cautionary tale about
+what happens when an agent "cleans up" the personality by accident. Both
+matter equally here.
+
 ## The design language
 
 The camp's daily poster *is* the design system: flat saturated color blocks,
