@@ -24,6 +24,7 @@ import { TodayView } from './TodayView';
 import { TonightView } from './TonightView';
 import { WeekView } from './WeekView';
 import { SettingsSheet, type ThemePref } from './SettingsSheet';
+import { InstallToast } from './InstallToast';
 
 type View = 'today' | 'tonight' | 'week';
 
@@ -235,6 +236,8 @@ export function HerrangApp({ data }: { data: HerrangData }) {
         onTheme={saveTheme}
         trackIds={trackIds}
       />
+
+      <InstallToast />
     </div>
   );
 }
