@@ -67,7 +67,8 @@ export function TodayView({
   }
 
   // Class-free days: Wednesday has the whole-camp special at 14:00; arrival
-  // Saturday has nothing scheduled at all.
+  // Saturday has the Mozambican Dances daytime special at 11:20 (the rest of
+  // the evening program lives in the daily file, not here).
   if (isClassFreeDay(week, clock.posterDate)) {
     const specials = weekSpecialsOn(week, clock.posterDate);
     if (specials.length === 0) {
