@@ -21,7 +21,7 @@ import {
   venueName,
   type StreamGroup,
 } from '@/lib/herrang/schedule';
-import { blockStyle, BigSay, Chip } from './bits';
+import { blockStyle, kindColor, kindLabel, BigSay, Chip } from './bits';
 
 export function TonightView({
   data,
@@ -117,14 +117,22 @@ export function TonightView({
               <span className="hg-display text-sm">Now</span>
               <ul className="mt-2 flex flex-col gap-2">
                 {running.map((e) => (
-                  <li key={`${e.title}-${e.start}`} className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
-                    <span className="hg-display text-xl">{e.title}</span>
-                    <span className="text-sm font-semibold" style={{ color: 'var(--hg-soft)' }}>
-                      {e.venues.map((v) => venueName(data.venues, v)).join(' + ')}
+                  <li key={`${e.title}-${e.start}`} className="flex flex-col gap-0.5">
+                    <span
+                      className="hg-display text-[11px] font-bold uppercase tracking-wider"
+                      style={{ color: kindColor(e.kind) }}
+                    >
+                      {kindLabel(e.kind)}
                     </span>
-                    <Chip filled>
-                      {endsChip(nowPM, e.end ? toPosterMinutes(e.end) : undefined, e.openEnd)}
-                    </Chip>
+                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
+                      <span className="hg-display text-xl">{e.title}</span>
+                      <span className="text-sm font-semibold" style={{ color: 'var(--hg-soft)' }}>
+                        {e.venues.map((v) => venueName(data.venues, v)).join(' + ')}
+                      </span>
+                      <Chip filled>
+                        {endsChip(nowPM, e.end ? toPosterMinutes(e.end) : undefined, e.openEnd)}
+                      </Chip>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -200,7 +208,7 @@ function StreamBlock({
       <span className="hg-display hg-time w-14 shrink-0 pt-1 text-lg">
         {group.start}
       </span>
-      <div className="flex min-w-0 flex-1 flex-col gap-2">
+      <div className="flex min-w-0 flex-1 flex-col gap-3">
         {group.events.map((e) => (
           <EventBlock key={`${e.title}-${e.venues.join()}`} event={e} data={data} live={live} nowPM={nowPM} />
         ))}
@@ -232,6 +240,12 @@ function EventBlock({
       className="p-4"
       style={{ ...blockStyle(e.kind, e.tba), ...(over ? { opacity: 0.4 } : null) }}
     >
+      <span
+        className="hg-display block text-[11px] font-bold uppercase tracking-wider"
+        style={{ opacity: 0.65 }}
+      >
+        {kindLabel(e.kind)}
+      </span>
       <div className="flex items-baseline justify-between gap-3">
         <h4 className="hg-display min-w-0 text-lg">{e.title}</h4>
         <span className="hg-time shrink-0 text-sm font-bold">
