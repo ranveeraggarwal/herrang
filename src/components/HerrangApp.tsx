@@ -192,6 +192,21 @@ export function HerrangApp({ data }: { data: HerrangData }) {
         style={{ color: 'var(--hg-soft)', borderTop: '1px solid var(--hg-line)' }}
       >
         <p>Unofficially made for a village up north.</p>
+        <p className="mt-1">
+          Something off?{' '}
+          <a
+            href="https://github.com/ranveeraggarwal/herrang"
+            className="underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Github
+          </a>
+          {' · '}
+          <a href="mailto:herrang@walagran.com" className="underline">
+            Email
+          </a>
+        </p>
       </footer>
 
       <SettingsSheet
