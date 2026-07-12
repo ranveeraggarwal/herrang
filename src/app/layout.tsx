@@ -3,6 +3,7 @@
 
 import type { Metadata, Viewport } from 'next';
 import { Archivo_Black, Inter } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 const display = Archivo_Black({
@@ -65,7 +66,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="hg-body">{children}</body>
+      <body className="hg-body">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
