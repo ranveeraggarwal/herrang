@@ -127,15 +127,21 @@ export function WeekView({
       {upcoming.map(dayCard)}
 
       {pastCards.length > 0 && (
-        <details className="group">
-          <summary
-            className="hg-display cursor-pointer list-none text-xs"
-            style={{ color: 'var(--hg-soft)' }}
-          >
-            Already happened. Relax. ({pastCards.length})
-          </summary>
-          <div className="mt-3 flex flex-col gap-3 opacity-60">{pastCards}</div>
-        </details>
+        <>
+          <hr className="my-1" style={{ borderColor: 'var(--hg-line)' }} />
+          <details className="group">
+            <summary
+              className="hg-display flex cursor-pointer list-none items-center gap-1.5 text-xs"
+              style={{ color: 'var(--hg-soft)' }}
+            >
+              <span className="inline-block transition-transform group-open:rotate-90">
+                ▸
+              </span>
+              Already happened. Relax. ({pastCards.length})
+            </summary>
+            <div className="mt-3 flex flex-col gap-3 opacity-60">{pastCards}</div>
+          </details>
+        </>
       )}
     </div>
   );
