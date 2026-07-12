@@ -26,9 +26,8 @@ npm run serve      # http://localhost:4173
 ```
 
 Deploys automatically on push to `main` (Vercel), with a preview deployment
-and a PR comment on every pull request. See
-[`docs/vercel-setup.md`](docs/vercel-setup.md) for the one-time connection
-steps and the domain CNAME.
+and a PR comment on every pull request, once the repo is connected in the
+Vercel dashboard (one-time, done outside this repo).
 
 **CI setup (one-time):** the session token couldn't push workflow files, so
 the GitHub Actions workflow lives at `ci/validate.yml`. Move it into place
