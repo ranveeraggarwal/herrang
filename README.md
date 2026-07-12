@@ -27,5 +27,13 @@ npm run serve      # http://localhost:4173
 
 Deploys automatically on push to `main` (Vercel).
 
+**CI setup (one-time):** the session token couldn't push workflow files, so
+the GitHub Actions workflow lives at `ci/validate.yml`. Move it into place
+to enable data validation on every push:
+
+```sh
+mkdir -p .github/workflows && git mv ci/validate.yml .github/workflows/validate.yml
+```
+
 All programme data belongs to Herräng Dance Camp; the printed sheets are
 authoritative. This app is an unofficial companion.
