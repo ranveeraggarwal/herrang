@@ -20,6 +20,11 @@ export function addDays(iso: string, days: number): string {
   return d.toISOString().slice(0, 10);
 }
 
+/** Whole days between two YYYY-MM-DD dates (b - a). */
+export function diffDays(a: string, b: string): number {
+  return Math.round((parseUTC(b).getTime() - parseUTC(a).getTime()) / 86_400_000);
+}
+
 /**
  * Formats a YYYY-MM-DD string into a compact "Wed 26 Aug" label. Built from
  * fixed arrays rather than `toLocaleDateString`/`Intl`: ICU's combined

@@ -12,6 +12,7 @@ import {
   type ClockState,
 } from '@/lib/herrang/time';
 import {
+  campDayNumber,
   classesOn,
   firstClassOnOrAfter,
   freeDayLine,
@@ -24,6 +25,19 @@ import {
 } from '@/lib/herrang/schedule';
 import { formatCompactWeekdayDate } from '@/lib/dates';
 import { BigSay, Card, Chip } from './bits';
+
+// One line per day of camp — sleep debt escalates, the joke doesn't repeat
+// until the pool runs out. Index by day-of-camp so it's stable all night,
+// not a coin flip on every 30s clock tick.
+const WEIRD_HOURS_LINES = [
+  "Go to bed. Or don't.",
+  'Still got legs. Go to bed.',
+  "You're not as young as Tuesday you.",
+  "Whatever this is, it's not a nap.",
+  'Your body is filing a complaint.',
+  "The sun's basically up. Might as well stay up.",
+  'Go to bed. Home is soon enough.',
+];
 
 export function TodayView({
   data,
@@ -43,9 +57,10 @@ export function TodayView({
   // 04:00–08:00 — a single card.
   if (clock.mode === 'weird') {
     const first = firstClassOnOrAfter(week, trackIds, clock.dateISO);
+    const dayIndex = (campDayNumber(week, clock.posterDate) - 1) % WEIRD_HOURS_LINES.length;
     return (
       <BigSay
-        title="Go to bed. Or don't."
+        title={WEIRD_HOURS_LINES[dayIndex]}
         sub={
           first ? (
             <span>

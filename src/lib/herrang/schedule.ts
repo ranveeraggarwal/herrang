@@ -2,7 +2,7 @@
 // reasoning delegates to time.ts's poster timeline; this file only picks and
 // sorts. No I/O, no React.
 
-import { addDays } from '@/lib/dates';
+import { addDays, diffDays } from '@/lib/dates';
 import type {
   DailyEvent,
   DailyProgram,
@@ -201,6 +201,18 @@ export function isWeekWrapped(
 /** Whole-camp specials (e.g. the Wednesday special) for a given date. */
 export function weekSpecialsOn(week: WeekSchedule, date: string): WeekSpecial[] {
   return week.specials.filter((s) => s.date === date);
+}
+
+/** 1-based day of camp for a poster date, clamped to the week window —
+ * "Day 4 of 7". */
+export function campDayNumber(week: WeekSchedule, date: string): number {
+  const clamped = date < week.start ? week.start : date > week.end ? week.end : date;
+  return diffDays(week.start, clamped) + 1;
+}
+
+/** Total days in the week window — the "of 7" in "Day 4 of 7". */
+export function campDayCount(week: WeekSchedule): number {
+  return diffDays(week.start, week.end) + 1;
 }
 
 /** The "nothing else today" line for a class-free day. Arrival Saturday
