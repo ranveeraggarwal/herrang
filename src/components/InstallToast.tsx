@@ -86,7 +86,10 @@ export function InstallToast() {
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 flex justify-center px-4 pb-4">
+    <div
+      className="fixed inset-x-0 bottom-0 z-40 flex justify-center px-4"
+      style={{ paddingBottom: 'calc(env(safe-area-inset-bottom) + 1rem)' }}
+    >
       <div
         className="flex w-full max-w-xl items-center justify-between gap-3 p-4"
         style={{

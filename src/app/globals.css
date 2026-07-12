@@ -48,6 +48,13 @@
   color: var(--hg-ink);
   font-family: var(--font-hg-body), system-ui, sans-serif;
   min-height: 100dvh;
+  /* viewport-fit=cover (layout.tsx) draws under the notch/status bar for a
+     full-bleed ground — installed as a PWA, iOS gives no browser chrome to
+     push content clear of it, so we have to pad for the safe area ourselves. */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 /* Chunky uppercase display face — titles, venue names, big times. */
