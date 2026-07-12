@@ -131,7 +131,7 @@ export function HerrangApp({ data }: { data: HerrangData }) {
       <div className="mx-auto flex w-full max-w-xl flex-grow flex-col px-4">
         <header className="flex items-start justify-between gap-3 pt-5 pb-4">
           <div>
-            <h1 className="hg-display text-xl leading-none">My Herräng</h1>
+            <h1 className="hg-display text-xl leading-none">Herräng Companion</h1>
             <p
               className="hg-time mt-1 text-xs font-semibold uppercase tracking-wider"
               style={{ color: 'var(--hg-soft)' }}

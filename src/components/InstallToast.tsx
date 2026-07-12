@@ -101,7 +101,7 @@ export function InstallToast() {
         <p className="text-sm font-semibold">
           {iosHint
             ? 'Add to Home Screen for offline access — Share → Add to Home Screen.'
-            : 'Install My Herräng for offline access at camp.'}
+            : 'Install Herräng Companion for offline access at camp.'}
         </p>
         <div className="flex shrink-0 items-center gap-2">
           {!iosHint && (
