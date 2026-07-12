@@ -1,16 +1,16 @@
 'use client';
 
-// Night mode: tonight's program as a single chronological stream with a
-// moving now-line. The poster's venue-columns × hour-rows grid dies on a
-// phone — here every block carries its own venue instead. Timed specials
-// are merged into the stream at their actual slot; only specials with no
-// start time (can't be placed on a timeline) stay pinned as red cards.
-// TBA items render as mystery cards.
+// Night mode: tonight's program as a single chronological stream. The
+// poster's venue-columns × hour-rows grid dies on a phone — here every
+// block carries its own venue instead. Timed specials are merged into the
+// stream at their actual slot; only specials with no start time (can't be
+// placed on a timeline) stay pinned as red cards. TBA items render as
+// mystery cards. Currently-running cards carry their own progress scrim
+// instead of a separate now-line — see EventBlock.
 
 import type { DailyEvent, HerrangData } from '@/lib/herrang/types';
 import {
   endsChip,
-  fromPosterMinutes,
   relativeChip,
   toPosterMinutes,
   type ClockState,
@@ -46,10 +46,10 @@ export function TonightView({
   const stream = tonightStream(daily);
   // "Live" for the whole poster window, not just the party hours: the poster's
   // night genuinely runs through 07:59 the next morning, so the 04:00–08:00
-  // tail still needs now-line/past-dimming — otherwise a 3am check-in freezes
-  // with nothing ever marked as over. Stays false outside that window
-  // (checking Tonight ahead of time during the day), since nothing has
-  // started yet.
+  // tail still needs the running/past treatment — otherwise a 3am check-in
+  // freezes with nothing ever marked as over or in progress. Stays false
+  // outside that window (checking Tonight ahead of time during the day),
+  // since nothing has started yet.
   const live = clock.mode === 'night' || clock.mode === 'weird';
   const nowPM = clock.posterMinutes;
 
@@ -138,23 +138,14 @@ export function TonightView({
         </p>
       )}
 
-      {/* The stream. */}
+      {/* The stream. No separate now-line — the currently running card(s)
+          carry their own progress scrim instead (see EventBlock). */}
       <ol className="flex flex-col gap-3">
-        {stream.map((group, i) => {
-          const prevPM = i === 0 ? -Infinity : stream[i - 1].startPM;
-          const showNowLine = live && nowPM >= prevPM && nowPM < group.startPM;
-          return (
-            <li key={group.start} className="flex flex-col gap-3">
-              {showNowLine && <NowLine nowPM={nowPM} />}
-              <StreamBlock group={group} data={data} live={live} nowPM={nowPM} />
-            </li>
-          );
-        })}
-        {live && stream.length > 0 && nowPM >= stream[stream.length - 1].startPM && (
-          <li>
-            <NowLine nowPM={nowPM} />
+        {stream.map((group) => (
+          <li key={group.start}>
+            <StreamBlock group={group} data={data} live={live} nowPM={nowPM} />
           </li>
-        )}
+        ))}
       </ol>
 
       {daily.note && (
@@ -162,20 +153,6 @@ export function TonightView({
           {daily.note}
         </p>
       )}
-    </div>
-  );
-}
-
-function NowLine({ nowPM }: { nowPM: number }) {
-  return (
-    <div className="flex items-center gap-2" aria-label="current time">
-      <span
-        className="hg-display hg-time text-xs"
-        style={{ color: 'var(--hg-special)' }}
-      >
-        Now {fromPosterMinutes(nowPM)}
-      </span>
-      <div className="h-0.5 flex-1" style={{ background: 'var(--hg-special)' }} />
     </div>
   );
 }
@@ -216,8 +193,17 @@ function EventBlock({
   live: boolean;
   nowPM: number;
 }) {
+  const startPM = toPosterMinutes(e.start);
   const endPM = e.end ? toPosterMinutes(e.end) : undefined;
   const over = live && endPM !== undefined && nowPM >= endPM;
+  // Currently running, with a known end: shade the elapsed portion from the
+  // left so what's still bright is what's still left — a stand-in for the
+  // now-line, right on the card it applies to instead of floating between
+  // rows. Skipped for TBA/mystery cards (no fill to shade over).
+  const runningNow = live && !e.tba && endPM !== undefined && nowPM >= startPM && nowPM < endPM;
+  const elapsedPct = runningNow
+    ? Math.round(((nowPM - startPM) / (endPM! - startPM)) * 100)
+    : 0;
   const hasVenue = e.venues.length > 0;
   // Some ex-specials (Queer Meet Up, Balboa Square Competition) have no
   // registry venue — their location lives in `detail` instead.
@@ -230,33 +216,42 @@ function EventBlock({
 
   return (
     <div
-      className="p-4"
+      className="relative overflow-hidden p-4"
       style={{ ...blockStyle(e.kind, e.tba), ...(over ? { opacity: 0.4 } : null) }}
     >
-      <span
-        className="hg-display block text-[11px] font-bold uppercase tracking-wider"
-        style={{ opacity: 0.65 }}
-      >
-        {kindLabel(e.kind)}
-      </span>
-      <div className="flex items-baseline justify-between gap-3">
-        <h4 className="hg-display min-w-0 text-lg">{e.title}</h4>
-        <span className="hg-time shrink-0 text-sm font-bold">
-          {e.start}–{e.end ?? '?'}
-        </span>
-      </div>
-      <p className="mt-0.5 text-sm font-semibold">{venuesLabel}</p>
-      {showDetailRow && (
-        <div className="mt-2 flex flex-wrap items-center gap-1.5 text-xs">
-          {e.theme && <Chip>{e.theme}</Chip>}
-          {e.tba && <Chip>TBA</Chip>}
-          {(e.tba || (e.detail && hasVenue)) && (
-            <span className="italic">
-              {e.detail ?? 'announced at the Variety Revue'}
-            </span>
-          )}
-        </div>
+      {runningNow && (
+        <div
+          aria-hidden
+          className="absolute inset-y-0 left-0"
+          style={{ width: `${elapsedPct}%`, background: 'rgba(0,0,0,0.28)' }}
+        />
       )}
+      <div className="relative z-10">
+        <span
+          className="hg-display block text-[11px] font-bold uppercase tracking-wider"
+          style={{ opacity: 0.65 }}
+        >
+          {kindLabel(e.kind)}
+        </span>
+        <div className="flex items-baseline justify-between gap-3">
+          <h4 className="hg-display min-w-0 text-lg">{e.title}</h4>
+          <span className="hg-time shrink-0 text-sm font-bold">
+            {e.start}–{e.end ?? '?'}
+          </span>
+        </div>
+        <p className="mt-0.5 text-sm font-semibold">{venuesLabel}</p>
+        {showDetailRow && (
+          <div className="mt-2 flex flex-wrap items-center gap-1.5 text-xs">
+            {e.theme && <Chip>{e.theme}</Chip>}
+            {e.tba && <Chip>TBA</Chip>}
+            {(e.tba || (e.detail && hasVenue)) && (
+              <span className="italic">
+                {e.detail ?? 'announced at the Variety Revue'}
+              </span>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
