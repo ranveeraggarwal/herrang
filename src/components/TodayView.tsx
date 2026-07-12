@@ -4,7 +4,8 @@
 // camp calendar throws at us — the class-free Wednesday, the post-Friday wrap,
 // and the 04:00–08:00 weird hours.
 
-import type { HerrangData, WeekClass } from '@/lib/herrang/types';
+import { useState, type SyntheticEvent } from 'react';
+import type { HerrangData, HerrangVenue, WeekClass } from '@/lib/herrang/types';
 import {
   endsChip,
   relativeChip,
@@ -39,7 +40,71 @@ const WEIRD_HOURS_LINES = [
   'Go to bed. Home is soon enough.',
 ];
 
-export function TodayView({
+export function TodayView(props: {
+  data: HerrangData;
+  clock: ClockState;
+  trackIds: string[];
+  onPickTracks: () => void;
+  onGoTonight: () => void;
+}) {
+  return (
+    <div className="flex flex-col gap-3">
+      <TodayViewBody {...props} />
+      <WhereAreThings venues={props.data.venues} />
+    </div>
+  );
+}
+
+const WHERE_OPEN_KEY = 'herrang.whereOpen.v1';
+
+/** Open by default; the user's collapse choice persists across visits.
+ * Safe to read localStorage in the initializer — TodayView only ever mounts
+ * client-side, after HerrangApp's clock gate has already passed. */
+function WhereAreThings({ venues }: { venues: HerrangVenue[] }) {
+  const [open, setOpen] = useState(() => {
+    try {
+      const raw = localStorage.getItem(WHERE_OPEN_KEY);
+      return raw === null ? true : raw === 'true';
+    } catch {
+      return true;
+    }
+  });
+
+  const handleToggle = (e: SyntheticEvent<HTMLDetailsElement>) => {
+    const isOpen = e.currentTarget.open;
+    setOpen(isOpen);
+    try {
+      localStorage.setItem(WHERE_OPEN_KEY, String(isOpen));
+    } catch {
+      /* private mode etc. — collapse state just won't persist */
+    }
+  };
+
+  return (
+    <Card>
+      <details className="group" open={open} onToggle={handleToggle}>
+        <summary
+          className="hg-display flex cursor-pointer list-none items-center gap-1.5 text-xs"
+          style={{ color: 'var(--hg-soft)' }}
+        >
+          <span className="inline-block transition-transform group-open:rotate-90">
+            ▸
+          </span>
+          Where are things?
+        </summary>
+        <ul className="mt-3 flex flex-col gap-1.5">
+          {venues.map((v) => (
+            <li key={v.id} className="text-sm font-semibold">
+              {venueLabel(venues, v.id)}
+            </li>
+          ))}
+        </ul>
+      </details>
+    </Card>
+  );
+}
+
+function TodayViewBody({
   data,
   clock,
   trackIds,
@@ -68,7 +133,7 @@ export function TodayView({
               <strong className="hg-time" style={{ color: 'var(--hg-ink)' }}>
                 {formatCompactWeekdayDate(first.date)} {first.start}
               </strong>{' '}
-              — {venueLabel(venues, first.venue)}
+              — {venueName(venues, first.venue)}
             </span>
           ) : trackIds.length === 0 && week.tracks.length > 0 ? (
             <button className="font-bold underline" onClick={onPickTracks}>
@@ -201,7 +266,7 @@ export function TodayView({
                     {c.start}–{c.end}
                   </span>
                   <span className="text-sm font-semibold">
-                    {venueLabel(data.venues, c.venue)}
+                    {venueName(data.venues, c.venue)}
                   </span>
                   <span className="text-xs" style={{ color: 'var(--hg-soft)' }}>
                     {c.title ?? track?.name}

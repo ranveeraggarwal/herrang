@@ -11,9 +11,10 @@ import {
   classesOn,
   freeDayLine,
   isClassFreeDay,
-  venueLabel,
+  venueName,
   weekSpecialsOn,
 } from '@/lib/herrang/schedule';
+import { toMinutes } from '@/lib/herrang/time';
 import { formatCompactWeekdayDate } from '@/lib/dates';
 import { BigSay, Card, Chip } from './bits';
 
@@ -21,12 +22,15 @@ export function WeekView({
   data,
   trackIds,
   today,
+  now,
   onPickTracks,
 }: {
   data: HerrangData;
   trackIds: string[];
   /** Poster date "now" is in force — days before it are already behind us. */
   today: string;
+  /** Minutes since local midnight — used only to grey out today's finished items. */
+  now: number;
   onPickTracks: () => void;
 }) {
   const { week, venues } = data;
@@ -62,28 +66,37 @@ export function WeekView({
     const free = isClassFreeDay(week, date);
     if (classes.length === 0 && specials.length === 0 && !free) return null;
 
+    // Only today's card can have finished items sitting next to upcoming
+    // ones — earlier days are already behind the "today" split, later days
+    // haven't started.
+    const isToday = date === today;
+
     return (
       <Card key={date}>
         <h3 className="hg-display mb-3 text-sm">
           {formatCompactWeekdayDate(date)}
         </h3>
         <ul className="flex flex-col gap-2">
-          {specials.map((s) => (
-            <li
-              key={s.title}
-              className="-mx-2 flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-lg px-2 py-1.5"
-              style={{
-                background: 'var(--hg-special)',
-                color: 'var(--hg-on-special)',
-              }}
-            >
-              {s.start && (
-                <span className="hg-time text-sm font-bold">{s.start}</span>
-              )}
-              <span className="text-sm font-bold">{s.title}</span>
-              {s.detail && <span className="text-xs">{s.detail}</span>}
-            </li>
-          ))}
+          {specials.map((s) => {
+            const donePast = isToday && s.start && now >= toMinutes(s.start);
+            return (
+              <li
+                key={s.title}
+                className="-mx-2 flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-lg px-2 py-1.5"
+                style={{
+                  background: 'var(--hg-special)',
+                  color: 'var(--hg-on-special)',
+                  opacity: donePast ? 0.45 : undefined,
+                }}
+              >
+                {s.start && (
+                  <span className="hg-time text-sm font-bold">{s.start}</span>
+                )}
+                <span className="text-sm font-bold">{s.title}</span>
+                {s.detail && <span className="text-xs">{s.detail}</span>}
+              </li>
+            );
+          })}
           {free && classes.length === 0 && (
             <li className="text-sm" style={{ color: 'var(--hg-soft)' }}>
               {freeDayLine(week, date)}
@@ -91,16 +104,18 @@ export function WeekView({
           )}
           {classes.map((c) => {
             const track = week.tracks.find((t) => t.id === c.track);
+            const done = isToday && now >= toMinutes(c.end);
             return (
               <li
                 key={`${c.track}-${c.start}`}
                 className="flex flex-wrap items-baseline gap-x-3 gap-y-1"
+                style={done ? { opacity: 0.45 } : undefined}
               >
                 <span className="hg-time text-sm font-bold">
                   {c.start}–{c.end}
                 </span>
                 <span className="text-sm font-semibold">
-                  {venueLabel(venues, c.venue)}
+                  {venueName(venues, c.venue)}
                 </span>
                 {trackIds.length > 1 && (
                   <span className="text-xs" style={{ color: 'var(--hg-soft)' }}>
