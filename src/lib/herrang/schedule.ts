@@ -176,11 +176,9 @@ export function weekSpecialsOn(week: WeekSchedule, date: string): WeekSpecial[] 
   return week.specials.filter((s) => s.date === date);
 }
 
-/** The line under a class-free day's specials. Arrival Saturday isn't a
- * rest day like Wednesday — it's the day everyone shows up — so it earns
- * its own tagline instead of the generic "free day." */
+/** The "nothing else today" line for a class-free day. Arrival Saturday
+ * isn't a rest day like Wednesday — it's the day everyone shows up — so it
+ * earns its own tagline instead of the generic "free day." */
 export function freeDayLine(week: WeekSchedule, date: string): string {
-  return date === week.start
-    ? 'Otherwise: the day your life changes.'
-    : 'Otherwise: free day.';
+  return date === week.start ? 'The day your life changes.' : 'Free day.';
 }

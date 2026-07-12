@@ -68,12 +68,17 @@ export function TodayView({
   }
 
   // Class-free days: Wednesday has the whole-camp special at 14:00; arrival
-  // Saturday has the Mozambican Dances daytime special at 11:20 (the rest of
-  // the evening program lives in the daily file, not here).
+  // Saturday has nothing on the class schedule (the evening program lives
+  // in the daily file, not here).
   if (isClassFreeDay(week, clock.posterDate)) {
     const specials = weekSpecialsOn(week, clock.posterDate);
     if (specials.length === 0) {
-      return <BigSay title="No classes today." sub="Free day." />;
+      return (
+        <BigSay
+          title="No classes today."
+          sub={freeDayLine(week, clock.posterDate)}
+        />
+      );
     }
     return (
       <div className="flex flex-col gap-3">
