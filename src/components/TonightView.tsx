@@ -2,20 +2,22 @@
 
 // Night mode: tonight's program as a single chronological stream with a
 // moving now-line. The poster's venue-columns × hour-rows grid dies on a
-// phone — here every block carries its own venue instead. Specials pin on
-// top as red cards regardless of time; TBA items render as mystery cards.
+// phone — here every block carries its own venue instead. Timed specials
+// are merged into the stream at their actual slot; only specials with no
+// start time (can't be placed on a timeline) stay pinned as red cards.
+// TBA items render as mystery cards.
 
 import type { DailyEvent, HerrangData } from '@/lib/herrang/types';
 import {
   endsChip,
   fromPosterMinutes,
-  isPast,
   relativeChip,
   toPosterMinutes,
   type ClockState,
 } from '@/lib/herrang/time';
 import {
   dailyFor,
+  eventLocation,
   tonightStream,
   venueLabel,
   venueName,
@@ -66,14 +68,13 @@ export function TonightView({
     <div className="flex flex-col gap-3">
       <h2 className="hg-display text-2xl">{daily.title}</h2>
 
-      {/* Specials: pinned red cards, always first. Dimmed once their own
-          time has passed, same as the stream below — a "book now" note for
-          an 11:20 class shouldn't still read as urgent at 3am. */}
-      {daily.specials.map((s) => {
-        const startPM = s.start ? toPosterMinutes(s.start) : undefined;
-        const endPM = s.end ? toPosterMinutes(s.end) : undefined;
-        const over = live && isPast(nowPM, startPM, endPM);
-        return (
+      {/* Untimed specials only — anything with a start time now lives in
+          the stream below, at its actual slot. These have nowhere to go
+          on a timeline (e.g. "Bedlam Jam, after live music"), so they
+          stay pinned. */}
+      {daily.specials
+        .filter((s) => !s.start)
+        .map((s) => (
           <section
             key={s.title}
             className="p-4"
@@ -81,26 +82,16 @@ export function TonightView({
               background: 'var(--hg-special)',
               color: 'var(--hg-on-special)',
               borderRadius: 'var(--hg-radius)',
-              ...(over ? { opacity: 0.4 } : null),
             }}
           >
-            <div className="flex items-baseline justify-between gap-3">
-              <h3 className="hg-display text-xl">{s.title}</h3>
-              {s.start && (
-                <span className="hg-time text-sm font-bold">
-                  {s.start}
-                  {s.end ? `–${s.end}` : ''}
-                </span>
-              )}
-            </div>
+            <h3 className="hg-display text-xl">{s.title}</h3>
             <p className="mt-1 text-sm">
               {s.venue ? `${venueLabel(data.venues, s.venue)}` : ''}
               {s.venue && s.detail ? ' — ' : ''}
               {s.detail ?? ''}
             </p>
           </section>
-        );
-      })}
+        ))}
 
       {/* The Now card, night flavor: current events across venues, then next. */}
       {live && (running.length > 0 || nextGroup) && (
@@ -127,7 +118,7 @@ export function TonightView({
                     <div className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
                       <span className="hg-display text-xl">{e.title}</span>
                       <span className="text-sm font-semibold" style={{ color: 'var(--hg-soft)' }}>
-                        {e.venues.map((v) => venueName(data.venues, v)).join(' + ')}
+                        {eventLocation(data.venues, e)}
                       </span>
                       <Chip filled>
                         {endsChip(nowPM, e.end ? toPosterMinutes(e.end) : undefined, e.openEnd)}
@@ -142,7 +133,10 @@ export function TonightView({
             <p className="mt-3 text-sm font-semibold" style={{ color: 'var(--hg-soft)' }}>
               <span className="hg-display text-xs">Next&nbsp;·&nbsp;</span>
               {nextGroup.events
-                .map((e) => `${e.title} (${venueName(data.venues, e.venues[0])})`)
+                .map((e) => {
+                  const loc = eventLocation(data.venues, e);
+                  return loc ? `${e.title} (${loc})` : e.title;
+                })
                 .join(' + ')}{' '}
               — {relativeChip(nowPM, nextGroup.startPM)}
             </p>
@@ -230,10 +224,15 @@ function EventBlock({
 }) {
   const endPM = e.end ? toPosterMinutes(e.end) : undefined;
   const over = live && endPM !== undefined && nowPM >= endPM;
-  const venuesLabel =
-    e.venues.length === 1
+  const hasVenue = e.venues.length > 0;
+  // Some ex-specials (Queer Meet Up, Balboa Square Competition) have no
+  // registry venue — their location lives in `detail` instead.
+  const venuesLabel = hasVenue
+    ? e.venues.length === 1
       ? venueLabel(data.venues, e.venues[0])
-      : e.venues.map((v) => venueName(data.venues, v)).join(' + ');
+      : e.venues.map((v) => venueName(data.venues, v)).join(' + ')
+    : (e.detail ?? '');
+  const showDetailRow = e.theme || e.tba || (e.detail && hasVenue);
 
   return (
     <div
@@ -253,11 +252,11 @@ function EventBlock({
         </span>
       </div>
       <p className="mt-0.5 text-sm font-semibold">{venuesLabel}</p>
-      {(e.theme || e.detail || e.tba) && (
+      {showDetailRow && (
         <div className="mt-2 flex flex-wrap items-center gap-1.5 text-xs">
           {e.theme && <Chip>{e.theme}</Chip>}
           {e.tba && <Chip>TBA</Chip>}
-          {(e.detail || e.tba) && (
+          {(e.tba || (e.detail && hasVenue)) && (
             <span className="italic">
               {e.detail ?? 'announced at the Variety Revue'}
             </span>
