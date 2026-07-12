@@ -14,7 +14,7 @@
     {"title": "DJ Antonin", "venues": ["db"], "start": "00:00", "end": "05:00", "openEnd": true, "kind": "dj"},
     {"title": "Library Talk — Hannah Lane", "venues": ["lb"], "start": "22:00", "end": "23:00", "kind": "special"},
     {"title": "Ramble", "venues": ["lb"], "start": "23:00", "end": "05:00", "openEnd": true, "kind": "dj", "theme": "R'nB"},
-    {"title": "Musicality: Rhythm vs Melody", "venues": ["sb"], "start": "23:00", "end": "00:00", "kind": "taster", "detail": "With Maka"}
+    {"title": "Musicality: Rhythm vs Melody", "venues": ["sb"], "start": "22:00", "end": "23:00", "kind": "taster", "detail": "With Maka"}
   ],
   "specials": [
     {"title": "Stretching", "venue": "fh", "start": "18:00", "end": "18:45", "kind": "special"},
