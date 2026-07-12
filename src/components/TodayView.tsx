@@ -14,6 +14,7 @@ import {
 import {
   classesOn,
   firstClassOnOrAfter,
+  freeDayLine,
   isClassFreeDay,
   isWeekWrapped,
   nowAndNextClass,
@@ -67,11 +68,17 @@ export function TodayView({
   }
 
   // Class-free days: Wednesday has the whole-camp special at 14:00; arrival
-  // Saturday has nothing scheduled at all.
+  // Saturday has nothing on the class schedule (the evening program lives
+  // in the daily file, not here).
   if (isClassFreeDay(week, clock.posterDate)) {
     const specials = weekSpecialsOn(week, clock.posterDate);
     if (specials.length === 0) {
-      return <BigSay title="No classes today." sub="Free day." />;
+      return (
+        <BigSay
+          title="No classes today."
+          sub={freeDayLine(week, clock.posterDate)}
+        />
+      );
     }
     return (
       <div className="flex flex-col gap-3">
@@ -95,7 +102,7 @@ export function TodayView({
             </p>
           </section>
         ))}
-        <BigSay title="Otherwise: free day." />
+        <BigSay title={freeDayLine(week, clock.posterDate)} />
       </div>
     );
   }

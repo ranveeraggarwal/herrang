@@ -7,6 +7,7 @@ import type { HerrangData } from '@/lib/herrang/types';
 import { addDays } from '@/lib/dates';
 import {
   classesOn,
+  freeDayLine,
   isClassFreeDay,
   venueLabel,
   weekSpecialsOn,
@@ -82,7 +83,7 @@ export function WeekView({
               ))}
               {free && classes.length === 0 && (
                 <li className="text-sm" style={{ color: 'var(--hg-soft)' }}>
-                  Otherwise: free day.
+                  {freeDayLine(week, date)}
                 </li>
               )}
               {classes.map((c) => {
