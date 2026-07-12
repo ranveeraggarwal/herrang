@@ -1,15 +1,15 @@
 {
   "name": "Herräng Companion",
   "short_name": "Herräng",
-  "description": "Unofficial offline-first companion for Herräng Dance Camp 2026",
-  "start_url": "./",
-  "scope": "./",
+  "description": "Unofficial companion for Herräng Dance Camp — today's classes, tonight's program.",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#12111a",
-  "theme_color": "#12111a",
+  "background_color": "#ffffff",
+  "theme_color": "#141414",
   "icons": [
-    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ]
 }

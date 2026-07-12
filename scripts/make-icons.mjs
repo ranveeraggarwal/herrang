@@ -1,6 +1,7 @@
 // Generates the PNG app icons (192/512 for the manifest, 180 for
 // apple-touch-icon) with zero image dependencies: a minimal truecolor PNG
-// encoder over node:zlib, drawing the same "H" mark as icon.svg.
+// encoder over node:zlib, drawing the same poster-mosaic mark as icon.svg —
+// four blocks in the app's own semantic colors (dj/show/special/taster).
 // Run once with `npm run icons`; outputs are committed in public/.
 
 import fs from 'node:fs';
@@ -10,8 +11,16 @@ import { fileURLToPath } from 'node:url';
 
 const OUT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'public');
 
-const BG = [0x12, 0x11, 0x1a];
-const FG = [0xff, 0xb4, 0x54];
+const BG = hex('#FFFFFF');
+const DJ = hex('#3BA55D');
+const SHOW = hex('#F4801F');
+const SPECIAL = hex('#CE2B37');
+const TASTER = hex('#7FD4E0');
+
+function hex(h) {
+  const n = parseInt(h.slice(1), 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+}
 
 const CRC_TABLE = Array.from({ length: 256 }, (_, n) => {
   let c = n;
@@ -58,21 +67,19 @@ function png(size, drawPixel) {
   ]);
 }
 
-// Same geometry as icon.svg, in 512-space, scaled per output size.
+// Same geometry as icon.svg (viewBox 0 0 64 64), scaled per output size.
 function drawIcon(size) {
-  const s = size / 512;
+  const s = size / 64;
   const rects = [
-    [136, 120, 56, 272],
-    [320, 120, 56, 272],
-    [164, 228, 184, 56],
-  ].map((r) => r.map((v) => v * s));
-  const dot = { cx: 256 * s, cy: 120 * s, r: 26 * s };
+    [8, 8, 48, 14, DJ],
+    [8, 25, 48, 14, SHOW],
+    [8, 42, 30, 14, SPECIAL],
+    [41, 42, 15, 14, TASTER],
+  ].map(([x, y, w, h, color]) => [x * s, y * s, w * s, h * s, color]);
   return (x, y) => {
-    for (const [rx, ry, rw, rh] of rects) {
-      if (x >= rx && x < rx + rw && y >= ry && y < ry + rh) return FG;
+    for (const [rx, ry, rw, rh, color] of rects) {
+      if (x >= rx && x < rx + rw && y >= ry && y < ry + rh) return color;
     }
-    const dx = x - dot.cx, dy = y - dot.cy;
-    if (dx * dx + dy * dy <= dot.r * dot.r) return FG;
     return BG;
   };
 }

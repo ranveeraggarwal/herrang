@@ -2,18 +2,29 @@
   "name": "herrang-companion",
   "version": "1.0.0",
   "private": true,
-  "description": "Mobile-first, offline-capable companion app for Herräng Dance Camp 2026",
-  "type": "module",
   "scripts": {
+    "dev": "next dev",
+    "build": "npm run validate && next build",
+    "start": "next start",
+    "lint": "eslint",
     "validate": "node scripts/validate.mjs",
-    "build": "node scripts/build.mjs",
-    "icons": "node scripts/make-icons.mjs",
-    "serve": "node scripts/serve.mjs"
+    "icons": "node scripts/make-icons.mjs"
+  },
+  "dependencies": {
+    "next": "^15.5.19",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
   },
   "devDependencies": {
-    "ajv": "^8.17.1",
-    "ajv-formats": "^3.0.1",
-    "yaml": "^2.5.0"
+    "@eslint/eslintrc": "^3.3.5",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "^15.5.19",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   },
   "engines": {
     "node": ">=20"

@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+/* Herräng Companion — the daily poster as a design system. Flat saturated
+   blocks, chunky uppercase, white ground, color = meaning. No gradients, no
+   shadows deeper than 1px, no ornament. */
+
+:root {
+  color-scheme: light;
+
+  --hg-ground: #ffffff;
+  --hg-ink: #141414;
+  --hg-soft: #6d6d6d;      /* secondary text on the ground */
+  --hg-line: #e4e2dd;      /* hairlines, card borders */
+  --hg-card: #f7f6f3;      /* neutral ink cards (day classes) */
+
+  /* Color = meaning (sampled from the poster). The night language. */
+  --hg-dj: #3ba55d;        /* DJ / live music */
+  --hg-show: #f4801f;      /* show / Variety Revue */
+  --hg-special: #ce2b37;   /* specials */
+  --hg-taster: #7fd4e0;    /* taster */
+  --hg-social: #f2a0a9;    /* social / meet-up (and jams) */
+
+  --hg-on-block: #141414;  /* ink on colored blocks */
+  --hg-on-special: #ffffff;
+
+  --hg-radius: 12px;
+}
+
+:root[data-hg='night'] {
+  color-scheme: dark;
+
+  --hg-ground: #0e0f12;
+  --hg-ink: #f4f2ed;
+  --hg-soft: #9b9890;
+  --hg-line: #26282e;
+  --hg-card: #17181d;
+
+  /* Same hues, slightly lifted for contrast on the dark ground. */
+  --hg-dj: #4cc172;
+  --hg-show: #ff9034;
+  --hg-special: #e0424e;
+  --hg-taster: #8fdfeb;
+  --hg-social: #f5aeb7;
+}
+
+.hg-body {
+  background: var(--hg-ground);
+  color: var(--hg-ink);
+  font-family: var(--font-hg-body), system-ui, sans-serif;
+  min-height: 100dvh;
+}
+
+/* Chunky uppercase display face — titles, venue names, big times. */
+.hg-display {
+  font-family: var(--font-hg-display), var(--font-hg-body), sans-serif;
+  text-transform: uppercase;
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+}
+
+/* Times are the protagonist. Always tabular. */
+.hg-time {
+  font-variant-numeric: tabular-nums;
+}

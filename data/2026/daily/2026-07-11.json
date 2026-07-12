@@ -1,0 +1,23 @@
+{
+  "date": "2026-07-11",
+  "weekday": "Saturday",
+  "title": "Saturday's Activities",
+  "source": "A day in Herräng daily poster",
+  "note": "Times read off the poster grid — treat mid-hour times as ±15 min.",
+  "events": [
+    {"title": "Newcomers Meet & Greet", "venues": ["lb"], "start": "20:30", "end": "21:00", "kind": "social"},
+    {"title": "Variety Revue", "venues": ["fh", "db", "lb"], "start": "21:00", "end": "22:00", "kind": "show"},
+    {"title": "Guest DJ", "venues": ["fh"], "start": "22:15", "end": "00:00", "kind": "dj", "tba": true},
+    {"title": "DJ Simon", "venues": ["fh"], "start": "00:00", "end": "02:00", "kind": "dj", "theme": "Vinyl set"},
+    {"title": "DJ Antonin", "venues": ["fh"], "start": "02:00", "end": "04:00", "openEnd": true, "kind": "dj"},
+    {"title": "Guest DJ Erdi", "venues": ["db"], "start": "22:00", "end": "23:30", "kind": "dj"},
+    {"title": "DJ Viktor", "venues": ["db"], "start": "23:30", "end": "01:45", "kind": "dj"},
+    {"title": "DJ Victoria", "venues": ["db"], "start": "01:45", "end": "03:30", "kind": "dj"},
+    {"title": "DJ Steven", "venues": ["lb"], "start": "22:45", "end": "02:15", "kind": "dj", "theme": "Long recordings"},
+    {"title": "Taster Classes", "venues": ["ab", "sp", "sb"], "start": "22:30", "end": "23:00", "kind": "taster", "tba": true, "detail": "Announced at the Variety Revue"}
+  ],
+  "specials": [
+    {"title": "Mozambican Dances — Saturday Special", "start": "11:20", "detail": "Only today. Classes start 11:20 — book now.", "kind": "special"},
+    {"title": "Bedlam Jam", "venue": "bar-bedlam", "start": "00:00", "end": "03:30", "kind": "jam"}
+  ]
+}
