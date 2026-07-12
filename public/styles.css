@@ -1,0 +1,263 @@
+/* Dark-first, mobile-first (~380px), designed for a tired dancer in a dark
+   ballroom: large type, high contrast, thumb-reachable controls. */
+
+:root {
+  --bg: #12111a;
+  --surface: #1c1a26;
+  --surface-2: #26232f;
+  --text: #f2eef7;
+  --muted: #a49fb3;
+  --faint: #6f6a7d;
+  --accent: #ffb454;
+  --accent-dim: #8a6430;
+  --line: #322e3d;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+.app {
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 12px 14px calc(24px + env(safe-area-inset-bottom));
+}
+
+a { color: var(--accent); }
+
+/* ---------- header ---------- */
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px 0 10px;
+  position: sticky;
+  top: 0;
+  background: linear-gradient(var(--bg) 85%, transparent);
+  z-index: 5;
+}
+
+.header h1 {
+  font-size: 20px;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.track-chip {
+  flex-shrink: 0;
+  background: var(--surface-2);
+  color: var(--accent);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  max-width: 46vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.week-switcher { display: flex; gap: 6px; margin-top: 6px; }
+
+.week-switcher button {
+  background: var(--surface);
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 3px 10px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.week-switcher button.active { color: var(--bg); background: var(--accent); border-color: var(--accent); font-weight: 700; }
+.week-switcher button.outside { opacity: 0.45; }
+
+/* ---------- staleness banner ---------- */
+
+.stale-banner {
+  background: #3a2f1c;
+  border: 1px solid #5c4a2a;
+  color: #f0d9a8;
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+
+/* ---------- sections ---------- */
+
+section { margin-bottom: 22px; }
+
+.section-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--muted);
+  margin: 0 0 8px 2px;
+}
+
+/* ---------- hero ---------- */
+
+.hero-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.hero-status {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.hero-title { font-size: 24px; font-weight: 800; line-height: 1.2; }
+
+.hero-meta { color: var(--muted); font-size: 16px; margin-top: 6px; }
+
+.hero-note { color: var(--faint); font-size: 14px; margin-top: 6px; }
+
+.hero-empty { color: var(--muted); font-size: 16px; }
+
+/* night hero: one row per active venue */
+.now-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+.now-row:last-child { border-bottom: none; }
+.now-row .now-what { flex: 1; font-size: 17px; font-weight: 600; }
+.now-row .now-until { color: var(--muted); font-size: 14px; white-space: nowrap; }
+
+/* ---------- list rows (timeline, classes, strips) ---------- */
+
+.rows { display: flex; flex-direction: column; }
+
+.row {
+  display: flex;
+  gap: 10px;
+  padding: 9px 2px;
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+.rows .row:last-child { border-bottom: none; }
+
+.row.past { opacity: 0.42; }
+.row.current { background: var(--surface); border-radius: 8px; margin: 0 -8px; padding-left: 10px; padding-right: 10px; }
+
+.row-time {
+  flex-shrink: 0;
+  width: 88px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  font-size: 14px;
+}
+.row-time.fuzzy { font-size: 13px; font-style: italic; }
+
+.row-body { flex: 1; min-width: 0; }
+.row-title { font-size: 16px; font-weight: 600; }
+.row-title .kind-icon { margin-right: 4px; }
+.row-sub { color: var(--faint); font-size: 13.5px; margin-top: 1px; }
+
+.badges { display: inline-flex; gap: 4px; flex-wrap: wrap; vertical-align: middle; }
+
+.badge {
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 1.5px 7px;
+  border-radius: 6px;
+  color: var(--bg);
+  white-space: nowrap;
+}
+
+/* ---------- venue legend ---------- */
+
+.legend-area { margin-bottom: 12px; }
+.legend-area h3 { font-size: 15px; margin: 0 0 2px; }
+.legend-area .walk { color: var(--faint); font-size: 13px; margin: 0 0 4px; }
+.legend-venues { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* ---------- footer ---------- */
+
+.footer { color: var(--faint); font-size: 13px; border-top: 1px solid var(--line); padding-top: 14px; }
+.footer a { color: var(--muted); }
+
+/* ---------- track bottom sheet ---------- */
+
+.sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 20;
+}
+
+.track-sheet {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  max-width: 430px;
+  margin: 0 auto;
+  background: var(--surface-2);
+  border-radius: 18px 18px 0 0;
+  padding: 10px 18px calc(20px + env(safe-area-inset-bottom));
+  z-index: 21;
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+.sheet-handle { width: 42px; height: 4px; border-radius: 2px; background: var(--faint); margin: 2px auto 12px; }
+.track-sheet h2 { margin: 0 0 4px; font-size: 19px; }
+.sheet-hint { color: var(--muted); font-size: 14px; margin: 0 0 12px; }
+
+.track-list { display: flex; flex-direction: column; gap: 6px; }
+
+.track-list button {
+  text-align: left;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.track-list button.selected { border-color: var(--accent); color: var(--accent); font-weight: 700; }
+
+/* ---------- update toast ---------- */
+
+.update-toast {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 700;
+  font-size: 14.5px;
+  border: none;
+  border-radius: 999px;
+  padding: 11px 18px;
+  cursor: pointer;
+  z-index: 30;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+}

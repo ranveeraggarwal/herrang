@@ -1,0 +1,55 @@
+# Canonical venue registry.
+#
+# The evening sheets and class schedules use different names for overlapping
+# places — this registry is the canonical mapping. New venues appearing on a
+# daily sheet get added here as part of ingestion; the validator rejects
+# unknown venue ids everywhere else.
+
+venues:
+  - id: fh
+    name: Folketshus Ballroom
+    aliases: [FH, Ballroom]        # "Ballroom" on evening sheets = Folketshus
+    area: folketshus
+  - id: db
+    name: Dansbanan
+    aliases: [DB, Dansbanan]
+    area: folketshus
+  - id: lb
+    name: Library
+    aliases: [LB, Library]
+    area: folketshus
+  - id: ab
+    name: Alhambra Ballroom
+    aliases: [AB, Alhambra]
+    area: school
+  - id: sp
+    name: Small's Paradise
+    aliases: [SP, Small's]
+    area: school
+  - id: sb
+    name: Savoy Ballroom
+    aliases: [SB, Savoy]
+    area: school
+  - id: rb
+    name: Roseland Ballroom
+    aliases: [RB]
+    area: camping
+  - id: pb
+    name: Palladium Ballroom
+    aliases: [PB]
+    area: camping
+  - id: klubben
+    name: Klubben
+    area: village
+  - id: oclock
+    name: One O'Clock Jump Wine Bar
+    area: village
+  - id: bedlam
+    name: Bar Bedlam
+    area: village
+
+areas:
+  folketshus: { name: Folketshus area, walk_note: "Main area" }
+  school:     { name: School area,     walk_note: "~3 min from Folketshus" }
+  camping:    { name: Camping area,    walk_note: "~8–10 min from Folketshus" }
+  village:    { name: Village,         walk_note: "" }

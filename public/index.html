@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Herräng Companion</title>
+  <meta name="description" content="Unofficial offline-first companion for Herräng Dance Camp 2026 — what's happening next, and where should I be tonight?">
+  <meta name="theme-color" content="#12111a">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="stylesheet" href="styles.css">
+  <!-- @SCHEDULE -->
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header-left">
+        <h1 id="day-title">Herräng Companion</h1>
+        <div id="week-switcher" class="week-switcher" hidden></div>
+      </div>
+      <button id="track-chip" class="track-chip" type="button" aria-haspopup="dialog">All tracks</button>
+    </header>
+
+    <div id="stale-banner" class="stale-banner" hidden>
+      Today’s programme not loaded yet — showing classes only.
+    </div>
+
+    <main id="main"></main>
+
+    <footer class="footer">
+      <p id="built-at"></p>
+      <p>
+        Unofficial companion app. All programme data belongs to
+        <a href="https://www.herrang.com" rel="noopener">Herräng Dance Camp</a> —
+        the printed sheets are authoritative.
+      </p>
+    </footer>
+  </div>
+
+  <div id="sheet-backdrop" class="sheet-backdrop" hidden></div>
+  <div id="track-sheet" class="track-sheet" role="dialog" aria-label="Pick your track" hidden>
+    <div class="sheet-handle"></div>
+    <h2>Pick your track</h2>
+    <p class="sheet-hint">Shown in the daytime view. Evening programme is the same for everyone.</p>
+    <div id="track-list" class="track-list"></div>
+  </div>
+
+  <button id="update-toast" class="update-toast" type="button" hidden>
+    Updated schedule available — tap to reload
+  </button>
+
+  <script src="app.js"></script>
+</body>
+</html>
