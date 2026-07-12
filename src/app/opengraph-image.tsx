@@ -3,7 +3,7 @@
 
 import { ImageResponse } from 'next/og';
 
-export const alt = 'My Herräng — what is happening today, at a glance';
+export const alt = 'Herräng Companion — what is happening today, at a glance';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -45,8 +45,8 @@ export default async function Image() {
             textTransform: 'uppercase',
           }}
         >
-          <span>My</span>
           <span>Herräng</span>
+          <span>Companion</span>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
