@@ -191,8 +191,7 @@ export function HerrangApp({ data }: { data: HerrangData }) {
         className="mx-auto mt-10 w-full max-w-3xl px-4 pt-4 pb-8 text-center text-xs"
         style={{ color: 'var(--hg-soft)', borderTop: '1px solid var(--hg-line)' }}
       >
-        <p>By dancers, for dancers. Made for a village up north.</p>
-        <p className="mt-1">Unofficial. Uninvited. Unbothered.</p>
+        <p>Unofficially made for a village up north.</p>
       </footer>
 
       <SettingsSheet
