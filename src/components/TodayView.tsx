@@ -4,6 +4,7 @@
 // camp calendar throws at us — the class-free Wednesday, the post-Friday wrap,
 // and the 04:00–08:00 weird hours.
 
+import { useState, type SyntheticEvent } from 'react';
 import type { HerrangData, HerrangVenue, WeekClass } from '@/lib/herrang/types';
 import {
   endsChip,
@@ -54,11 +55,34 @@ export function TodayView(props: {
   );
 }
 
-/** Collapsed by default — a reminder, not primary information. */
+const WHERE_OPEN_KEY = 'herrang.whereOpen.v1';
+
+/** Open by default; the user's collapse choice persists across visits.
+ * Safe to read localStorage in the initializer — TodayView only ever mounts
+ * client-side, after HerrangApp's clock gate has already passed. */
 function WhereAreThings({ venues }: { venues: HerrangVenue[] }) {
+  const [open, setOpen] = useState(() => {
+    try {
+      const raw = localStorage.getItem(WHERE_OPEN_KEY);
+      return raw === null ? true : raw === 'true';
+    } catch {
+      return true;
+    }
+  });
+
+  const handleToggle = (e: SyntheticEvent<HTMLDetailsElement>) => {
+    const isOpen = e.currentTarget.open;
+    setOpen(isOpen);
+    try {
+      localStorage.setItem(WHERE_OPEN_KEY, String(isOpen));
+    } catch {
+      /* private mode etc. — collapse state just won't persist */
+    }
+  };
+
   return (
     <Card>
-      <details className="group">
+      <details className="group" open={open} onToggle={handleToggle}>
         <summary
           className="hg-display flex cursor-pointer list-none items-center gap-1.5 text-xs"
           style={{ color: 'var(--hg-soft)' }}
@@ -109,7 +133,7 @@ function TodayViewBody({
               <strong className="hg-time" style={{ color: 'var(--hg-ink)' }}>
                 {formatCompactWeekdayDate(first.date)} {first.start}
               </strong>{' '}
-              — {venueLabel(venues, first.venue)}
+              — {venueName(venues, first.venue)}
             </span>
           ) : trackIds.length === 0 && week.tracks.length > 0 ? (
             <button className="font-bold underline" onClick={onPickTracks}>
@@ -242,7 +266,7 @@ function TodayViewBody({
                     {c.start}–{c.end}
                   </span>
                   <span className="text-sm font-semibold">
-                    {venueLabel(data.venues, c.venue)}
+                    {venueName(data.venues, c.venue)}
                   </span>
                   <span className="text-xs" style={{ color: 'var(--hg-soft)' }}>
                     {c.title ?? track?.name}

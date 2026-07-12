@@ -11,7 +11,7 @@ import {
   classesOn,
   freeDayLine,
   isClassFreeDay,
-  venueLabel,
+  venueName,
   weekSpecialsOn,
 } from '@/lib/herrang/schedule';
 import { toMinutes } from '@/lib/herrang/time';
@@ -115,7 +115,7 @@ export function WeekView({
                   {c.start}–{c.end}
                 </span>
                 <span className="text-sm font-semibold">
-                  {venueLabel(venues, c.venue)}
+                  {venueName(venues, c.venue)}
                 </span>
                 {trackIds.length > 1 && (
                   <span className="text-xs" style={{ color: 'var(--hg-soft)' }}>
