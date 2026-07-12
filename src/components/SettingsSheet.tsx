@@ -67,12 +67,13 @@ export function SettingsSheet({
         role="dialog"
         aria-modal="true"
         aria-label="Your tracks & settings"
-        className="relative max-h-[85dvh] w-full max-w-xl overflow-y-auto p-5 pb-8"
+        className="relative max-h-[85dvh] w-full max-w-xl overflow-y-auto p-5"
         style={{
           background: 'var(--hg-ground)',
           color: 'var(--hg-ink)',
           borderRadius: 'var(--hg-radius) var(--hg-radius) 0 0',
           borderTop: '1px solid var(--hg-ink)',
+          paddingBottom: 'calc(env(safe-area-inset-bottom) + 2rem)',
         }}
       >
         <div className="mb-4 flex items-center justify-between">
