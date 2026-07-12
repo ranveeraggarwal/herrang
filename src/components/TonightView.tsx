@@ -93,36 +93,57 @@ export function TonightView({
           </section>
         ))}
 
-      {/* The Now cards, night flavor: one card per running event, then next. */}
+      {/* The Now cards, night flavor: one card per running event, then next.
+          Same elapsed-time scrim as the stream cards, but tinted with the
+          event's kind color instead of a dark overlay — these sit on the
+          neutral --hg-card background, not a vivid block, so a black scrim
+          would vanish against it in night mode. */}
       {live && running.length > 0 && (
         <div className="flex flex-col gap-3">
-          {running.map((e) => (
-            <section
-              key={`${e.title}-${e.start}`}
-              className="p-5"
-              style={{
-                background: 'var(--hg-card)',
-                border: '1px solid var(--hg-ink)',
-                borderRadius: 'var(--hg-radius)',
-              }}
-            >
-              <div className="flex items-center justify-between gap-2">
-                <span
-                  className="hg-display text-[11px] font-bold uppercase tracking-wider"
-                  style={{ color: kindColor(e.kind) }}
-                >
-                  {kindLabel(e.kind)}
-                </span>
-                <Chip filled>
-                  {endsChip(nowPM, e.end ? toPosterMinutes(e.end) : undefined, e.openEnd)}
-                </Chip>
-              </div>
-              <h3 className="hg-display mt-2 text-xl">{e.title}</h3>
-              <p className="mt-1 text-sm font-semibold" style={{ color: 'var(--hg-soft)' }}>
-                {eventLocation(data.venues, e)}
-              </p>
-            </section>
-          ))}
+          {running.map((e) => {
+            const startPM = toPosterMinutes(e.start);
+            const endPM = e.end ? toPosterMinutes(e.end) : undefined;
+            const elapsedPct =
+              endPM !== undefined
+                ? Math.round(((nowPM - startPM) / (endPM - startPM)) * 100)
+                : 0;
+            return (
+              <section
+                key={`${e.title}-${e.start}`}
+                className="relative overflow-hidden p-5"
+                style={{
+                  background: 'var(--hg-card)',
+                  border: '1px solid var(--hg-ink)',
+                  borderRadius: 'var(--hg-radius)',
+                }}
+              >
+                {endPM !== undefined && (
+                  <div
+                    aria-hidden
+                    className="absolute inset-y-0 left-0"
+                    style={{ width: `${elapsedPct}%`, background: kindColor(e.kind), opacity: 0.15 }}
+                  />
+                )}
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between gap-2">
+                    <span
+                      className="hg-display text-[11px] font-bold uppercase tracking-wider"
+                      style={{ color: kindColor(e.kind) }}
+                    >
+                      {kindLabel(e.kind)}
+                    </span>
+                    <Chip filled>
+                      {endsChip(nowPM, endPM, e.openEnd)}
+                    </Chip>
+                  </div>
+                  <h3 className="hg-display mt-2 text-xl">{e.title}</h3>
+                  <p className="mt-1 text-sm font-semibold" style={{ color: 'var(--hg-soft)' }}>
+                    {eventLocation(data.venues, e)}
+                  </p>
+                </div>
+              </section>
+            );
+          })}
         </div>
       )}
       {live && nextGroup && (
