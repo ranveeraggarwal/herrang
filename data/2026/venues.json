@@ -1,0 +1,13 @@
+{
+  "venues": [
+    {"id": "fh", "name": "Folketshus Ballroom", "aliases": ["Ballroom", "FH"], "area": "Folketshus Area", "usage": ["classes", "night"]},
+    {"id": "db", "name": "Dansbana", "aliases": ["Dansbanan", "DB"], "area": "Folketshus Area", "usage": ["classes", "night"]},
+    {"id": "lb", "name": "Library", "aliases": ["LB"], "area": "Folketshus Area", "usage": ["classes", "night"]},
+    {"id": "ab", "name": "Alhambra Ballroom", "aliases": ["Alhambra", "AB"], "area": "School Area", "usage": ["classes", "night"]},
+    {"id": "sp", "name": "Small's Paradise", "aliases": ["Small's", "SP"], "area": "School Area", "usage": ["classes", "night"]},
+    {"id": "sb", "name": "Savoy Ballroom", "aliases": ["Savoy", "SB"], "area": "School Area", "usage": ["classes", "night"]},
+    {"id": "rb", "name": "Roseland Ballroom", "aliases": ["RB"], "area": "Camping Area", "usage": ["classes"]},
+    {"id": "pb", "name": "Palladium Ballroom", "aliases": ["PB"], "area": "Camping Area", "usage": ["classes"]},
+    {"id": "bar-bedlam", "name": "Bar Bedlam", "aliases": ["Bedlam"], "area": "Village", "usage": ["night"]}
+  ]
+}

@@ -1,0 +1,1521 @@
+{
+  "week": 2,
+  "year": 2026,
+  "start": "2026-07-11",
+  "end": "2026-07-17",
+  "note": "Week 2 master schedule, 210 verified entries: 197 classes + the Wednesday whole-camp special (13 per-track rows folded into specials[]).",
+  "tracks": [
+    {
+      "id": "lh-beg-int",
+      "name": "Lindy Hop Beg-Int",
+      "level": "Lindy Hop Beg-Int"
+    },
+    {
+      "id": "lh-interm-g1",
+      "name": "Lindy Hop Interm — Group 1",
+      "level": "Lindy Hop Interm",
+      "group": 1
+    },
+    {
+      "id": "lh-interm-g2",
+      "name": "Lindy Hop Interm — Group 2",
+      "level": "Lindy Hop Interm",
+      "group": 2
+    },
+    {
+      "id": "lh-int-adv-g1",
+      "name": "Lindy Hop Int-Adv — Group 1",
+      "level": "Lindy Hop Int-Adv",
+      "group": 1
+    },
+    {
+      "id": "lh-int-adv-g2",
+      "name": "Lindy Hop Int-Adv — Group 2",
+      "level": "Lindy Hop Int-Adv",
+      "group": 2
+    },
+    {
+      "id": "lh-advanced",
+      "name": "Lindy Hop Advanced",
+      "level": "Lindy Hop Advanced"
+    },
+    {
+      "id": "balboa-beg-int",
+      "name": "Balboa Beg-Int",
+      "level": "Balboa Beg-Int"
+    },
+    {
+      "id": "balboa-interm",
+      "name": "Balboa Interm",
+      "level": "Balboa Interm"
+    },
+    {
+      "id": "balboa-int-adv",
+      "name": "Balboa Int-Adv",
+      "level": "Balboa Int-Adv"
+    },
+    {
+      "id": "balboa-advanced",
+      "name": "Balboa Advanced",
+      "level": "Balboa Advanced"
+    },
+    {
+      "id": "ramble",
+      "name": "Ramble",
+      "level": "Ramble"
+    },
+    {
+      "id": "classic-routines",
+      "name": "Classic Routines (HT)",
+      "level": "Classic Routines (HT)"
+    },
+    {
+      "id": "chorus-line",
+      "name": "Chorus Line (HT)",
+      "level": "Chorus Line (HT)"
+    }
+  ],
+  "classes": [
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-12",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "db"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-12",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "db"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-12",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "db"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-12",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-12",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "ab",
+      "labels": [
+        "Audition"
+      ]
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-12",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "ab",
+      "labels": [
+        "Audition"
+      ]
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-12",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "ab",
+      "labels": [
+        "Audition"
+      ]
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-12",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "pb"
+    },
+    {
+      "track": "ramble",
+      "date": "2026-07-12",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "db"
+    },
+    {
+      "track": "balboa-interm",
+      "date": "2026-07-12",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "fh"
+    },
+    {
+      "track": "balboa-int-adv",
+      "date": "2026-07-12",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "ab",
+      "labels": [
+        "Audition"
+      ]
+    },
+    {
+      "track": "balboa-advanced",
+      "date": "2026-07-12",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "ab",
+      "labels": [
+        "Audition"
+      ]
+    },
+    {
+      "track": "classic-routines",
+      "date": "2026-07-12",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-12",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-12",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-12",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-12",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "ab"
+    },
+    {
+      "track": "balboa-interm",
+      "date": "2026-07-12",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "fh"
+    },
+    {
+      "track": "balboa-advanced",
+      "date": "2026-07-12",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "db"
+    },
+    {
+      "track": "chorus-line",
+      "date": "2026-07-12",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "lb"
+    },
+    {
+      "track": "classic-routines",
+      "date": "2026-07-12",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-12",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-12",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-12",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-12",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "ab"
+    },
+    {
+      "track": "ramble",
+      "date": "2026-07-12",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "pb"
+    },
+    {
+      "track": "balboa-int-adv",
+      "date": "2026-07-12",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "fh"
+    },
+    {
+      "track": "balboa-advanced",
+      "date": "2026-07-12",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "db"
+    },
+    {
+      "track": "chorus-line",
+      "date": "2026-07-12",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "lb"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-12",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-12",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "sb"
+    },
+    {
+      "track": "ramble",
+      "date": "2026-07-12",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "pb"
+    },
+    {
+      "track": "balboa-beg-int",
+      "date": "2026-07-12",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "db"
+    },
+    {
+      "track": "balboa-int-adv",
+      "date": "2026-07-12",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-12",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-12",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "sb"
+    },
+    {
+      "track": "balboa-beg-int",
+      "date": "2026-07-12",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "db"
+    },
+    {
+      "track": "chorus-line",
+      "date": "2026-07-12",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "lb"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-13",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-13",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-13",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-13",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-13",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "pb"
+    },
+    {
+      "track": "balboa-int-adv",
+      "date": "2026-07-13",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "db"
+    },
+    {
+      "track": "balboa-advanced",
+      "date": "2026-07-13",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-13",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-13",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-13",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-13",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "pb"
+    },
+    {
+      "track": "ramble",
+      "date": "2026-07-13",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "sb"
+    },
+    {
+      "track": "balboa-int-adv",
+      "date": "2026-07-13",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "db"
+    },
+    {
+      "track": "balboa-advanced",
+      "date": "2026-07-13",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-13",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-13",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "ab"
+    },
+    {
+      "track": "ramble",
+      "date": "2026-07-13",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "sb"
+    },
+    {
+      "track": "balboa-beg-int",
+      "date": "2026-07-13",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "db"
+    },
+    {
+      "track": "balboa-interm",
+      "date": "2026-07-13",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-13",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-13",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-13",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-13",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "ab"
+    },
+    {
+      "track": "balboa-beg-int",
+      "date": "2026-07-13",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "db"
+    },
+    {
+      "track": "balboa-interm",
+      "date": "2026-07-13",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "fh"
+    },
+    {
+      "track": "chorus-line",
+      "date": "2026-07-13",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "lb"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-13",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-13",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-13",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "rb"
+    },
+    {
+      "track": "ramble",
+      "date": "2026-07-13",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "sb"
+    },
+    {
+      "track": "balboa-int-adv",
+      "date": "2026-07-13",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "fh"
+    },
+    {
+      "track": "balboa-advanced",
+      "date": "2026-07-13",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "db"
+    },
+    {
+      "track": "chorus-line",
+      "date": "2026-07-13",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "lb"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-13",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-13",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-13",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "ab"
+    },
+    {
+      "track": "ramble",
+      "date": "2026-07-13",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "lb",
+      "labels": [
+        "Culture Class"
+      ]
+    },
+    {
+      "track": "balboa-beg-int",
+      "date": "2026-07-13",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "db"
+    },
+    {
+      "track": "balboa-interm",
+      "date": "2026-07-13",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "fh"
+    },
+    {
+      "track": "balboa-beg-int",
+      "date": "2026-07-13",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "db"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-14",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "ab"
+    },
+    {
+      "track": "balboa-beg-int",
+      "date": "2026-07-14",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "db"
+    },
+    {
+      "track": "balboa-interm",
+      "date": "2026-07-14",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "lb"
+    },
+    {
+      "track": "balboa-int-adv",
+      "date": "2026-07-14",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "sb"
+    },
+    {
+      "track": "balboa-advanced",
+      "date": "2026-07-14",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-14",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-14",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-14",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-14",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "ab"
+    },
+    {
+      "track": "ramble",
+      "date": "2026-07-14",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "lb"
+    },
+    {
+      "track": "balboa-beg-int",
+      "date": "2026-07-14",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "db"
+    },
+    {
+      "track": "balboa-advanced",
+      "date": "2026-07-14",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-14",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-14",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-14",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-14",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "ab"
+    },
+    {
+      "track": "ramble",
+      "date": "2026-07-14",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "lb"
+    },
+    {
+      "track": "balboa-interm",
+      "date": "2026-07-14",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "db"
+    },
+    {
+      "track": "balboa-int-adv",
+      "date": "2026-07-14",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "sb"
+    },
+    {
+      "track": "classic-routines",
+      "date": "2026-07-14",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-14",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "ab"
+    },
+    {
+      "track": "balboa-interm",
+      "date": "2026-07-14",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "db"
+    },
+    {
+      "track": "balboa-int-adv",
+      "date": "2026-07-14",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "sb"
+    },
+    {
+      "track": "balboa-advanced",
+      "date": "2026-07-14",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "lb"
+    },
+    {
+      "track": "classic-routines",
+      "date": "2026-07-14",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-14",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "fh",
+      "labels": [
+        "Culture Class"
+      ]
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-14",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "fh",
+      "labels": [
+        "Culture Class"
+      ]
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-14",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "fh",
+      "labels": [
+        "Culture Class"
+      ]
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-14",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-14",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "rb"
+    },
+    {
+      "track": "ramble",
+      "date": "2026-07-14",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "lb"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-14",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "db"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-14",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-14",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-14",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-14",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-14",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "rb"
+    },
+    {
+      "track": "balboa-beg-int",
+      "date": "2026-07-14",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "fh",
+      "labels": [
+        "Culture Class"
+      ]
+    },
+    {
+      "track": "balboa-interm",
+      "date": "2026-07-14",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "fh",
+      "labels": [
+        "Culture Class"
+      ]
+    },
+    {
+      "track": "balboa-int-adv",
+      "date": "2026-07-14",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "fh",
+      "labels": [
+        "Culture Class"
+      ]
+    },
+    {
+      "track": "balboa-advanced",
+      "date": "2026-07-14",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "fh",
+      "labels": [
+        "Culture Class"
+      ]
+    },
+    {
+      "track": "chorus-line",
+      "date": "2026-07-14",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "lb"
+    },
+    {
+      "track": "chorus-line",
+      "date": "2026-07-14",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "lb"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-16",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-16",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-16",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-16",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "sb"
+    },
+    {
+      "track": "balboa-beg-int",
+      "date": "2026-07-16",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "lb"
+    },
+    {
+      "track": "balboa-interm",
+      "date": "2026-07-16",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "fh"
+    },
+    {
+      "track": "balboa-int-adv",
+      "date": "2026-07-16",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "db"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-16",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-16",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-16",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-16",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "pb"
+    },
+    {
+      "track": "balboa-beg-int",
+      "date": "2026-07-16",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "lb"
+    },
+    {
+      "track": "balboa-interm",
+      "date": "2026-07-16",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "fh"
+    },
+    {
+      "track": "balboa-int-adv",
+      "date": "2026-07-16",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "db"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-16",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-16",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "pb"
+    },
+    {
+      "track": "ramble",
+      "date": "2026-07-16",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "sb"
+    },
+    {
+      "track": "balboa-advanced",
+      "date": "2026-07-16",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-16",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-16",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "rb"
+    },
+    {
+      "track": "ramble",
+      "date": "2026-07-16",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "sb"
+    },
+    {
+      "track": "balboa-beg-int",
+      "date": "2026-07-16",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "fh"
+    },
+    {
+      "track": "balboa-interm",
+      "date": "2026-07-16",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "db"
+    },
+    {
+      "track": "balboa-int-adv",
+      "date": "2026-07-16",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "lb"
+    },
+    {
+      "track": "chorus-line",
+      "date": "2026-07-16",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-16",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-16",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-16",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "fh",
+      "labels": [
+        "Culture Class"
+      ]
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-16",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "fh",
+      "labels": [
+        "Culture Class"
+      ]
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-16",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "fh",
+      "labels": [
+        "Culture Class"
+      ]
+    },
+    {
+      "track": "balboa-int-adv",
+      "date": "2026-07-16",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "lb"
+    },
+    {
+      "track": "balboa-advanced",
+      "date": "2026-07-16",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "db"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-16",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-16",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "sp"
+    },
+    {
+      "track": "ramble",
+      "date": "2026-07-16",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "sb"
+    },
+    {
+      "track": "balboa-interm",
+      "date": "2026-07-16",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "fh"
+    },
+    {
+      "track": "balboa-advanced",
+      "date": "2026-07-16",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "db"
+    },
+    {
+      "track": "classic-routines",
+      "date": "2026-07-16",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "pb"
+    },
+    {
+      "track": "classic-routines",
+      "date": "2026-07-16",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-17",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "ab"
+    },
+    {
+      "track": "balboa-int-adv",
+      "date": "2026-07-17",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "db"
+    },
+    {
+      "track": "balboa-advanced",
+      "date": "2026-07-17",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-17",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-17",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-17",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "ab"
+    },
+    {
+      "track": "ramble",
+      "date": "2026-07-17",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "lb"
+    },
+    {
+      "track": "balboa-beg-int",
+      "date": "2026-07-17",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "fh"
+    },
+    {
+      "track": "balboa-interm",
+      "date": "2026-07-17",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "sb"
+    },
+    {
+      "track": "balboa-advanced",
+      "date": "2026-07-17",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "db"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-17",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-17",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "sp"
+    },
+    {
+      "track": "ramble",
+      "date": "2026-07-17",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "lb"
+    },
+    {
+      "track": "balboa-beg-int",
+      "date": "2026-07-17",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "fh"
+    },
+    {
+      "track": "balboa-int-adv",
+      "date": "2026-07-17",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-17",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-17",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-17",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "pb"
+    },
+    {
+      "track": "ramble",
+      "date": "2026-07-17",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "lb"
+    },
+    {
+      "track": "balboa-interm",
+      "date": "2026-07-17",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "db"
+    },
+    {
+      "track": "balboa-int-adv",
+      "date": "2026-07-17",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "fh"
+    },
+    {
+      "track": "classic-routines",
+      "date": "2026-07-17",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-17",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-17",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-17",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "rb"
+    },
+    {
+      "track": "balboa-beg-int",
+      "date": "2026-07-17",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "fh"
+    },
+    {
+      "track": "balboa-interm",
+      "date": "2026-07-17",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "db"
+    },
+    {
+      "track": "classic-routines",
+      "date": "2026-07-17",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-17",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-17",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-17",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-17",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "pb"
+    },
+    {
+      "track": "balboa-beg-int",
+      "date": "2026-07-17",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "fh"
+    },
+    {
+      "track": "balboa-advanced",
+      "date": "2026-07-17",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "db"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-17",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-17",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "sp"
+    },
+    {
+      "track": "balboa-advanced",
+      "date": "2026-07-17",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "fh"
+    }
+  ],
+  "specials": [
+    {
+      "title": "Barbara Billups & Sugar Sullivan",
+      "detail": "Special class for everyone, all tracks.",
+      "date": "2026-07-15",
+      "start": "14:00",
+      "end": "15:10",
+      "venues": [
+        "fh",
+        "db"
+      ],
+      "kind": "special"
+    }
+  ]
+}

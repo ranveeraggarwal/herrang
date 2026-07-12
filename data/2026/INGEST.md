@@ -1,0 +1,101 @@
+# Daily poster ingestion — the morning ritual
+
+Open Claude Code (phone is fine) → attach today's poster PDF or a photo of the
+notice board → paste the prompt below → review the diff → merge. The site is
+live in about a minute.
+
+## The prompt
+
+> Convert the attached "A day in Herräng" daily program into
+> `data/2026/daily/<date>.json` following the schema in this folder (see
+> 2026-07-11.json for a worked example). Rules: transcribe faithfully — every
+> block, DJ name, theme star, special, and taster; do not invent times — read
+> them from the grid position and round to 15 minutes; map venue column names
+> via venues.json aliases; mark "TBA"/"announced at…" items with `tba: true`;
+> "04–?" style endings get `openEnd: true`; put the red specials box into
+> `specials`, not `events`; times after midnight stay as printed on the
+> poster; if a special's own text states a time (e.g. "classes start
+> 11:20"), also put that time in the special's `start` field — don't leave it
+> only in `detail`, or the site can't tell the special is over. Run
+> `npm run validate`, then stop — no other file changes.
+
+## Schemas
+
+### `2026/daily/<date>.json` — one per poster day
+
+```jsonc
+{
+  "date": "2026-07-11",          // must match the filename
+  "weekday": "Saturday",
+  "title": "Saturday's Activities",
+  "source": "A day in Herräng daily poster",
+  "note": "optional free text",
+  "events": [                     // the evening grid, chronological-ish
+    {
+      "title": "DJ Simon",
+      "venues": ["fh"],          // registry ids from ../2026/venues.json
+      "start": "22:15",           // HH:MM as printed on the poster
+      "end": "00:00",             // after-midnight times stay as printed
+      "kind": "dj",              // dj | show | taster | social | jam | special
+      "theme": "Vinyl set",      // optional — the poster's theme star
+      "detail": "optional",
+      "tba": true,                // optional — "announced at the Variety Revue"
+      "openEnd": true             // optional — "04–?" style endings
+    }
+  ],
+  "specials": [                   // the red specials box, NOT part of events
+    {"title": "Bedlam Jam", "venue": "bar-bedlam", "start": "00:00", "end": "03:30", "kind": "jam"},
+    // A special with a stated time but no clear end (e.g. a daytime class
+    // reminder posted on the evening board) still gets a `start` — the site
+    // uses it to grey the card out once that time has passed.
+    {"title": "…", "start": "11:20", "detail": "Classes start 11:20 — book now.", "kind": "special"}
+  ]
+}
+```
+
+Cross-midnight rule: anything before 08:00 belongs to the poster's date's
+night (02:00 on the 11th's poster = 02:00 on the 12th in real time). Store as
+printed; the site's now-logic handles the shift.
+
+### `2026/week2.json` — the week's master class schedule
+
+```jsonc
+{
+  "week": 2,
+  "year": 2026,
+  "start": "2026-07-11",         // week window, inclusive
+  "end": "2026-07-17",
+  "tracks": [
+    // Split levels (Interm, Int-Adv) appear as two tracks sharing a `level`,
+    // distinguished by `group`. Un-split tracks omit `group`.
+    {"id": "interm-g1", "name": "Intermediate — Group 1", "level": "Intermediate", "group": 1}
+  ],
+  "classes": [
+    {
+      "track": "interm-g1",      // track id from tracks[]
+      "date": "2026-07-13",
+      "start": "09:00",
+      "end": "10:10",
+      "venue": "rb",             // registry id
+      "title": "optional class title/teachers",
+      "labels": ["Audition"]      // optional: Audition, Culture Class, …
+    }
+  ],
+  "specials": [                   // whole-camp items on class days (e.g. Wednesday)
+    {"title": "…", "date": "2026-07-15", "start": "14:00", "venues": ["fh", "db"], "detail": "…", "kind": "special"}
+  ]
+}
+```
+
+### `2026/venues.json` — the registry
+
+Ids are the canonical reference everywhere else. `aliases` absorb the
+poster's column-name spellings (Ballroom→fh, Dansbanan→db). `area` feeds the
+"Venue · Area" formula on the site.
+
+## Validation
+
+`npm run validate` (`scripts/validate.mjs`) checks every file above: venue
+references resolve, times are HH:MM, kinds are legal, filenames match dates.
+Run it before committing a new daily file — `npm run build` runs it
+automatically and fails the build on any error.

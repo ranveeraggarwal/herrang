@@ -10,8 +10,8 @@ import { fileURLToPath } from 'node:url';
 
 const OUT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'public');
 
-const BG = [0x12, 0x11, 0x1a];
-const FG = [0xff, 0xb4, 0x54];
+const BG = [0xff, 0xff, 0xff];
+const FG = [0x14, 0x14, 0x14];
 
 const CRC_TABLE = Array.from({ length: 256 }, (_, n) => {
   let c = n;
@@ -58,7 +58,7 @@ function png(size, drawPixel) {
   ]);
 }
 
-// Same geometry as icon.svg, in 512-space, scaled per output size.
+// Same geometry as icon.svg (a square "H"), in 512-space, scaled per output size.
 function drawIcon(size) {
   const s = size / 512;
   const rects = [
@@ -66,13 +66,10 @@ function drawIcon(size) {
     [320, 120, 56, 272],
     [164, 228, 184, 56],
   ].map((r) => r.map((v) => v * s));
-  const dot = { cx: 256 * s, cy: 120 * s, r: 26 * s };
   return (x, y) => {
     for (const [rx, ry, rw, rh] of rects) {
       if (x >= rx && x < rx + rw && y >= ry && y < ry + rh) return FG;
     }
-    const dx = x - dot.cx, dy = y - dot.cy;
-    if (dx * dx + dy * dy <= dot.r * dot.r) return FG;
     return BG;
   };
 }

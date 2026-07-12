@@ -1,0 +1,248 @@
+'use client';
+
+// Day mode: your track's current/next class, huge. Plus the special cases the
+// camp calendar throws at us — the class-free Wednesday, the post-Friday wrap,
+// and the 04:00–08:00 weird hours.
+
+import type { HerrangData, WeekClass } from '@/lib/herrang/types';
+import {
+  endsChip,
+  relativeChip,
+  toMinutes,
+  type ClockState,
+} from '@/lib/herrang/time';
+import {
+  classesOn,
+  firstClassOnOrAfter,
+  isClassFreeDay,
+  isWeekWrapped,
+  nowAndNextClass,
+  venueLabel,
+  venueName,
+  weekSpecialsOn,
+} from '@/lib/herrang/schedule';
+import { formatCompactWeekdayDate } from '@/lib/dates';
+import { BigSay, Card, Chip } from './bits';
+
+export function TodayView({
+  data,
+  clock,
+  trackIds,
+  onPickTracks,
+  onGoTonight,
+}: {
+  data: HerrangData;
+  clock: ClockState;
+  trackIds: string[];
+  onPickTracks: () => void;
+  onGoTonight: () => void;
+}) {
+  const { week, venues } = data;
+
+  // 04:00–08:00 — a single card.
+  if (clock.mode === 'weird') {
+    const first = firstClassOnOrAfter(week, trackIds, clock.dateISO);
+    return (
+      <BigSay
+        title="Go to bed. Or don't."
+        sub={
+          first ? (
+            <span>
+              Your next class:{' '}
+              <strong className="hg-time" style={{ color: 'var(--hg-ink)' }}>
+                {formatCompactWeekdayDate(first.date)} {first.start}
+              </strong>{' '}
+              — {venueLabel(venues, first.venue)}
+            </span>
+          ) : trackIds.length === 0 && week.tracks.length > 0 ? (
+            <button className="font-bold underline" onClick={onPickTracks}>
+              Pick your track to see what&apos;s next →
+            </button>
+          ) : (
+            'Nothing on your schedule until further notice.'
+          )
+        }
+      />
+    );
+  }
+
+  // Class-free days: Wednesday has the whole-camp special at 14:00; arrival
+  // Saturday has nothing scheduled at all.
+  if (isClassFreeDay(week, clock.posterDate)) {
+    const specials = weekSpecialsOn(week, clock.posterDate);
+    if (specials.length === 0) {
+      return <BigSay title="No classes today." sub="Free day." />;
+    }
+    return (
+      <div className="flex flex-col gap-3">
+        {specials.map((s) => (
+          <section
+            key={s.title}
+            className="p-5"
+            style={{
+              background: 'var(--hg-special)',
+              color: 'var(--hg-on-special)',
+              borderRadius: 'var(--hg-radius)',
+            }}
+          >
+            <div className="hg-time text-sm font-bold">{s.start ?? ''}</div>
+            <h2 className="hg-display mt-1 text-[clamp(1.5rem,7vw,2.4rem)]">
+              {s.title}
+            </h2>
+            <p className="mt-2 text-sm">
+              {(s.venues ?? []).map((v) => venueName(venues, v)).join(' + ')}
+              {s.detail ? ` — ${s.detail}` : ''}
+            </p>
+          </section>
+        ))}
+        <BigSay title="Otherwise: free day." />
+      </div>
+    );
+  }
+
+  if (isWeekWrapped(week, clock.posterDate, clock.minutes)) {
+    return (
+      <BigSay
+        title={`Week ${week.week} is a wrap 🎉`}
+        sub={
+          <button className="font-bold underline" onClick={onGoTonight}>
+            The night program is still live →
+          </button>
+        }
+      />
+    );
+  }
+
+  if (week.classes.length === 0) {
+    return (
+      <BigSay
+        title="The class schedule isn't loaded yet."
+        sub="Tonight's program already works."
+      />
+    );
+  }
+
+  if (trackIds.length === 0) {
+    return (
+      <BigSay
+        title="Pick your track."
+        sub={
+          <button className="font-bold underline" onClick={onPickTracks}>
+            Choose your track →
+          </button>
+        }
+      />
+    );
+  }
+
+  const classes = classesOn(week, trackIds, clock.posterDate);
+  const { current, next } = nowAndNextClass(classes, clock.minutes);
+
+  return (
+    <div className="flex flex-col gap-3">
+      {current || next ? (
+        <NowClassCard data={data} clock={clock} current={current} next={next} />
+      ) : clock.mode === 'night' ? (
+        <BigSay
+          title="Classes are done."
+          sub={
+            <button className="font-bold underline" onClick={onGoTonight}>
+              Tonight is live →
+            </button>
+          }
+        />
+      ) : classes.length === 0 ? (
+        <BigSay title="No classes for your track today." />
+      ) : (
+        <BigSay title="Nothing on right now. Go swim." />
+      )}
+
+      {classes.length > 0 && (
+        <Card>
+          <h3
+            className="hg-display mb-3 text-xs"
+            style={{ color: 'var(--hg-soft)' }}
+          >
+            Today · your track{trackIds.length > 1 ? 's' : ''}
+          </h3>
+          <ul className="flex flex-col gap-2.5">
+            {classes.map((c) => {
+              const past = clock.minutes >= toMinutes(c.end);
+              const track = week.tracks.find((t) => t.id === c.track);
+              return (
+                <li
+                  key={`${c.track}-${c.start}`}
+                  className="flex flex-wrap items-baseline gap-x-3 gap-y-1"
+                  style={past ? { opacity: 0.45 } : undefined}
+                >
+                  <span className="hg-time text-sm font-bold">
+                    {c.start}–{c.end}
+                  </span>
+                  <span className="text-sm font-semibold">
+                    {venueLabel(data.venues, c.venue)}
+                  </span>
+                  <span className="text-xs" style={{ color: 'var(--hg-soft)' }}>
+                    {c.title ?? track?.name}
+                  </span>
+                  {(c.labels ?? []).map((l) => (
+                    <Chip key={l}>{l}</Chip>
+                  ))}
+                </li>
+              );
+            })}
+          </ul>
+        </Card>
+      )}
+    </div>
+  );
+}
+
+/** The signature component, day flavor: one card, full width, display type. */
+function NowClassCard({
+  data,
+  clock,
+  current,
+  next,
+}: {
+  data: HerrangData;
+  clock: ClockState;
+  current?: WeekClass;
+  next?: WeekClass;
+}) {
+  const c = current ?? next!;
+  const track = data.week.tracks.find((t) => t.id === c.track);
+  const chip = current
+    ? endsChip(clock.minutes, toMinutes(current.end))
+    : relativeChip(clock.minutes, toMinutes(next!.start));
+
+  return (
+    <section
+      className="p-5"
+      style={{
+        background: 'var(--hg-card)',
+        border: '1px solid var(--hg-ink)',
+        borderRadius: 'var(--hg-radius)',
+      }}
+    >
+      <div className="flex items-center justify-between gap-2">
+        <span className="hg-display hg-time text-sm">
+          {current ? 'Now' : `Next · ${c.start}`}
+        </span>
+        <Chip filled>{chip}</Chip>
+      </div>
+      <h2 className="hg-display mt-2 text-[clamp(2rem,10vw,3.4rem)]">
+        {venueName(data.venues, c.venue)}
+      </h2>
+      <p className="mt-1 text-sm font-semibold" style={{ color: 'var(--hg-soft)' }}>
+        {venueLabel(data.venues, c.venue).split(' · ')[1]} — {c.title ?? track?.name}
+      </p>
+      {(c.labels ?? []).length > 0 && (
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          {(c.labels ?? []).map((l) => (
+            <Chip key={l}>{l}</Chip>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
