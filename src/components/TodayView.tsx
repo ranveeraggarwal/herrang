@@ -14,6 +14,7 @@ import {
 import {
   classesOn,
   firstClassOnOrAfter,
+  freeDayLine,
   isClassFreeDay,
   isWeekWrapped,
   nowAndNextClass,
@@ -96,7 +97,7 @@ export function TodayView({
             </p>
           </section>
         ))}
-        <BigSay title="Otherwise: free day." />
+        <BigSay title={freeDayLine(week, clock.posterDate)} />
       </div>
     );
   }
