@@ -1,0 +1,21 @@
+{
+  "name": "herrang-companion",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mobile-first, offline-capable companion app for Herräng Dance Camp 2026",
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "build": "node scripts/build.mjs",
+    "icons": "node scripts/make-icons.mjs",
+    "serve": "node scripts/serve.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "yaml": "^2.5.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
