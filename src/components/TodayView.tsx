@@ -301,35 +301,55 @@ function NowClassCard({
   const chip = current
     ? endsChip(clock.minutes, toMinutes(current.end))
     : relativeChip(clock.minutes, toMinutes(next!.start));
+  // Same elapsed-time scrim as Tonight's cards. Classes have no poster kind
+  // color to tint with, so this uses --hg-ink itself at low opacity — it
+  // darkens the card in day mode and lightens it in night mode, since ink
+  // flips between the two, staying subtle either way.
+  const elapsedPct = current
+    ? Math.round(
+        ((clock.minutes - toMinutes(current.start)) /
+          (toMinutes(current.end) - toMinutes(current.start))) *
+          100
+      )
+    : 0;
 
   return (
     <section
-      className="p-5"
+      className="relative overflow-hidden p-5"
       style={{
         background: 'var(--hg-card)',
         border: '1px solid var(--hg-ink)',
         borderRadius: 'var(--hg-radius)',
       }}
     >
-      <div className="flex items-center justify-between gap-2">
-        <span className="hg-display hg-time text-sm">
-          {current ? 'Now' : `Next · ${c.start}`}
-        </span>
-        <Chip filled>{chip}</Chip>
-      </div>
-      <h2 className="hg-display mt-2 text-[clamp(2rem,10vw,3.4rem)]">
-        {venueName(data.venues, c.venue)}
-      </h2>
-      <p className="mt-1 text-sm font-semibold" style={{ color: 'var(--hg-soft)' }}>
-        {venueLabel(data.venues, c.venue).split(' · ')[1]} — {c.title ?? track?.name}
-      </p>
-      {(c.labels ?? []).length > 0 && (
-        <div className="mt-3 flex flex-wrap gap-1.5">
-          {(c.labels ?? []).map((l) => (
-            <Chip key={l}>{l}</Chip>
-          ))}
-        </div>
+      {current && (
+        <div
+          aria-hidden
+          className="absolute inset-y-0 left-0"
+          style={{ width: `${elapsedPct}%`, background: 'var(--hg-ink)', opacity: 0.08 }}
+        />
       )}
+      <div className="relative z-10">
+        <div className="flex items-center justify-between gap-2">
+          <span className="hg-display hg-time text-sm">
+            {current ? 'Now' : `Next · ${c.start}`}
+          </span>
+          <Chip filled>{chip}</Chip>
+        </div>
+        <h2 className="hg-display mt-2 text-[clamp(2rem,10vw,3.4rem)]">
+          {venueName(data.venues, c.venue)}
+        </h2>
+        <p className="mt-1 text-sm font-semibold" style={{ color: 'var(--hg-soft)' }}>
+          {venueLabel(data.venues, c.venue).split(' · ')[1]} — {c.title ?? track?.name}
+        </p>
+        {(c.labels ?? []).length > 0 && (
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {(c.labels ?? []).map((l) => (
+              <Chip key={l}>{l}</Chip>
+            ))}
+          </div>
+        )}
+      </div>
     </section>
   );
 }
