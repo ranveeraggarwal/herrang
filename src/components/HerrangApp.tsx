@@ -12,6 +12,8 @@ import {
   type ClockState,
 } from '@/lib/herrang/time';
 import {
+  campDayCount,
+  campDayNumber,
   selectedTrackIds,
   type TrackSelection,
 } from '@/lib/herrang/schedule';
@@ -109,80 +111,87 @@ export function HerrangApp({ data }: { data: HerrangData }) {
   };
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-xl flex-col px-4 pb-8">
-      <header className="flex items-start justify-between gap-3 pt-5 pb-4">
-        <div>
-          <h1 className="hg-display text-xl leading-none">A Day in Herräng</h1>
-          <p
-            className="hg-time mt-1 text-xs font-semibold uppercase tracking-wider"
-            style={{ color: 'var(--hg-soft)' }}
-          >
-            {/* The real calendar date, not the poster date — during the
-                04:00–08:00 weird hours the poster date is still "yesterday"
-                (it groups the tail of last night's program), but the header
-                is read as "what day is it" and must not look stuck. */}
-            {clock ? formatCompactWeekdayDate(clock.dateISO) : ' '}
-          </p>
-        </div>
-        <button
-          onClick={() => setSettingsOpen(true)}
-          className="rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-wide"
-          style={{ border: '1px solid var(--hg-ink)' }}
-        >
-          Tracks&thinsp;·&thinsp;⚙
-        </button>
-      </header>
-
-      <nav
-        aria-label="View"
-        className="mb-5 grid grid-cols-3 gap-2"
-      >
-        {(['today', 'tonight', 'week'] as const).map((v) => (
+    <div className="flex min-h-dvh w-full flex-col">
+      <div className="mx-auto flex w-full max-w-xl flex-grow flex-col px-4">
+        <header className="flex items-start justify-between gap-3 pt-5 pb-4">
+          <div>
+            <h1 className="hg-display text-xl leading-none">My Herräng</h1>
+            <p
+              className="hg-time mt-1 text-xs font-semibold uppercase tracking-wider"
+              style={{ color: 'var(--hg-soft)' }}
+            >
+              {/* The real calendar date, not the poster date — during the
+                  04:00–08:00 weird hours the poster date is still "yesterday"
+                  (it groups the tail of last night's program), but the header
+                  is read as "what day is it" and must not look stuck. */}
+              {clock ? formatCompactWeekdayDate(clock.dateISO) : ' '}
+            </p>
+            {clock && data.week.classes.length > 0 && (
+              <p className="mt-0.5 text-[11px]" style={{ color: 'var(--hg-soft)' }}>
+                Day {campDayNumber(data.week, clock.posterDate)} of{' '}
+                {campDayCount(data.week)} · ~
+                {Math.max(0, campDayNumber(data.week, clock.posterDate) - 1) * 4}h
+                slept, allegedly
+              </p>
+            )}
+          </div>
           <button
-            key={v}
-            onClick={() => setManualView(v)}
-            aria-current={view === v ? 'page' : undefined}
-            className="hg-display rounded-full py-2 text-sm"
-            style={
-              view === v
-                ? { background: 'var(--hg-ink)', color: 'var(--hg-ground)' }
-                : { border: '1px solid var(--hg-line)', color: 'var(--hg-ink)' }
-            }
+            onClick={() => setSettingsOpen(true)}
+            className="rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-wide"
+            style={{ border: '1px solid var(--hg-ink)' }}
           >
-            {v}
+            Tracks&thinsp;·&thinsp;⚙
           </button>
-        ))}
-      </nav>
+        </header>
 
-      <main className="flex-grow">
-        {clock === null ? null : view === 'today' ? (
-          <TodayView
-            data={data}
-            clock={clock}
-            trackIds={trackIds}
-            onPickTracks={() => setSettingsOpen(true)}
-            onGoTonight={() => setManualView('tonight')}
-          />
-        ) : view === 'tonight' ? (
-          <TonightView data={data} clock={clock} />
-        ) : (
-          <WeekView
-            data={data}
-            trackIds={trackIds}
-            onPickTracks={() => setSettingsOpen(true)}
-          />
-        )}
-      </main>
+        <nav
+          aria-label="View"
+          className="mb-5 grid grid-cols-3 gap-2"
+        >
+          {(['today', 'tonight', 'week'] as const).map((v) => (
+            <button
+              key={v}
+              onClick={() => setManualView(v)}
+              aria-current={view === v ? 'page' : undefined}
+              className="hg-display rounded-full py-2 text-sm"
+              style={
+                view === v
+                  ? { background: 'var(--hg-ink)', color: 'var(--hg-ground)' }
+                  : { border: '1px solid var(--hg-line)', color: 'var(--hg-ink)' }
+              }
+            >
+              {v}
+            </button>
+          ))}
+        </nav>
+
+        <main className="flex-grow">
+          {clock === null ? null : view === 'today' ? (
+            <TodayView
+              data={data}
+              clock={clock}
+              trackIds={trackIds}
+              onPickTracks={() => setSettingsOpen(true)}
+              onGoTonight={() => setManualView('tonight')}
+            />
+          ) : view === 'tonight' ? (
+            <TonightView data={data} clock={clock} />
+          ) : (
+            <WeekView
+              data={data}
+              trackIds={trackIds}
+              today={clock.posterDate}
+              onPickTracks={() => setSettingsOpen(true)}
+            />
+          )}
+        </main>
+      </div>
 
       <footer
-        className="mt-10 pt-4 text-center text-xs"
+        className="mx-auto mt-10 w-full max-w-3xl px-4 pt-4 pb-8 text-center text-xs"
         style={{ color: 'var(--hg-soft)', borderTop: '1px solid var(--hg-line)' }}
       >
-        <p>By dancers, for dancers. Made for a village up north.</p>
-        <p className="mt-1">
-          An unofficial fan project — programme data comes from the official
-          printed posters, which remain the source of truth.
-        </p>
+        <p>Unofficially made for a village up north.</p>
       </footer>
 
       <SettingsSheet
