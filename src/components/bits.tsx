@@ -12,6 +12,24 @@ export function kindColor(kind: EventKind): string {
   return `var(--hg-${token})`;
 }
 
+/** Kind → the label the poster itself would print above a block. */
+export function kindLabel(kind: EventKind): string {
+  switch (kind) {
+    case 'dj':
+      return 'DJ Set';
+    case 'show':
+      return 'Show';
+    case 'taster':
+      return 'Taster Class';
+    case 'social':
+      return 'Social';
+    case 'jam':
+      return 'Jam';
+    case 'special':
+      return 'Special';
+  }
+}
+
 /** Flat block styling for a night event of a given kind. */
 export function blockStyle(kind: EventKind, tba?: boolean): CSSProperties {
   if (tba) {

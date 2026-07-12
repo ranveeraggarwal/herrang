@@ -6,6 +6,7 @@ import { addDays } from '@/lib/dates';
 import type {
   DailyEvent,
   DailyProgram,
+  DailySpecial,
   HerrangVenue,
   Track,
   WeekClass,
@@ -24,6 +25,14 @@ export function venueName(venues: HerrangVenue[], id: string): string {
   return venues.find((v) => v.id === id)?.name ?? id;
 }
 
+/** Short location for a stream event: venue names, or the ex-special's
+ * `detail` when there's no registry venue (Klubben, One O'Clock Jump Wine
+ * Bar aren't in venues.json). */
+export function eventLocation(venues: HerrangVenue[], e: DailyEvent): string {
+  if (e.venues.length === 0) return e.detail ?? '';
+  return e.venues.map((v) => venueName(venues, v)).join(' + ');
+}
+
 export function dailyFor(
   dailies: DailyProgram[],
   posterDate: string
@@ -38,10 +47,28 @@ export interface StreamGroup {
   events: DailyEvent[];
 }
 
-/** Chronological stream from 20:00-ish onward, simultaneous starts grouped. */
+/** A timed special, reshaped to slot into the stream next to regular events.
+ * Untimed specials (no `start` — e.g. "Bedlam Jam, after live music") can't
+ * go on a timeline and are left for the pinned box instead. */
+function timedSpecialsAsEvents(specials: DailySpecial[]): DailyEvent[] {
+  return specials
+    .filter((s): s is DailySpecial & { start: string } => !!s.start)
+    .map((s) => ({
+      title: s.title,
+      venues: s.venue ? [s.venue] : [],
+      start: s.start,
+      end: s.end,
+      kind: s.kind ?? 'special',
+      detail: s.detail,
+    }));
+}
+
+/** Chronological stream from 20:00-ish onward, simultaneous starts grouped.
+ * Timed specials are merged in at their actual slot. */
 export function tonightStream(daily: DailyProgram): StreamGroup[] {
+  const all = [...daily.events, ...timedSpecialsAsEvents(daily.specials)];
   const byStart = new Map<string, DailyEvent[]>();
-  for (const e of daily.events) {
+  for (const e of all) {
     const list = byStart.get(e.start) ?? [];
     list.push(e);
     byStart.set(e.start, list);
