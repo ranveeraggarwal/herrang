@@ -2,6 +2,8 @@
 
 // Week view: the user's tracks only, grouped by day, compact rows.
 // Wednesday's row shows the whole-camp special instead of classes.
+// Days already behind us drop into a collapsed archive — nobody's
+// scrolling back to check what track they picked on Tuesday.
 
 import type { HerrangData } from '@/lib/herrang/types';
 import { addDays } from '@/lib/dates';
@@ -18,10 +20,13 @@ import { BigSay, Card, Chip } from './bits';
 export function WeekView({
   data,
   trackIds,
+  today,
   onPickTracks,
 }: {
   data: HerrangData;
   trackIds: string[];
+  /** Poster date "now" is in force — days before it are already behind us. */
+  today: string;
   onPickTracks: () => void;
 }) {
   const { week, venues } = data;
@@ -51,69 +56,87 @@ export function WeekView({
   const dates: string[] = [];
   for (let d = week.start; d <= week.end; d = addDays(d, 1)) dates.push(d);
 
+  const dayCard = (date: string) => {
+    const classes = classesOn(week, trackIds, date);
+    const specials = weekSpecialsOn(week, date);
+    const free = isClassFreeDay(week, date);
+    if (classes.length === 0 && specials.length === 0 && !free) return null;
+
+    return (
+      <Card key={date}>
+        <h3 className="hg-display mb-3 text-sm">
+          {formatCompactWeekdayDate(date)}
+        </h3>
+        <ul className="flex flex-col gap-2">
+          {specials.map((s) => (
+            <li
+              key={s.title}
+              className="-mx-2 flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-lg px-2 py-1.5"
+              style={{
+                background: 'var(--hg-special)',
+                color: 'var(--hg-on-special)',
+              }}
+            >
+              {s.start && (
+                <span className="hg-time text-sm font-bold">{s.start}</span>
+              )}
+              <span className="text-sm font-bold">{s.title}</span>
+              {s.detail && <span className="text-xs">{s.detail}</span>}
+            </li>
+          ))}
+          {free && classes.length === 0 && (
+            <li className="text-sm" style={{ color: 'var(--hg-soft)' }}>
+              {freeDayLine(week, date)}
+            </li>
+          )}
+          {classes.map((c) => {
+            const track = week.tracks.find((t) => t.id === c.track);
+            return (
+              <li
+                key={`${c.track}-${c.start}`}
+                className="flex flex-wrap items-baseline gap-x-3 gap-y-1"
+              >
+                <span className="hg-time text-sm font-bold">
+                  {c.start}–{c.end}
+                </span>
+                <span className="text-sm font-semibold">
+                  {venueLabel(venues, c.venue)}
+                </span>
+                {trackIds.length > 1 && (
+                  <span className="text-xs" style={{ color: 'var(--hg-soft)' }}>
+                    {track?.name}
+                  </span>
+                )}
+                {(c.labels ?? []).map((l) => (
+                  <Chip key={l}>{l}</Chip>
+                ))}
+              </li>
+            );
+          })}
+        </ul>
+      </Card>
+    );
+  };
+
+  const upcoming = dates.filter((d) => d >= today);
+  const past = dates.filter((d) => d < today);
+  const pastCards = past.map(dayCard).filter(Boolean);
+
   return (
     <div className="flex flex-col gap-3">
-      {dates.map((date) => {
-        const classes = classesOn(week, trackIds, date);
-        const specials = weekSpecialsOn(week, date);
-        const free = isClassFreeDay(week, date);
-        if (classes.length === 0 && specials.length === 0 && !free) return null;
+      {upcoming.map(dayCard)}
 
-        return (
-          <Card key={date}>
-            <h3 className="hg-display mb-3 text-sm">
-              {formatCompactWeekdayDate(date)}
-            </h3>
-            <ul className="flex flex-col gap-2">
-              {specials.map((s) => (
-                <li
-                  key={s.title}
-                  className="-mx-2 flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-lg px-2 py-1.5"
-                  style={{
-                    background: 'var(--hg-special)',
-                    color: 'var(--hg-on-special)',
-                  }}
-                >
-                  {s.start && (
-                    <span className="hg-time text-sm font-bold">{s.start}</span>
-                  )}
-                  <span className="text-sm font-bold">{s.title}</span>
-                  {s.detail && <span className="text-xs">{s.detail}</span>}
-                </li>
-              ))}
-              {free && classes.length === 0 && (
-                <li className="text-sm" style={{ color: 'var(--hg-soft)' }}>
-                  {freeDayLine(week, date)}
-                </li>
-              )}
-              {classes.map((c) => {
-                const track = week.tracks.find((t) => t.id === c.track);
-                return (
-                  <li
-                    key={`${c.track}-${c.start}`}
-                    className="flex flex-wrap items-baseline gap-x-3 gap-y-1"
-                  >
-                    <span className="hg-time text-sm font-bold">
-                      {c.start}–{c.end}
-                    </span>
-                    <span className="text-sm font-semibold">
-                      {venueLabel(venues, c.venue)}
-                    </span>
-                    {trackIds.length > 1 && (
-                      <span className="text-xs" style={{ color: 'var(--hg-soft)' }}>
-                        {track?.name}
-                      </span>
-                    )}
-                    {(c.labels ?? []).map((l) => (
-                      <Chip key={l}>{l}</Chip>
-                    ))}
-                  </li>
-                );
-              })}
-            </ul>
-          </Card>
-        );
-      })}
+      {pastCards.length > 0 && (
+        <details className="group">
+          <summary
+            className="hg-display cursor-pointer list-none text-xs"
+            style={{ color: 'var(--hg-soft)' }}
+          >
+            Already happened. Relax. ({pastCards.length})
+          </summary>
+          <div className="mt-3 flex flex-col gap-3 opacity-60">{pastCards}</div>
+        </details>
+      )}
     </div>
   );
 }
