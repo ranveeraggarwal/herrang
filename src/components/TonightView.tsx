@@ -93,55 +93,49 @@ export function TonightView({
           </section>
         ))}
 
-      {/* The Now card, night flavor: current events across venues, then next. */}
-      {live && (running.length > 0 || nextGroup) && (
-        <section
-          className="p-5"
-          style={{
-            background: 'var(--hg-card)',
-            border: '1px solid var(--hg-ink)',
-            borderRadius: 'var(--hg-radius)',
-          }}
-        >
-          {running.length > 0 && (
-            <>
-              <span className="hg-display text-sm">Now</span>
-              <ul className="mt-2 flex flex-col gap-2">
-                {running.map((e) => (
-                  <li key={`${e.title}-${e.start}`} className="flex flex-col gap-0.5">
-                    <span
-                      className="hg-display text-[11px] font-bold uppercase tracking-wider"
-                      style={{ color: kindColor(e.kind) }}
-                    >
-                      {kindLabel(e.kind)}
-                    </span>
-                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
-                      <span className="hg-display text-xl">{e.title}</span>
-                      <span className="text-sm font-semibold" style={{ color: 'var(--hg-soft)' }}>
-                        {eventLocation(data.venues, e)}
-                      </span>
-                      <Chip filled>
-                        {endsChip(nowPM, e.end ? toPosterMinutes(e.end) : undefined, e.openEnd)}
-                      </Chip>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
-          {nextGroup && (
-            <p className="mt-3 text-sm font-semibold" style={{ color: 'var(--hg-soft)' }}>
-              <span className="hg-display text-xs">Next&nbsp;·&nbsp;</span>
-              {nextGroup.events
-                .map((e) => {
-                  const loc = eventLocation(data.venues, e);
-                  return loc ? `${e.title} (${loc})` : e.title;
-                })
-                .join(' + ')}{' '}
-              — {relativeChip(nowPM, nextGroup.startPM)}
-            </p>
-          )}
-        </section>
+      {/* The Now cards, night flavor: one card per running event, then next. */}
+      {live && running.length > 0 && (
+        <div className="flex flex-col gap-3">
+          {running.map((e) => (
+            <section
+              key={`${e.title}-${e.start}`}
+              className="p-5"
+              style={{
+                background: 'var(--hg-card)',
+                border: '1px solid var(--hg-ink)',
+                borderRadius: 'var(--hg-radius)',
+              }}
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span
+                  className="hg-display text-[11px] font-bold uppercase tracking-wider"
+                  style={{ color: kindColor(e.kind) }}
+                >
+                  {kindLabel(e.kind)}
+                </span>
+                <Chip filled>
+                  {endsChip(nowPM, e.end ? toPosterMinutes(e.end) : undefined, e.openEnd)}
+                </Chip>
+              </div>
+              <h3 className="hg-display mt-2 text-xl">{e.title}</h3>
+              <p className="mt-1 text-sm font-semibold" style={{ color: 'var(--hg-soft)' }}>
+                {eventLocation(data.venues, e)}
+              </p>
+            </section>
+          ))}
+        </div>
+      )}
+      {live && nextGroup && (
+        <p className="text-sm font-semibold" style={{ color: 'var(--hg-soft)' }}>
+          <span className="hg-display text-xs">Next&nbsp;·&nbsp;</span>
+          {nextGroup.events
+            .map((e) => {
+              const loc = eventLocation(data.venues, e);
+              return loc ? `${e.title} (${loc})` : e.title;
+            })
+            .join(' + ')}{' '}
+          — {relativeChip(nowPM, nextGroup.startPM)}
+        </p>
       )}
 
       {/* The stream. */}
