@@ -18,7 +18,7 @@ const body = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://herrang.stockholmswing.com'),
-  title: 'Herräng Companion',
+  title: 'A Day in Herräng',
   description:
     'What is happening today in Herräng — your track’s classes, tonight’s DJs, shows and jams. At a glance, on a phone, possibly at 2am.',
   manifest: '/manifest.webmanifest',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   // A tool for people physically at the camp; not for search engines.
   robots: { index: false, follow: false },
   openGraph: {
-    siteName: 'Herräng Companion',
+    siteName: 'A Day in Herräng',
     locale: 'en',
     type: 'website',
   },
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'Herräng',
+    title: 'A Day in Herräng',
   },
 };
 

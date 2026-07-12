@@ -29,7 +29,7 @@ export function WeekView({
     return (
       <BigSay
         title="The class schedule isn't loaded yet."
-        sub="The master schedule lands here soon."
+        sub="The week 2 master schedule lands here soon."
       />
     );
   }
@@ -40,7 +40,7 @@ export function WeekView({
         title="Pick your track."
         sub={
           <button className="font-bold underline" onClick={onPickTracks}>
-            Choose your track →
+            Choose from the week 2 tracks →
           </button>
         }
       />

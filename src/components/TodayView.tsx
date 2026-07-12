@@ -117,7 +117,7 @@ export function TodayView({
     return (
       <BigSay
         title="The class schedule isn't loaded yet."
-        sub="Tonight's program already works."
+        sub="The 210-entry week 2 master schedule lands here soon. Tonight's program already works."
       />
     );
   }
@@ -128,7 +128,7 @@ export function TodayView({
         title="Pick your track."
         sub={
           <button className="font-bold underline" onClick={onPickTracks}>
-            Choose your track →
+            Choose from the week 2 tracks →
           </button>
         }
       />

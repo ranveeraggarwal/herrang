@@ -88,7 +88,7 @@ export function SettingsSheet({
 
         {options.length === 0 ? (
           <p className="text-sm" style={{ color: 'var(--hg-soft)' }}>
-            The track picker unlocks when the class schedule lands.
+            The track picker unlocks when the week 2 class schedule lands.
             Tonight&apos;s program works without it.
           </p>
         ) : (

@@ -36,7 +36,7 @@ export function TonightView({
     return (
       <BigSay
         title="Tonight's program isn't up yet."
-        sub="Check back once today's poster has been ingested."
+        sub="Check the notice board (or nag Ranveer)."
       />
     );
   }
