@@ -166,16 +166,23 @@ export function TonightView({
   );
 }
 
+/** Same left column as the timeline's time labels, so it reads as part of
+ * the same axis. Only the line (not the time label) carries the negative
+ * margin, so it runs on past the row and behind the card that follows,
+ * instead of the whole row sliding into the card and colliding with it. */
 function NowLine({ nowPM }: { nowPM: number }) {
   return (
-    <div className="flex items-center gap-2" aria-label="current time">
+    <div className="flex items-center gap-3" aria-label="current time">
       <span
-        className="hg-display hg-time text-xs"
+        className="hg-display hg-time w-14 shrink-0 text-lg"
         style={{ color: 'var(--hg-special)' }}
       >
-        Now {fromPosterMinutes(nowPM)}
+        {fromPosterMinutes(nowPM)}
       </span>
-      <div className="h-0.5 flex-1" style={{ background: 'var(--hg-special)' }} />
+      <div
+        className="h-0.5 flex-1"
+        style={{ background: 'var(--hg-special)', marginBottom: '-1.25rem' }}
+      />
     </div>
   );
 }
