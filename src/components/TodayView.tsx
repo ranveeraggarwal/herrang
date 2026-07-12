@@ -4,7 +4,7 @@
 // camp calendar throws at us — the class-free Wednesday, the post-Friday wrap,
 // and the 04:00–08:00 weird hours.
 
-import type { HerrangData, WeekClass } from '@/lib/herrang/types';
+import type { HerrangData, HerrangVenue, WeekClass } from '@/lib/herrang/types';
 import {
   endsChip,
   relativeChip,
@@ -39,7 +39,48 @@ const WEIRD_HOURS_LINES = [
   'Go to bed. Home is soon enough.',
 ];
 
-export function TodayView({
+export function TodayView(props: {
+  data: HerrangData;
+  clock: ClockState;
+  trackIds: string[];
+  onPickTracks: () => void;
+  onGoTonight: () => void;
+}) {
+  return (
+    <div className="flex flex-col gap-3">
+      <TodayViewBody {...props} />
+      <WhereAreThings venues={props.data.venues} />
+    </div>
+  );
+}
+
+/** Collapsed by default — a reminder, not primary information. */
+function WhereAreThings({ venues }: { venues: HerrangVenue[] }) {
+  return (
+    <Card>
+      <details className="group">
+        <summary
+          className="hg-display flex cursor-pointer list-none items-center gap-1.5 text-xs"
+          style={{ color: 'var(--hg-soft)' }}
+        >
+          <span className="inline-block transition-transform group-open:rotate-90">
+            ▸
+          </span>
+          Where are things?
+        </summary>
+        <ul className="mt-3 flex flex-col gap-1.5">
+          {venues.map((v) => (
+            <li key={v.id} className="text-sm font-semibold">
+              {venueLabel(venues, v.id)}
+            </li>
+          ))}
+        </ul>
+      </details>
+    </Card>
+  );
+}
+
+function TodayViewBody({
   data,
   clock,
   trackIds,

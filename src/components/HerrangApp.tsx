@@ -9,11 +9,13 @@ import type { HerrangData } from '@/lib/herrang/types';
 import {
   clockStateFor,
   isNightGround,
+  toMinutes,
   type ClockState,
 } from '@/lib/herrang/time';
 import {
   campDayCount,
   campDayNumber,
+  classesOn,
   selectedTrackIds,
   type TrackSelection,
 } from '@/lib/herrang/schedule';
@@ -98,7 +100,20 @@ export function HerrangApp({ data }: { data: HerrangData }) {
     [data.week, selection]
   );
 
-  const autoView: View = clock?.mode === 'night' ? 'tonight' : 'today';
+  // Once the last of today's classes for the picked tracks has ended, jump
+  // to Tonight even if the clock hasn't crossed the 19:10 day/night line yet
+  // — a day with an early last class shouldn't leave you staring at "nothing
+  // on right now" until the fixed cutoff.
+  const classesDoneForToday = useMemo(() => {
+    if (!clock || clock.mode !== 'day' || trackIds.length === 0) return false;
+    const todaysClasses = classesOn(data.week, trackIds, clock.posterDate);
+    if (todaysClasses.length === 0) return false;
+    const lastEnd = Math.max(...todaysClasses.map((c) => toMinutes(c.end)));
+    return clock.minutes >= lastEnd;
+  }, [clock, data.week, trackIds]);
+
+  const autoView: View =
+    clock?.mode === 'night' || classesDoneForToday ? 'tonight' : 'today';
   const view = manualView ?? autoView;
 
   const saveSelection = (s: TrackSelection) => {
@@ -181,6 +196,7 @@ export function HerrangApp({ data }: { data: HerrangData }) {
               data={data}
               trackIds={trackIds}
               today={clock.posterDate}
+              now={clock.minutes}
               onPickTracks={() => setSettingsOpen(true)}
             />
           )}
