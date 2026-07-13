@@ -9,15 +9,32 @@ live in about a minute.
 > Convert the attached "A day in Herräng" daily program into
 > `data/2026/daily/<date>.json` following the schema in this folder (see
 > 2026-07-11.json for a worked example). Rules: transcribe faithfully — every
-> block, DJ name, theme star, special, and taster; do not invent times — read
-> them from the grid position and round to 15 minutes; map venue column names
-> via venues.json aliases; mark "TBA"/"announced at…" items with `tba: true`;
-> "04–?" style endings get `openEnd: true`; put the red specials box into
-> `specials`, not `events`; times after midnight stay as printed on the
-> poster; if a special's own text states a time (e.g. "classes start
-> 11:20"), also put that time in the special's `start` field — don't leave it
-> only in `detail`, or the site can't tell the special is over. Run
-> `npm run validate`, then stop — no other file changes.
+> block, DJ name, theme star, special, and taster; the poster's grid is drawn
+> "ish", not to pixel-perfect scale, so don't over-read it — snap the known
+> fixed slots below to their standard times, and round everything else to the
+> nearest 15 minutes, favoring clean :00/:30 marks when a box sits between two
+> readings; map venue column names via venues.json aliases; mark "TBA"/
+> "announced at…" items with `tba: true`; "04–?" style endings get
+> `openEnd: true`; put the red specials box into `specials`, not `events`;
+> times after midnight stay as printed on the poster; if a special's own text
+> states a time (e.g. "classes start 11:20"), also put that time in the
+> special's `start` field — don't leave it only in `detail`, or the site
+> can't tell the special is over. Run `npm run validate`, then stop — no
+> other file changes.
+
+## Known fixed slots
+
+A few nightly fixtures run the same times every night regardless of where
+their box appears to land on the grid — snap to these rather than trusting
+the drawn box edges:
+
+- **Variety Revue** — 21:00–22:00 (spans Ballroom, Dansbanan, Library)
+- **Library Talk** — 22:00–23:00 (Library)
+- **Taster Classes** — 22:00–23:00 (wherever they're hosted that night)
+
+Everything else on the grid (DJ sets, Ramble/guest slots, jams) moves around
+these anchors night to night — read those from the box position as usual,
+just don't expect them to land on the hour.
 
 ## Schemas
 

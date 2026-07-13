@@ -1,0 +1,29 @@
+{
+  "date": "2026-07-13",
+  "weekday": "Monday",
+  "title": "Monday's Activities",
+  "source": "A day in Herräng daily poster",
+  "note": "Times read off the poster grid — treat mid-hour times as ±15 min. Variety Revue, Library Talk, and Taster Classes snapped to their fixed nightly slots per INGEST.md.",
+  "events": [
+    {"title": "DJ R2Steve2", "venues": ["db"], "start": "20:00", "end": "21:00", "kind": "dj"},
+    {"title": "Variety Revue", "venues": ["fh", "db", "lb"], "start": "21:00", "end": "22:00", "kind": "show"},
+    {"title": "DJ Viktor", "venues": ["fh"], "start": "22:30", "end": "00:30", "kind": "dj"},
+    {"title": "DJ Simon", "venues": ["fh"], "start": "00:30", "end": "02:30", "kind": "dj"},
+    {"title": "DJ Antonin", "venues": ["fh"], "start": "02:30", "end": "04:00", "openEnd": true, "kind": "dj"},
+    {"title": "Guest DJ Sam", "venues": ["db"], "start": "22:00", "end": "00:30", "kind": "dj"},
+    {"title": "Guest DJ Maria", "venues": ["db"], "start": "00:30", "end": "02:30", "kind": "dj"},
+    {"title": "DJ Steven", "venues": ["db"], "start": "02:30", "end": "04:00", "openEnd": true, "kind": "dj"},
+    {"title": "Library Talk — Giselle Anguizola", "venues": ["lb"], "start": "22:00", "end": "23:00", "kind": "special"},
+    {"title": "Ramble DJs Markus & Natty Bo feat. Guest DJ Erod", "venues": ["lb"], "start": "23:00", "end": "04:00", "openEnd": true, "kind": "dj", "theme": "Bebop"},
+    {"title": "Fancy Switching in Lindy Hop with Rathish & Choco", "venues": ["sb"], "start": "22:00", "end": "23:00", "kind": "taster"}
+  ],
+  "specials": [
+    {"title": "Yoga", "venue": "fh", "start": "09:00", "end": "10:00", "kind": "special"},
+    {"title": "Round Table Talk: Dancers You Should Know — Modern London Version", "start": "18:00", "end": "19:10", "detail": "Klubben", "kind": "special"},
+    {"title": "Stretching", "venue": "fh", "start": "18:00", "end": "19:10", "kind": "special"},
+    {"title": "Safe Space for Black, Brown and Indigenous People — Radical Rhythm: Holding Space, Taking Space", "start": "20:00", "end": "21:00", "detail": "Klubben", "kind": "special"},
+    {"title": "Pub Night", "start": "22:00", "end": "23:00", "detail": "Coconut Island", "kind": "social"},
+    {"title": "Solo Jazz Competition", "venue": "fh", "start": "00:00", "end": "01:00", "kind": "special"},
+    {"title": "Spotlight", "venue": "bar-bedlam", "start": "01:00", "end": "02:00", "kind": "special"}
+  ]
+}
