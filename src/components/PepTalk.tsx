@@ -9,12 +9,14 @@ const PEP_TALK_LINES = [
   'You look beautiful today.',
   'Isn\'t this a great time to be alive?',
   'You crossed the world to dance in a field. That was the right call.',
-  'Nobody is watching your feet.',
   'Nobody remembers the step you missed. They remember you smiled.',
   'Drink some water. You\'re doing great.',
   'That dance you keep replaying? They\'re replaying it too.',
-  'One more social won\'t kill you. Skipping one won\'t either.',
   'You belong here. Even the mosquitoes agree.',
+  'Take the nap. The party will find you either way.',
+  'The lake doesn\'t care how your last dance went. Go jump in it.',
+  'Someone here thinks you\'re the good dancer.',
+  'Your feet hurt because you danced until four. Fair trade.',
   'Herräng is a lot. You\'re doing fine.',
 ];
 
