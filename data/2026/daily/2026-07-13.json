@@ -22,8 +22,8 @@
     {"title": "Round Table Talk: Dancers You Should Know — Modern London Version", "start": "18:00", "end": "19:10", "detail": "Klubben", "kind": "special"},
     {"title": "Stretching", "venue": "fh", "start": "18:00", "end": "19:10", "kind": "special"},
     {"title": "Safe Space for Black, Brown and Indigenous People — Radical Rhythm: Holding Space, Taking Space", "start": "20:00", "end": "21:00", "detail": "Klubben", "kind": "special"},
-    {"title": "Pub Night", "start": "22:00", "detail": "Coconut Island", "kind": "social"},
-    {"title": "Solo Jazz Competition", "venue": "fh", "start": "00:00", "kind": "special"},
-    {"title": "Spotlight", "venue": "bar-bedlam", "start": "01:00", "kind": "special"}
+    {"title": "Pub Night", "start": "22:00", "end": "23:00", "detail": "Coconut Island", "kind": "social"},
+    {"title": "Solo Jazz Competition", "venue": "fh", "start": "00:00", "end": "01:00", "kind": "special"},
+    {"title": "Spotlight", "venue": "bar-bedlam", "start": "01:00", "end": "02:00", "kind": "special"}
   ]
 }
