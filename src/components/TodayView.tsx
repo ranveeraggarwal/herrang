@@ -225,7 +225,7 @@ function TodayViewBody({
           sub={
             <span className="flex flex-col items-start gap-1.5">
               <button className="font-bold underline" onClick={onGoTonight}>
-                Tonight is live →
+                Program is live →
               </button>
               {/* Past midnight, still "night" mode: the poster date is
                   still yesterday's, but a 3am reader deciding whether to go

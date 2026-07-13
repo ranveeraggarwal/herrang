@@ -28,6 +28,12 @@ import { InstallToast } from './InstallToast';
 
 type View = 'today' | 'tonight' | 'week';
 
+const VIEW_LABELS: Record<View, string> = {
+  today: 'classes',
+  tonight: 'program',
+  week: 'week',
+};
+
 const TRACKS_KEY = 'herrang.tracks.v1';
 const THEME_KEY = 'herrang.theme.v1';
 
@@ -176,7 +182,7 @@ export function HerrangApp({ data }: { data: HerrangData }) {
                   : { border: '1px solid var(--hg-line)', color: 'var(--hg-ink)' }
               }
             >
-              {v}
+              {VIEW_LABELS[v]}
             </button>
           ))}
         </nav>
