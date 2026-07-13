@@ -197,7 +197,7 @@ export function HerrangApp({ data }: { data: HerrangData }) {
               data={data}
               trackIds={trackIds}
               today={clock.posterDate}
-              now={clock.minutes}
+              now={clock.posterMinutes}
               onPickTracks={() => setSettingsOpen(true)}
             />
           )}

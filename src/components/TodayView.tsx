@@ -187,7 +187,7 @@ function TodayViewBody({
     );
   }
 
-  if (isWeekWrapped(week, clock.posterDate, clock.minutes)) {
+  if (isWeekWrapped(week, clock.posterDate, clock.posterMinutes)) {
     return (
       <BigSay
         title={`Week ${week.week} is a wrap 🎉`}
@@ -223,7 +223,7 @@ function TodayViewBody({
   }
 
   const classes = classesOn(week, trackIds, clock.posterDate);
-  const { current, next } = nowAndNextClass(classes, clock.minutes);
+  const { current, next } = nowAndNextClass(classes, clock.posterMinutes);
 
   return (
     <div className="flex flex-col gap-3">
@@ -254,7 +254,7 @@ function TodayViewBody({
           </h3>
           <ul className="flex flex-col gap-2.5">
             {classes.map((c) => {
-              const past = clock.minutes >= toMinutes(c.end);
+              const past = clock.posterMinutes >= toMinutes(c.end);
               const track = week.tracks.find((t) => t.id === c.track);
               return (
                 <li
@@ -299,15 +299,15 @@ function NowClassCard({
   const c = current ?? next!;
   const track = data.week.tracks.find((t) => t.id === c.track);
   const chip = current
-    ? endsChip(clock.minutes, toMinutes(current.end))
-    : relativeChip(clock.minutes, toMinutes(next!.start));
+    ? endsChip(clock.posterMinutes, toMinutes(current.end))
+    : relativeChip(clock.posterMinutes, toMinutes(next!.start));
   // Same elapsed-time scrim as Tonight's cards. Classes have no poster kind
   // color to tint with, so this uses --hg-ink itself at low opacity — it
   // darkens the card in day mode and lightens it in night mode, since ink
   // flips between the two, staying subtle either way.
   const elapsedPct = current
     ? Math.round(
-        ((clock.minutes - toMinutes(current.start)) /
+        ((clock.posterMinutes - toMinutes(current.start)) /
           (toMinutes(current.end) - toMinutes(current.start))) *
           100
       )

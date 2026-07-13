@@ -29,7 +29,7 @@ export function WeekView({
   trackIds: string[];
   /** Poster date "now" is in force — days before it are already behind us. */
   today: string;
-  /** Minutes since local midnight — used only to grey out today's finished items. */
+  /** Poster-timeline minutes — used only to grey out today's finished items. */
   now: number;
   onPickTracks: () => void;
 }) {
