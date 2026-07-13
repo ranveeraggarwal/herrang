@@ -215,6 +215,16 @@ function TodayViewBody({
   const classes = classesOn(week, trackIds, clock.posterDate);
   const { current, next } = nowAndNextClass(classes, clock.posterMinutes);
 
+  // Past midnight, still "night" mode: `classes` above is the just-finished
+  // poster day (yesterday, by the calendar) — every one of them dimmed as
+  // past. Showing that under a "Today" heading is misinformation once the
+  // calendar has actually turned over. The reference list below follows the
+  // real calendar day instead, which is what "today" means to a 3am reader.
+  const pastMidnight = clock.mode === 'night' && clock.dateISO !== clock.posterDate;
+  const listClasses = pastMidnight
+    ? classesOn(week, trackIds, clock.dateISO)
+    : classes;
+
   return (
     <div className="flex flex-col gap-3">
       {current || next ? (
@@ -248,7 +258,7 @@ function TodayViewBody({
         <BigSay title="Nothing on right now. Go swim." />
       )}
 
-      {classes.length > 0 && (
+      {listClasses.length > 0 && (
         <Card>
           <h3
             className="hg-display mb-3 text-xs"
@@ -257,8 +267,12 @@ function TodayViewBody({
             Today · your track{trackIds.length > 1 ? 's' : ''}
           </h3>
           <ul className="flex flex-col gap-2.5">
-            {classes.map((c) => {
-              const past = clock.posterMinutes >= toPosterMinutes(c.end);
+            {listClasses.map((c) => {
+              // The post-midnight list is tomorrow's (by poster-day terms)
+              // full schedule, none of it started yet — poster-minutes from
+              // the *current* poster day can't be compared against it.
+              const past =
+                !pastMidnight && clock.posterMinutes >= toPosterMinutes(c.end);
               const track = week.tracks.find((t) => t.id === c.track);
               return (
                 <li
