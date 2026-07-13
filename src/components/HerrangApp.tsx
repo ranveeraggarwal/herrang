@@ -25,6 +25,7 @@ import { TonightView } from './TonightView';
 import { WeekView } from './WeekView';
 import { SettingsSheet, type ThemePref } from './SettingsSheet';
 import { InstallToast } from './InstallToast';
+import { PepTalk } from './PepTalk';
 
 type View = 'today' | 'tonight' | 'week';
 
@@ -64,6 +65,7 @@ export function HerrangApp({ data }: { data: HerrangData }) {
   const [themePref, setThemePref] = useState<ThemePref>('auto');
   const [manualView, setManualView] = useState<View | null>(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [pepTalkOpen, setPepTalkOpen] = useState(false);
 
   useEffect(() => {
     const tick = () => setClock(clockStateFor(new Date()));
@@ -137,7 +139,30 @@ export function HerrangApp({ data }: { data: HerrangData }) {
       <div className="mx-auto flex w-full max-w-xl flex-grow flex-col px-4">
         <header className="flex items-start justify-between gap-3 pt-5 pb-4">
           <div>
-            <h1 className="hg-display text-xl leading-none">Herräng Companion</h1>
+            <h1 className="hg-display text-xl leading-none">
+              {/* Secret trigger: looks exactly like the plain title, no hint
+                  it does anything. See PepTalk.tsx. */}
+              <button
+                type="button"
+                onClick={() => setPepTalkOpen(true)}
+                aria-label="Herräng Companion"
+                style={{
+                  font: 'inherit',
+                  color: 'inherit',
+                  textTransform: 'inherit',
+                  letterSpacing: 'inherit',
+                  background: 'none',
+                  border: 'none',
+                  padding: 0,
+                  margin: 0,
+                  textAlign: 'left',
+                  display: 'block',
+                  width: '100%',
+                }}
+              >
+                Herräng Companion
+              </button>
+            </h1>
             <p
               className="hg-time mt-1 text-xs font-semibold uppercase tracking-wider"
               style={{ color: 'var(--hg-soft)' }}
@@ -244,6 +269,8 @@ export function HerrangApp({ data }: { data: HerrangData }) {
       />
 
       <InstallToast />
+
+      {pepTalkOpen && <PepTalk onClose={() => setPepTalkOpen(false)} />}
     </div>
   );
 }
