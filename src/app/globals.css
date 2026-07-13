@@ -69,3 +69,40 @@
 .hg-time {
   font-variant-numeric: tabular-nums;
 }
+
+/* Secret pep-talk emoji rain (PepTalk.tsx). Falls top to bottom on a loop;
+   each span's position/size/timing comes in as CSS custom properties so the
+   randomization lives in JS and this stays pure layout. */
+.hg-peptalk-rain {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hg-peptalk-emoji {
+  position: absolute;
+  left: var(--hg-emoji-x);
+  top: 0;
+  font-size: var(--hg-emoji-size);
+  transform: translateY(-10vh);
+  animation: hg-emoji-fall var(--hg-emoji-dur) linear var(--hg-emoji-delay) infinite;
+}
+
+@keyframes hg-emoji-fall {
+  from {
+    transform: translateY(-10vh);
+  }
+  to {
+    transform: translateY(110vh);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hg-peptalk-emoji {
+    animation: none;
+    top: var(--hg-emoji-y);
+    transform: none;
+    opacity: 0.25;
+  }
+}
