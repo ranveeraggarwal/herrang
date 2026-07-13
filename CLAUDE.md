@@ -23,6 +23,12 @@ shadows deeper than 1px, no ornament.
 Read `src/lib/herrang/time.ts` before touching any date/time logic — it's
 short and the comments explain the reasoning, but the short version:
 
+For the full list of assumptions this rests on (which "minutes" to
+compare against what, the poster-date invariant, timezone/DST handling),
+see `TIME.md`. Most time bugs in this app have come from mixing raw
+wall-clock minutes with poster-timeline minutes — read it before touching
+anything that compares a clock to a class/event time.
+
 - **Day** 08:00–19:10 (classes), **Night** 19:10–04:00 (the party), **Weird
   hours** 04:00–08:00 (a single "go to bed" card).
 - A **poster date** runs 08:00 → 07:59 the next morning. Times printed after
