@@ -13,7 +13,7 @@ import type {
   WeekSchedule,
   WeekSpecial,
 } from './types';
-import { toMinutes, toPosterMinutes } from './time';
+import { toPosterMinutes } from './time';
 
 /** "Roseland Ballroom · Camping Area" — the Venue · Area formula. */
 export function venueLabel(venues: HerrangVenue[], id: string): string {
@@ -142,19 +142,24 @@ export function classesOn(
 ): WeekClass[] {
   return week.classes
     .filter((c) => c.date === date && trackIds.includes(c.track))
-    .sort((a, b) => toMinutes(a.start) - toMinutes(b.start));
+    .sort((a, b) => toPosterMinutes(a.start) - toPosterMinutes(b.start));
 }
 
-/** The Now-card pair for day mode: the running class and/or the next one. */
+/** The Now-card pair for day mode: the running class and/or the next one.
+ * `nowPM` is poster-timeline minutes (see time.ts) — never raw wall-clock
+ * minutes, which reset at midnight and would misread already-finished
+ * classes as upcoming during the post-midnight tail. */
 export function nowAndNextClass(
   classes: WeekClass[],
-  minutes: number
+  nowPM: number
 ): { current?: WeekClass; next?: WeekClass } {
   let current: WeekClass | undefined;
   let next: WeekClass | undefined;
   for (const c of classes) {
-    if (toMinutes(c.start) <= minutes && minutes < toMinutes(c.end)) current = c;
-    else if (toMinutes(c.start) > minutes && !next) next = c;
+    const startPM = toPosterMinutes(c.start);
+    const endPM = toPosterMinutes(c.end);
+    if (startPM <= nowPM && nowPM < endPM) current = c;
+    else if (startPM > nowPM && !next) next = c;
   }
   return { current, next };
 }
@@ -185,17 +190,18 @@ export function isClassFreeDay(week: WeekSchedule, date: string): boolean {
   return !week.classes.some((c) => c.date === date);
 }
 
-/** True once the week's last class has ended — "Week 2 is a wrap 🎉". */
+/** True once the week's last class has ended — "Week 2 is a wrap 🎉".
+ * `nowPM` is poster-timeline minutes, matching `nowAndNextClass`. */
 export function isWeekWrapped(
   week: WeekSchedule,
   date: string,
-  minutes: number
+  nowPM: number
 ): boolean {
   if (week.classes.length === 0) return false;
   const last = week.classes.reduce((a, b) =>
     a.date > b.date || (a.date === b.date && a.end >= b.end) ? a : b
   );
-  return date > last.date || (date === last.date && minutes >= toMinutes(last.end));
+  return date > last.date || (date === last.date && nowPM >= toPosterMinutes(last.end));
 }
 
 /** Whole-camp specials (e.g. the Wednesday special) for a given date. */

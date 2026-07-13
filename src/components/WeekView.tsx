@@ -14,7 +14,7 @@ import {
   venueName,
   weekSpecialsOn,
 } from '@/lib/herrang/schedule';
-import { toMinutes } from '@/lib/herrang/time';
+import { toPosterMinutes } from '@/lib/herrang/time';
 import { formatCompactWeekdayDate } from '@/lib/dates';
 import { BigSay, Card, Chip } from './bits';
 
@@ -29,7 +29,7 @@ export function WeekView({
   trackIds: string[];
   /** Poster date "now" is in force — days before it are already behind us. */
   today: string;
-  /** Minutes since local midnight — used only to grey out today's finished items. */
+  /** Poster-timeline minutes — used only to grey out today's finished items. */
   now: number;
   onPickTracks: () => void;
 }) {
@@ -78,7 +78,7 @@ export function WeekView({
         </h3>
         <ul className="flex flex-col gap-2">
           {specials.map((s) => {
-            const donePast = isToday && s.start && now >= toMinutes(s.start);
+            const donePast = isToday && s.start && now >= toPosterMinutes(s.start);
             return (
               <li
                 key={s.title}
@@ -104,7 +104,7 @@ export function WeekView({
           )}
           {classes.map((c) => {
             const track = week.tracks.find((t) => t.id === c.track);
-            const done = isToday && now >= toMinutes(c.end);
+            const done = isToday && now >= toPosterMinutes(c.end);
             return (
               <li
                 key={`${c.track}-${c.start}`}

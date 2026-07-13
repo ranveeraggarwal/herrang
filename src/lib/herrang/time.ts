@@ -114,6 +114,6 @@ export function isPast(nowPM: number, startPM?: number, endPM?: number): boolean
 export function endsChip(nowPM: number, endPM?: number, openEnd?: boolean): string {
   if (endPM === undefined) return openEnd ? 'until ?' : '';
   const d = endPM - nowPM;
-  if (d <= 60) return `ends in ${d} min`;
+  if (d < 60) return `ends in ${d} min`;
   return `ends ${fromPosterMinutes(endPM)}`;
 }
