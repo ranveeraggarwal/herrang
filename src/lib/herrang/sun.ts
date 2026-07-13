@@ -109,7 +109,14 @@ export function sunTimesFor(posterDate: string): { sunset: string; sunrise: stri
   const { sunsetUTC } = solarEventsUTC(posterDate);
   const { sunriseUTC } = solarEventsUTC(addDays(posterDate, 1));
   return {
-    sunset: toStockholmHHMM(sunsetUTC),
-    sunrise: toStockholmHHMM(sunriseUTC),
+    sunset: toStockholmHHMM(roundTo5Min(sunsetUTC)),
+    sunrise: toStockholmHHMM(roundTo5Min(sunriseUTC)),
   };
+}
+
+// The algorithm is only good to a few minutes, and the village horizon is
+// trees, not sea — a to-the-minute reading would be false precision. Round
+// to 5 and let the copy say "ish".
+function roundTo5Min(instantUTC: Date): Date {
+  return new Date(Math.round(instantUTC.getTime() / 300_000) * 300_000);
 }

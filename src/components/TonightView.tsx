@@ -33,8 +33,8 @@ function SunLine({ posterDate }: { posterDate: string }) {
   const { sunset, sunrise } = sunTimesFor(posterDate);
   return (
     <p className="text-xs" style={{ color: 'var(--hg-soft)' }}>
-      Sunset <span className="hg-time">{sunset}</span> · sunrise{' '}
-      <span className="hg-time">{sunrise}</span> — the sun is also doing
+      ☀️ Sunset <span className="hg-time">{sunset}</span>ish · sunrise{' '}
+      <span className="hg-time">{sunrise}</span>ish — the sun is also doing
       weird hours.
     </p>
   );
