@@ -3,7 +3,7 @@
   "weekday": "Monday",
   "title": "Monday's Activities",
   "source": "A day in Herräng daily poster",
-  "note": "Times read off the poster grid — treat mid-hour times as ±15 min.",
+  "note": "Times read off the poster grid — treat mid-hour times as ±15 min. Variety Revue, Library Talk, and Taster Classes snapped to their fixed nightly slots per INGEST.md.",
   "events": [
     {"title": "DJ R2Steve2", "venues": ["db"], "start": "20:00", "end": "21:00", "kind": "dj"},
     {"title": "Variety Revue", "venues": ["fh", "db", "lb"], "start": "21:00", "end": "22:00", "kind": "show"},
