@@ -8,6 +8,7 @@
 // mystery cards. Currently-running cards carry their own progress scrim
 // instead of a separate now-line — see EventBlock.
 
+import { useState } from 'react';
 import type { DailyEvent, HerrangData } from '@/lib/herrang/types';
 import {
   endsChip,
@@ -24,6 +25,7 @@ import {
   type StreamGroup,
 } from '@/lib/herrang/schedule';
 import { blockStyle, kindColor, kindLabel, BigSay, Chip } from './bits';
+import { BigNow } from './BigNow';
 
 export function TonightView({
   data,
@@ -32,6 +34,11 @@ export function TonightView({
   data: HerrangData;
   clock: ClockState;
 }) {
+  // Across-the-room mode: which running event (if any) is currently blown
+  // up full-screen. Lives here, not in BigNow, so closing it is just
+  // setting it back to null.
+  const [bigNow, setBigNow] = useState<DailyEvent | null>(null);
+
   const daily = dailyFor(data.dailies, clock.posterDate);
 
   if (!daily) {
@@ -108,9 +115,11 @@ export function TonightView({
                 ? Math.round(((nowPM - startPM) / (endPM - startPM)) * 100)
                 : 0;
             return (
-              <section
+              <button
                 key={`${e.title}-${e.start}`}
-                className="relative overflow-hidden p-5"
+                type="button"
+                onClick={() => setBigNow(e)}
+                className="relative overflow-hidden p-5 text-left"
                 style={{
                   background: 'var(--hg-card)',
                   border: '1px solid var(--hg-ink)',
@@ -140,8 +149,11 @@ export function TonightView({
                   <p className="mt-1 text-sm font-semibold" style={{ color: 'var(--hg-soft)' }}>
                     {eventLocation(data.venues, e)}
                   </p>
+                  <p className="hg-display mt-2 text-[10px] tracking-wider" style={{ color: 'var(--hg-soft)' }}>
+                    tap to go big
+                  </p>
                 </div>
-              </section>
+              </button>
             );
           })}
         </div>
@@ -173,6 +185,15 @@ export function TonightView({
         <p className="text-xs" style={{ color: 'var(--hg-soft)' }}>
           {daily.note}
         </p>
+      )}
+
+      {bigNow && (
+        <BigNow
+          event={bigNow}
+          venues={data.venues}
+          clock={clock}
+          onClose={() => setBigNow(null)}
+        />
       )}
     </div>
   );
