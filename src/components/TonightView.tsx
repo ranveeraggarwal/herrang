@@ -8,6 +8,7 @@
 // mystery cards. Currently-running cards carry their own progress scrim
 // instead of a separate now-line — see EventBlock.
 
+import { useState } from 'react';
 import type { DailyEvent, HerrangData } from '@/lib/herrang/types';
 import {
   endsChip,
@@ -15,6 +16,7 @@ import {
   toPosterMinutes,
   type ClockState,
 } from '@/lib/herrang/time';
+import { sunTimesFor } from '@/lib/herrang/sun';
 import {
   dailyFor,
   eventLocation,
@@ -24,6 +26,19 @@ import {
   type StreamGroup,
 } from '@/lib/herrang/schedule';
 import { blockStyle, kindColor, kindLabel, BigSay, Chip } from './bits';
+import { BigNow } from './BigNow';
+
+/** The one quiet line about how little dark there is to work with tonight. */
+function SunLine({ posterDate }: { posterDate: string }) {
+  const { sunset, sunrise } = sunTimesFor(posterDate);
+  return (
+    <p className="text-xs" style={{ color: 'var(--hg-soft)' }}>
+      ☀️ Sunset <span className="hg-time">{sunset}</span>ish · sunrise{' '}
+      <span className="hg-time">{sunrise}</span>ish — the sun is also doing
+      weird hours.
+    </p>
+  );
+}
 
 export function TonightView({
   data,
@@ -32,14 +47,22 @@ export function TonightView({
   data: HerrangData;
   clock: ClockState;
 }) {
+  // Across-the-room mode: which running event (if any) is currently blown
+  // up full-screen. Lives here, not in BigNow, so closing it is just
+  // setting it back to null.
+  const [bigNow, setBigNow] = useState<DailyEvent | null>(null);
+
   const daily = dailyFor(data.dailies, clock.posterDate);
 
   if (!daily) {
     return (
-      <BigSay
-        title="Tonight's program isn't up yet."
-        sub="Check the notice board (or nag Ranveer)."
-      />
+      <div className="flex flex-col gap-3">
+        <BigSay
+          title="Tonight's program isn't up yet."
+          sub="Check the notice board (or nag Ranveer)."
+        />
+        <SunLine posterDate={clock.posterDate} />
+      </div>
     );
   }
 
@@ -108,9 +131,11 @@ export function TonightView({
                 ? Math.round(((nowPM - startPM) / (endPM - startPM)) * 100)
                 : 0;
             return (
-              <section
+              <button
                 key={`${e.title}-${e.start}`}
-                className="relative overflow-hidden p-5"
+                type="button"
+                onClick={() => setBigNow(e)}
+                className="relative overflow-hidden p-5 text-left"
                 style={{
                   background: 'var(--hg-card)',
                   border: '1px solid var(--hg-ink)',
@@ -140,8 +165,11 @@ export function TonightView({
                   <p className="mt-1 text-sm font-semibold" style={{ color: 'var(--hg-soft)' }}>
                     {eventLocation(data.venues, e)}
                   </p>
+                  <p className="hg-display mt-2 text-[10px] tracking-wider" style={{ color: 'var(--hg-soft)' }}>
+                    tap to go big
+                  </p>
                 </div>
-              </section>
+              </button>
             );
           })}
         </div>
@@ -173,6 +201,17 @@ export function TonightView({
         <p className="text-xs" style={{ color: 'var(--hg-soft)' }}>
           {daily.note}
         </p>
+      )}
+
+      <SunLine posterDate={clock.posterDate} />
+
+      {bigNow && (
+        <BigNow
+          event={bigNow}
+          venues={data.venues}
+          clock={clock}
+          onClose={() => setBigNow(null)}
+        />
       )}
     </div>
   );
