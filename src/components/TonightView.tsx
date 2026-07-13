@@ -16,6 +16,7 @@ import {
   toPosterMinutes,
   type ClockState,
 } from '@/lib/herrang/time';
+import { sunTimesFor } from '@/lib/herrang/sun';
 import {
   dailyFor,
   eventLocation,
@@ -26,6 +27,18 @@ import {
 } from '@/lib/herrang/schedule';
 import { blockStyle, kindColor, kindLabel, BigSay, Chip } from './bits';
 import { BigNow } from './BigNow';
+
+/** The one quiet line about how little dark there is to work with tonight. */
+function SunLine({ posterDate }: { posterDate: string }) {
+  const { sunset, sunrise } = sunTimesFor(posterDate);
+  return (
+    <p className="text-xs" style={{ color: 'var(--hg-soft)' }}>
+      Sunset <span className="hg-time">{sunset}</span> · sunrise{' '}
+      <span className="hg-time">{sunrise}</span> — the sun is also doing
+      weird hours.
+    </p>
+  );
+}
 
 export function TonightView({
   data,
@@ -43,10 +56,13 @@ export function TonightView({
 
   if (!daily) {
     return (
-      <BigSay
-        title="Tonight's program isn't up yet."
-        sub="Check the notice board (or nag Ranveer)."
-      />
+      <div className="flex flex-col gap-3">
+        <BigSay
+          title="Tonight's program isn't up yet."
+          sub="Check the notice board (or nag Ranveer)."
+        />
+        <SunLine posterDate={clock.posterDate} />
+      </div>
     );
   }
 
@@ -186,6 +202,8 @@ export function TonightView({
           {daily.note}
         </p>
       )}
+
+      <SunLine posterDate={clock.posterDate} />
 
       {bigNow && (
         <BigNow
