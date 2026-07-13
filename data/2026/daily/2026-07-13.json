@@ -15,7 +15,7 @@
     {"title": "DJ Steven", "venues": ["db"], "start": "02:30", "end": "04:00", "openEnd": true, "kind": "dj"},
     {"title": "Library Talk — Giselle Anguizola", "venues": ["lb"], "start": "22:00", "end": "23:00", "kind": "special"},
     {"title": "Ramble DJs Markus & Natty Bo feat. Guest DJ Erod", "venues": ["lb"], "start": "23:00", "end": "04:00", "openEnd": true, "kind": "dj", "theme": "Bebop"},
-    {"title": "Fancy Switching in Lindy Hop with Rathish & Choco", "venues": ["sb"], "start": "21:45", "end": "23:00", "kind": "taster"}
+    {"title": "Fancy Switching in Lindy Hop with Rathish & Choco", "venues": ["sb"], "start": "22:00", "end": "23:00", "kind": "taster"}
   ],
   "specials": [
     {"title": "Yoga", "venue": "fh", "start": "09:00", "end": "10:00", "kind": "special"},
