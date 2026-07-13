@@ -14,7 +14,7 @@ import {
   venueName,
   weekSpecialsOn,
 } from '@/lib/herrang/schedule';
-import { toMinutes } from '@/lib/herrang/time';
+import { toPosterMinutes } from '@/lib/herrang/time';
 import { formatCompactWeekdayDate } from '@/lib/dates';
 import { BigSay, Card, Chip } from './bits';
 
@@ -78,7 +78,7 @@ export function WeekView({
         </h3>
         <ul className="flex flex-col gap-2">
           {specials.map((s) => {
-            const donePast = isToday && s.start && now >= toMinutes(s.start);
+            const donePast = isToday && s.start && now >= toPosterMinutes(s.start);
             return (
               <li
                 key={s.title}
@@ -104,7 +104,7 @@ export function WeekView({
           )}
           {classes.map((c) => {
             const track = week.tracks.find((t) => t.id === c.track);
-            const done = isToday && now >= toMinutes(c.end);
+            const done = isToday && now >= toPosterMinutes(c.end);
             return (
               <li
                 key={`${c.track}-${c.start}`}

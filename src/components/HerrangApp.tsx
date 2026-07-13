@@ -9,7 +9,7 @@ import type { HerrangData } from '@/lib/herrang/types';
 import {
   clockStateFor,
   isNightGround,
-  toMinutes,
+  toPosterMinutes,
   type ClockState,
 } from '@/lib/herrang/time';
 import {
@@ -109,8 +109,8 @@ export function HerrangApp({ data }: { data: HerrangData }) {
     if (!clock || clock.mode !== 'day' || trackIds.length === 0) return false;
     const todaysClasses = classesOn(data.week, trackIds, clock.posterDate);
     if (todaysClasses.length === 0) return false;
-    const lastEnd = Math.max(...todaysClasses.map((c) => toMinutes(c.end)));
-    return clock.minutes >= lastEnd;
+    const lastEnd = Math.max(...todaysClasses.map((c) => toPosterMinutes(c.end)));
+    return clock.posterMinutes >= lastEnd;
   }, [clock, data.week, trackIds]);
 
   const autoView: View =
