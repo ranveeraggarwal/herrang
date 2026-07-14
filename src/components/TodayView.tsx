@@ -129,16 +129,16 @@ function ThisWeekCard({
   );
 }
 
-/** Open by default; the user's collapse choice persists across visits.
- * Safe to read localStorage in the initializer — TodayView only ever mounts
+/** Collapsed by default; the user's choice persists across visits. Safe to
+ * read localStorage in the initializer — TodayView only ever mounts
  * client-side, after HerrangApp's clock gate has already passed. */
 function WhereAreThings({ venues }: { venues: HerrangVenue[] }) {
   const [open, setOpen] = useState(() => {
     try {
       const raw = localStorage.getItem(WHERE_OPEN_KEY);
-      return raw === null ? true : raw === 'true';
+      return raw === null ? false : raw === 'true';
     } catch {
-      return true;
+      return false;
     }
   });
 
