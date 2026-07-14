@@ -67,13 +67,11 @@ export function TonightView({
   }
 
   const stream = tonightStream(daily);
-  // "Live" for the whole poster window, not just the party hours: the poster's
-  // night genuinely runs through 07:59 the next morning, so the 04:00–08:00
-  // tail still needs the running/past treatment — otherwise a 3am check-in
-  // freezes with nothing ever marked as over or in progress. Stays false
-  // outside that window (checking Tonight ahead of time during the day),
-  // since nothing has started yet.
-  const live = clock.mode === 'night' || clock.mode === 'weird';
+  // Live for the whole poster window (08:00 today through 07:59 tomorrow),
+  // not just party hours: `daily` is always the currently active poster
+  // (`dailyFor` resolves via `clock.posterDate`), and daytime specials like
+  // Yoga can genuinely be running well before the night program starts.
+  const live = true;
   const nowPM = clock.posterMinutes;
 
   const running = live

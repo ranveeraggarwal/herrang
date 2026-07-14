@@ -13,11 +13,11 @@
     {"title": "DJ Tony", "venues": ["db"], "start": "23:00", "end": "23:30", "kind": "dj"},
     {"title": "Herräng All Stars Band", "venues": ["db"], "start": "23:30", "end": "02:30", "kind": "show", "detail": "Band break: DJ Tony"},
     {"title": "DJ Jach", "venues": ["fh"], "start": "00:30", "end": "01:30", "kind": "dj"},
-    {"title": "DJ Omar", "venues": ["lb"], "start": "01:00", "end": "08:00", "kind": "dj"},
+    {"title": "DJ Omar", "venues": ["lb"], "start": "01:00", "end": "07:59", "kind": "dj"},
     {"title": "DJ Night Train", "venues": ["fh"], "start": "01:30", "end": "02:30", "kind": "dj"},
-    {"title": "DJ Victoria", "venues": ["db"], "start": "02:30", "end": "08:00", "kind": "dj"},
+    {"title": "DJ Victoria", "venues": ["db"], "start": "02:30", "end": "07:59", "kind": "dj"},
     {"title": "DJ Simon", "venues": ["fh"], "start": "02:30", "end": "03:30", "kind": "dj"},
-    {"title": "DJ Viktor", "venues": ["fh"], "start": "03:30", "end": "08:00", "kind": "dj"}
+    {"title": "DJ Viktor", "venues": ["fh"], "start": "03:30", "end": "07:59", "kind": "dj"}
   ],
   "specials": [
     {"title": "Yoga", "venue": "fh", "start": "09:00", "end": "09:45", "kind": "special"},
