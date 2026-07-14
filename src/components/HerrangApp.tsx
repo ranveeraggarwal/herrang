@@ -23,7 +23,7 @@ import {
   selectedTrackIds,
   type TrackSelection,
 } from '@/lib/herrang/schedule';
-import { formatCompactWeekdayDate } from '@/lib/dates';
+import { addDays, formatCompactWeekdayDate } from '@/lib/dates';
 import { TodayView } from './TodayView';
 import { TonightView } from './TonightView';
 import { SettingsSheet, type ThemePref } from './SettingsSheet';
@@ -31,11 +31,12 @@ import { InstallToast } from './InstallToast';
 import { PepTalk } from './PepTalk';
 import { LiveDot } from './bits';
 
-type View = 'today' | 'tonight';
+type View = 'today' | 'tonight' | 'nextday';
 
 const VIEW_LABELS: Record<View, string> = {
   today: 'classes',
   tonight: 'program',
+  nextday: 'next day',
 };
 
 const TRACKS_KEY = 'herrang.tracks.v1';
@@ -135,7 +136,21 @@ export function HerrangApp({ data }: { data: HerrangData }) {
     (clock ? isClassFreeDay(data.week, clock.posterDate) : false)
       ? 'tonight'
       : 'today';
-  const view = manualView ?? autoView;
+
+  // Tomorrow's program only earns a tab once its poster has actually been
+  // ingested — poster-date arithmetic, not calendar tomorrow (see TIME.md).
+  const hasNextDay = useMemo(() => {
+    if (!clock) return false;
+    return dailyFor(data.dailies, addDays(clock.posterDate, 1)) !== undefined;
+  }, [clock, data.dailies]);
+
+  // manualView wins, except when it points at a "next day" tab that no longer
+  // exists (poster rolled over, or tomorrow's file went away) — then fall
+  // back to autoView instead of rendering a blank tab.
+  const view: View =
+    manualView && (manualView !== 'nextday' || hasNextDay)
+      ? manualView
+      : autoView;
 
   // The nav's live dots: your track's current class, and anything currently
   // running on the daily program (DJ set, taster, daytime special, ...).
@@ -220,9 +235,14 @@ export function HerrangApp({ data }: { data: HerrangData }) {
 
         <nav
           aria-label="View"
-          className="mb-5 grid grid-cols-2 gap-2"
+          className={`mb-5 grid gap-2 ${hasNextDay ? 'grid-cols-3' : 'grid-cols-2'}`}
         >
-          {(['today', 'tonight'] as const).map((v) => {
+          {(hasNextDay
+            ? (['today', 'tonight', 'nextday'] as const)
+            : (['today', 'tonight'] as const)
+          ).map((v) => {
+            // "next day" is a preview of a future poster — nothing there is
+            // running now, so it never carries a live dot.
             const live = (v === 'today' && classesLive) || (v === 'tonight' && programLive);
             return (
               <button
@@ -251,6 +271,13 @@ export function HerrangApp({ data }: { data: HerrangData }) {
               trackIds={trackIds}
               onPickTracks={() => setSettingsOpen(true)}
               onGoTonight={() => setManualView('tonight')}
+            />
+          ) : view === 'nextday' ? (
+            <TonightView
+              data={data}
+              clock={clock}
+              posterDate={addDays(clock.posterDate, 1)}
+              live={false}
             />
           ) : (
             <TonightView data={data} clock={clock} />
