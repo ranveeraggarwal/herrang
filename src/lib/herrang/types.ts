@@ -25,6 +25,10 @@ export interface DailyEvent {
   end?: string;
   kind: EventKind;
   theme?: string;
+  /** Free-text meeting point, for the rare event with no registry venue
+   * (e.g. an ex-special folded into the stream). Always rendered plain,
+   * same slot a venue name would take — never italicized. */
+  location?: string;
   detail?: string;
   tba?: boolean;
   openEnd?: boolean;
@@ -33,6 +37,10 @@ export interface DailyEvent {
 /** The poster's red specials box — pinned above the stream, never inline. */
 export interface DailySpecial {
   title: string;
+  /** Free-text meeting point when there's no registry `venue` (e.g.
+   * "Klubben", "Bike Shop"). Rendered plain, like a venue name — keep it
+   * short. Put the actual description in `detail`. */
+  location?: string;
   detail?: string;
   venue?: string;
   start?: string;

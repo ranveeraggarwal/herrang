@@ -19,7 +19,11 @@ live in about a minute.
 > times after midnight stay as printed on the poster; if a special's own text
 > states a time (e.g. "classes start 11:20"), also put that time in the
 > special's `start` field — don't leave it only in `detail`, or the site
-> can't tell the special is over. Run `npm run validate`, then stop — no
+> can't tell the special is over; for a special/event with no registry
+> venue, put the meeting point in `location` and the actual description in
+> `detail` — never combine both into `detail` alone, since a venue-less
+> card's `detail` renders as its location line and a whole paragraph there
+> reads as a mislocated card, not a description. Run `npm run validate`, then stop — no
 > other file changes.
 
 ## Known fixed slots
@@ -65,7 +69,15 @@ just don't expect them to land on the hour.
     // A special with a stated time but no clear end (e.g. a daytime class
     // reminder posted on the evening board) still gets a `start` — the site
     // uses it to grey the card out once that time has passed.
-    {"title": "…", "start": "11:20", "detail": "Classes start 11:20 — book now.", "kind": "special"}
+    {"title": "…", "start": "11:20", "detail": "Classes start 11:20 — book now.", "kind": "special"},
+    // No registry venue for this one (e.g. "Klubben", "Bike Shop")? Put the
+    // meeting point in `location` (rendered plain, like a venue name) and
+    // keep `detail` for the actual description (rendered italic). Don't
+    // cram both into `detail` — a venue-less card whose `detail` holds a
+    // whole paragraph renders that paragraph as the *location line*, not
+    // italicized, which reads as inconsistent next to cards that do have a
+    // registry venue.
+    {"title": "…", "location": "Klubben", "start": "18:00", "end": "19:10", "detail": "Full description here.", "kind": "special"}
   ]
 }
 ```

@@ -100,8 +100,8 @@ export function TonightView({
           >
             <h3 className="hg-display text-xl">{s.title}</h3>
             <p className="mt-1 text-sm">
-              {s.venue ? `${venueLabel(data.venues, s.venue)}` : ''}
-              {s.venue && s.detail ? ' — ' : ''}
+              {s.venue ? venueLabel(data.venues, s.venue) : (s.location ?? '')}
+              {(s.venue || s.location) && s.detail ? ' — ' : ''}
               {s.detail ?? ''}
             </p>
           </section>
@@ -257,13 +257,18 @@ function EventBlock({
     : 0;
   const hasVenue = e.venues.length > 0;
   // Some ex-specials (Queer Meet Up, Balboa Square Competition) have no
-  // registry venue — their location lives in `detail` instead.
+  // registry venue — their location lives in `location` (or, for older
+  // data that predates that field, `detail`) instead.
   const venuesLabel = hasVenue
     ? e.venues.length === 1
       ? venueLabel(data.venues, e.venues[0])
       : e.venues.map((v) => venueName(data.venues, v)).join(' + ')
-    : (e.detail ?? '');
-  const showDetailRow = e.theme || e.tba || (e.detail && hasVenue);
+    : (e.location ?? e.detail ?? '');
+  // `detail` is a genuine standalone description — as opposed to already
+  // doing double duty as the venue-less location above — whenever there's
+  // a registry venue, or a separate `location` covered that instead.
+  const detailIsDescription = Boolean(e.detail) && (hasVenue || Boolean(e.location));
+  const showDetailRow = e.theme || e.tba || detailIsDescription;
 
   return (
     <div
@@ -295,7 +300,7 @@ function EventBlock({
           <div className="mt-2 flex flex-wrap items-center gap-1.5 text-xs">
             {e.theme && <Chip>{e.theme}</Chip>}
             {e.tba && <Chip>TBA</Chip>}
-            {(e.tba || (e.detail && hasVenue)) && (
+            {(e.tba || detailIsDescription) && (
               <span className="italic">
                 {e.detail ?? 'announced at the Variety Revue'}
               </span>

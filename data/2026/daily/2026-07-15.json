@@ -1,0 +1,155 @@
+{
+  "date": "2026-07-15",
+  "weekday": "Wednesday",
+  "title": "Wednesday's Activities",
+  "source": "Wednesday's Activities notice board",
+  "note": "Class-free day — daytime activities only.",
+  "events": [],
+  "specials": [
+    {
+      "title": "Bike Ride to Haberödal (Church)",
+      "location": "Bike Shop",
+      "detail": "Come along to discover places around the camp.",
+      "start": "11:00",
+      "kind": "special"
+    },
+    {
+      "title": "Nature and Culture Hike",
+      "location": "Outside Roseland",
+      "detail": "What is Herräng beyond the dance camp? On this hike we will both explore local flora/fauna as well as try to learn a bit more about the town's history together by walking along the beautiful \"culture trail\". Hike is approximately 6–7 km. Bring your water bottle, a swimsuit (optional) and a positive attitude! :D",
+      "start": "11:00",
+      "end": "13:00",
+      "kind": "special"
+    },
+    {
+      "title": "Power Yoga",
+      "venue": "fh",
+      "detail": "Anyone (beginner or not) up for a physical, energetical and dynamic yoga class! Led by two instructors offering hands-on assisting.",
+      "start": "12:00",
+      "end": "13:00",
+      "kind": "taster"
+    },
+    {
+      "title": "Hamilton Singalong",
+      "venue": "lb",
+      "detail": "With an introduction by Christi Jay Wells.",
+      "start": "12:00",
+      "end": "14:00",
+      "kind": "social"
+    },
+    {
+      "title": "The Art of Taking a Nap",
+      "location": "In front of the Lindy Hop shop",
+      "detail": "Learn the tips for great naps and the best spots for it around Herräng. Suitable for everyone who loves napping and/or wants to get better at it. Don't bring coffee!",
+      "start": "13:00",
+      "end": "13:50",
+      "kind": "special"
+    },
+    {
+      "title": "Barbara Billups & Sugar Sullivan",
+      "venue": "fh",
+      "detail": "Special class for everyone, all tracks. Also runs in Dansbana.",
+      "start": "14:00",
+      "end": "15:10",
+      "kind": "special"
+    },
+    {
+      "title": "Dance Trading",
+      "venue": "rb",
+      "detail": "We meet up have an exchange of different dances. As hosts we offer folkdances from the Middle East, Sweden and Indonesia. We would like someone who can teach capoeira or other dances that people request.",
+      "start": "14:00",
+      "end": "15:00",
+      "kind": "social"
+    },
+    {
+      "title": "Instant Theatre (Improvisation)",
+      "venue": "pb",
+      "detail": "Within one hour we are going to invent a story and act together in an Instant Theatre play. There are only a few rules. All that's needed is you guys. Everything is possible! The second part invites you to transform the story into music, dance or maybe a painting or a podcast.",
+      "start": "14:00",
+      "end": "16:00",
+      "kind": "special"
+    },
+    {
+      "title": "Costume Construction for Friday Party",
+      "location": "Grass area in front of the Lindy Hop shop (Exhibition Room if it rains)",
+      "start": "14:00",
+      "end": "16:00",
+      "kind": "special"
+    },
+    {
+      "title": "Sound Journey",
+      "venue": "fh",
+      "start": "15:10",
+      "end": "16:40",
+      "kind": "special"
+    },
+    {
+      "title": "Movie Afternoon: The Hunchback of Notre Dame",
+      "location": "Klubben",
+      "detail": "We will celebrate the 30th anniversary of the movie The Hunchback of Notre Dame by watching the Disney movie.",
+      "start": "15:10",
+      "end": "16:40",
+      "kind": "special"
+    },
+    {
+      "title": "Surströmming",
+      "location": "In front of Folketshus (to go by the lake)",
+      "start": "16:00",
+      "kind": "special"
+    },
+    {
+      "title": "Sieste Musicale / Quiet Concert",
+      "location": "In front of ICP (meadows near the school area)",
+      "detail": "Herräng can be an overstimulating place – so join us for some soft live music on the meadow (close to school area) to unwind and reflect. Bring your journals, painting and craft supplies, blankets and your frazzled nervous systems. No talking / only whispering allowed. Bring your own pillows, mats or blankets :)",
+      "start": "16:00",
+      "end": "17:00",
+      "kind": "special"
+    },
+    {
+      "title": "Tango Class 2 Levels (Introduction & Beginners)",
+      "venue": "db",
+      "detail": "Beginners class + milonga time. Come to learn some basics, and experienced dancers can come to social dance.",
+      "start": "16:40",
+      "end": "17:50",
+      "kind": "taster"
+    },
+    {
+      "title": "Afternoon Run",
+      "location": "In front of Folkets Hus",
+      "detail": "Let's run together in the forest around the camp. Duration and pace to be determined together.",
+      "start": "17:00",
+      "end": "18:00",
+      "kind": "special"
+    },
+    {
+      "title": "Tango Practice (Milonga)",
+      "venue": "fh",
+      "start": "18:00",
+      "end": "19:10",
+      "kind": "social"
+    },
+    {
+      "title": "Introduction to International Sign (IS)",
+      "location": "Klubben",
+      "detail": "How can we communicate on the dance floor without using spoken language? How can we connect with one another through eye contact, body language, and presence? Led by a Deaf facilitator who uses International Sign (IS), this workshop offers a fun and accessible introduction to this visual means of communication in an intercultural setting that encourages connection and exchange. Through interactive activities and practical situations, participants will learn useful signs to introduce themselves, meet new people, invite someone to dance, show their impressions of a dance event, or simply chat between dances. Beyond learning signs, the workshop is also an opportunity to discover Deaf culture and experience another way of being together, where eye contact, facial expressions, and attentive interaction play a central role. An invitation to broaden your language, your curiosity, and your way of building community on the dance floor. Open to everyone. No previous knowledge is required!",
+      "start": "18:00",
+      "end": "19:10",
+      "kind": "special"
+    },
+    {
+      "title": "Dizziness and Dancing: How to Be Balanced During Your Dance",
+      "venue": "rb",
+      "detail": "A one hour group discussion and practical tips for those who get wobbly, dizzy or off balance on or off the dance floor. Learn about the different components of the balance system and how to work on them to improve your dancing. Will include practical components such as turning drills and exercises led by Hilary, physiotherapist specialised in dizziness and balance issues.",
+      "start": "18:00",
+      "end": "19:30",
+      "kind": "special"
+    },
+    {
+      "title": "Tap Jam",
+      "venue": "db",
+      "start": "19:00",
+      "end": "20:00",
+      "kind": "jam"
+    }
+  ]
+}

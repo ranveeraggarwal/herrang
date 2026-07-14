@@ -1504,18 +1504,5 @@
       "venue": "fh"
     }
   ],
-  "specials": [
-    {
-      "title": "Barbara Billups & Sugar Sullivan",
-      "detail": "Special class for everyone, all tracks.",
-      "date": "2026-07-15",
-      "start": "14:00",
-      "end": "15:10",
-      "venues": [
-        "fh",
-        "db"
-      ],
-      "kind": "special"
-    }
-  ]
+  "specials": []
 }
