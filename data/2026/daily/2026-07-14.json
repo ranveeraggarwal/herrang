@@ -29,6 +29,6 @@
     {"title": "Neurodivergent & Disability Community Meet Up", "start": "19:10", "end": "20:30", "detail": "Klubben", "kind": "special"},
     {"title": "Tap Jam", "venue": "db", "start": "19:10", "end": "20:00", "kind": "jam"},
     {"title": "Slow Drag Opening", "venue": "fh", "start": "00:30", "end": "01:00", "kind": "special"},
-    {"title": "Bedlam Jam", "venue": "bar-bedlam", "start": "03:00", "end": "08:00", "kind": "jam"}
+    {"title": "Bedlam Jam", "venue": "bar-bedlam", "start": "03:00", "kind": "jam"}
   ]
 }
