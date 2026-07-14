@@ -17,6 +17,7 @@ import {
   campDayNumber,
   classesOn,
   dailyFor,
+  isClassFreeDay,
   nowAndNextClass,
   runningEvents,
   selectedTrackIds,
@@ -125,9 +126,13 @@ export function HerrangApp({ data }: { data: HerrangData }) {
 
   // No tracks picked means no classes to show on Today — the program is the
   // more useful default (also covers first-visit, before the track picker
-  // has been dismissed).
+  // has been dismissed). Same on a class-free day like Wednesday: the
+  // day's activities live in the daily program now, not the class view.
   const autoView: View =
-    trackIds.length === 0 || clock?.mode === 'night' || classesDoneForToday
+    trackIds.length === 0 ||
+    clock?.mode === 'night' ||
+    classesDoneForToday ||
+    (clock ? isClassFreeDay(data.week, clock.posterDate) : false)
       ? 'tonight'
       : 'today';
   const view = manualView ?? autoView;
