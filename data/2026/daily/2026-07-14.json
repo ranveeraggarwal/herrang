@@ -1,0 +1,34 @@
+{
+  "date": "2026-07-14",
+  "weekday": "Tuesday",
+  "title": "Tuesday's Activities",
+  "source": "A day in Herräng daily poster",
+  "note": "Times read off the poster grid — treat mid-hour times as ±15 min.",
+  "events": [
+    {"title": "DJ R2Steve2", "venues": ["db"], "start": "20:30", "end": "21:00", "kind": "dj", "theme": "Headphone set"},
+    {"title": "Variety Revue", "venues": ["fh", "db", "lb"], "start": "21:00", "end": "22:00", "kind": "show"},
+    {"title": "Library Talk — Sylvia Sykes, Shani Brown, Chisomo Selemani & Matt Richey", "venues": ["lb"], "start": "22:00", "end": "23:00", "kind": "special"},
+    {"title": "Swing Rueda with Nathan", "venues": ["ab"], "start": "22:00", "end": "23:00", "kind": "taster"},
+    {"title": "Blues Intro 101 with Christian", "venues": ["sp"], "start": "22:00", "end": "23:00", "kind": "taster"},
+    {"title": "DJ Tony", "venues": ["db"], "start": "23:00", "end": "00:00", "kind": "dj"},
+    {"title": "Herräng All Stars Band", "venues": ["db"], "start": "00:00", "end": "02:00", "kind": "show", "detail": "Band break: DJ Tony"},
+    {"title": "DJ Jach", "venues": ["fh"], "start": "01:00", "end": "02:00", "kind": "dj"},
+    {"title": "DJ Omar", "venues": ["lb"], "start": "00:00", "end": "04:00", "openEnd": true, "kind": "dj"},
+    {"title": "DJ Night Train", "venues": ["fh"], "start": "02:00", "end": "03:00", "kind": "dj"},
+    {"title": "DJ Victoria", "venues": ["db"], "start": "02:00", "end": "04:00", "openEnd": true, "kind": "dj"},
+    {"title": "DJ Simon", "venues": ["fh"], "start": "03:00", "end": "04:00", "kind": "dj"},
+    {"title": "DJ Viktor", "venues": ["fh"], "start": "04:00", "openEnd": true, "kind": "dj"}
+  ],
+  "specials": [
+    {"title": "Yoga", "venue": "fh", "start": "09:00", "end": "09:45", "kind": "special"},
+    {"title": "BIPOC Meet Up", "start": "14:00", "end": "15:10", "detail": "Klubben", "kind": "special"},
+    {"title": "Learn/Teach an Instrument", "start": "15:00", "end": "16:00", "detail": "Folkets Hus Plaza", "kind": "special"},
+    {"title": "Music Practice Jam", "start": "16:00", "end": "17:30", "detail": "Folkets Hus Plaza", "kind": "jam"},
+    {"title": "Stretching", "venue": "fh", "start": "18:00", "end": "18:45", "kind": "special"},
+    {"title": "Round Table Talk: Organisers/Scene Leaders — Today's Challenges", "start": "18:00", "end": "19:10", "detail": "Heaven's Tent", "kind": "special"},
+    {"title": "Neurodivergent & Disability Community Meet Up", "start": "19:10", "end": "20:30", "detail": "Klubben", "kind": "special"},
+    {"title": "Tap Jam", "venue": "db", "start": "19:10", "end": "20:00", "kind": "jam"},
+    {"title": "Slow Drag Opening", "venue": "fh", "start": "00:00", "end": "01:00", "kind": "special"},
+    {"title": "Bedlam Jam", "venue": "bar-bedlam", "start": "03:00", "kind": "jam"}
+  ]
+}
