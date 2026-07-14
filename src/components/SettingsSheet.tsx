@@ -76,14 +76,14 @@ export function SettingsSheet({
           paddingBottom: 'calc(env(safe-area-inset-bottom) + 2rem)',
         }}
       >
-        <div className="mb-4 flex items-center justify-between">
+        <div className="mb-4 flex items-center justify-between gap-2">
           <h2 className="hg-display text-lg">Your tracks</h2>
           <button
             onClick={onClose}
-            className="rounded-full px-3 py-1 text-xs font-bold uppercase"
+            className="shrink-0 rounded-full px-3 py-1 text-xs font-bold uppercase whitespace-nowrap"
             style={{ border: '1px solid var(--hg-ink)' }}
           >
-            Done
+            {selection.levels.length === 0 ? 'No tracks, just vibes' : 'Done'}
           </button>
         </div>
 
