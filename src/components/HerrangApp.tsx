@@ -320,7 +320,9 @@ export function HerrangApp({ data }: { data: HerrangData }) {
 
       <InstallToast />
 
-      {pepTalkOpen && <PepTalk onClose={() => setPepTalkOpen(false)} />}
+      {pepTalkOpen && clock && (
+        <PepTalk mode={clock.mode} onClose={() => setPepTalkOpen(false)} />
+      )}
     </div>
   );
 }

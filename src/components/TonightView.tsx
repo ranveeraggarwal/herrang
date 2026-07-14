@@ -29,15 +29,35 @@ import {
 import { blockStyle, kindColor, kindLabel, BigSay, Chip } from './bits';
 import { BigNow } from './BigNow';
 
+// Tapping the sun line cycles through the mosquito forecast, then puts it
+// away again. No hint it does anything — same rule as the title's pep talk.
+const MOSQUITO_FORECAST = [
+  '🦟 Mosquito forecast: yes.',
+  '🦟 Updated forecast: still yes.',
+  '🦟 They can smell your repellent. They consider it a marinade.',
+];
+
 /** The one quiet line about how little dark there is to work with tonight. */
 function SunLine({ posterDate }: { posterDate: string }) {
   const { sunset, sunrise } = sunTimesFor(posterDate);
+  // -1 = no forecast showing; each tap advances, the last wraps back to -1.
+  const [forecast, setForecast] = useState(-1);
   return (
-    <p className="text-xs" style={{ color: 'var(--hg-soft)' }}>
+    <button
+      type="button"
+      onClick={() =>
+        setForecast((f) => ((f + 2) % (MOSQUITO_FORECAST.length + 1)) - 1)
+      }
+      className="block text-left text-xs"
+      style={{ color: 'var(--hg-soft)' }}
+    >
       ☀️ Sunset <span className="hg-time">{sunset}</span>ish · sunrise{' '}
       <span className="hg-time">{sunrise}</span>ish — the sun is also doing
       weird hours.
-    </p>
+      {forecast >= 0 && (
+        <span className="mt-1 block">{MOSQUITO_FORECAST[forecast]}</span>
+      )}
+    </button>
   );
 }
 
@@ -71,7 +91,19 @@ export function TonightView({
       <div className="flex flex-col gap-3">
         <BigSay
           title="Tonight's program isn't up yet."
-          sub="Check the notice board (or nag Ranveer)."
+          sub={
+            <>
+              Check the notice board (or{' '}
+              {/* Yes, the nag button is real. It sends an actual email. */}
+              <a
+                className="font-bold underline"
+                href="mailto:herrang@walagran.com?subject=Nag%3A%20tonight%27s%20poster%3F&body=The%20notice%20board%20has%20it.%20The%20app%20doesn%27t.%20You%20know%20what%20to%20do."
+              >
+                nag Ranveer
+              </a>
+              ).
+            </>
+          }
         />
         <SunLine posterDate={date} />
       </div>

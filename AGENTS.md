@@ -84,6 +84,26 @@ Patterns worth copying when you write new copy:
   Only one sounds like it was written by the same person as the rest of
   the app.
 
+## The shenanigans (yes, they're deliberate)
+
+The app hides small jokes on purpose, with no hints they exist — finding
+one is the point. Don't "fix" them, don't add discoverability affordances,
+don't remove one because it looks like dead or odd code. The current roster:
+
+- **The pep talk** (`PepTalk.tsx`) — tap the title, get an affirmation and
+  emoji rain. It knows the clock: extra lines after 19:10 and in the weird
+  hours, and mosquitoes join the rain after dark. After ten opens
+  (localStorage counter) a couple of "back again?" lines join the pool.
+- **The mosquito forecast** (`TonightView.tsx`) — the sunset/sunrise line
+  is secretly a button; tapping cycles the forecast, then puts it away.
+- **"Nag Ranveer" is a real button** (`TonightView.tsx`) — the
+  program-not-up-yet card's nag opens a prefilled email. It should stay
+  functional; the joke is that it works.
+- **The 404** (`src/app/not-found.tsx`) — "This page isn't on the poster."
+
+Adding a new one: keep it silent (no tooltips, no sparkle icons), keep it
+offline, one joke per egg, and never let a shenanigan invent schedule data.
+
 ## The design system
 
 The camp's own daily poster *is* the design system — see
