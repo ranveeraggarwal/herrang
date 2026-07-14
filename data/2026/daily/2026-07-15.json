@@ -8,13 +8,15 @@
   "specials": [
     {
       "title": "Bike Ride to Haberödal (Church)",
-      "detail": "Meet at the Bike Shop. Come along to discover places around the camp.",
+      "location": "Bike Shop",
+      "detail": "Come along to discover places around the camp.",
       "start": "11:00",
       "kind": "special"
     },
     {
       "title": "Nature and Culture Hike",
-      "detail": "Meet up outside Roseland. What is Herräng beyond the dance camp? On this hike we will both explore local flora/fauna as well as try to learn a bit more about the town's history together by walking along the beautiful \"culture trail\". Hike is approximately 6–7 km. Bring your water bottle, a swimsuit (optional) and a positive attitude! :D",
+      "location": "Outside Roseland",
+      "detail": "What is Herräng beyond the dance camp? On this hike we will both explore local flora/fauna as well as try to learn a bit more about the town's history together by walking along the beautiful \"culture trail\". Hike is approximately 6–7 km. Bring your water bottle, a swimsuit (optional) and a positive attitude! :D",
       "start": "11:00",
       "end": "13:00",
       "kind": "special"
@@ -37,14 +39,16 @@
     },
     {
       "title": "The Art of Taking a Nap",
-      "detail": "Meet in front of the Lindy Hop shop. Learn the tips for great naps and the best spots for it around Herräng. Suitable for everyone who loves napping and/or wants to get better at it. Don't bring coffee!",
+      "location": "In front of the Lindy Hop shop",
+      "detail": "Learn the tips for great naps and the best spots for it around Herräng. Suitable for everyone who loves napping and/or wants to get better at it. Don't bring coffee!",
       "start": "13:00",
       "end": "13:50",
       "kind": "special"
     },
     {
       "title": "Barbara Billups & Sugar Sullivan",
-      "detail": "Folketshus Ballroom + Dansbana. Special class for everyone, all tracks.",
+      "venue": "fh",
+      "detail": "Special class for everyone, all tracks. Also runs in Dansbana.",
       "start": "14:00",
       "end": "15:10",
       "kind": "special"
@@ -67,7 +71,7 @@
     },
     {
       "title": "Costume Construction for Friday Party",
-      "detail": "Grass area in front of the Lindy Hop shop, or the Exhibition Room if it rains.",
+      "location": "Grass area in front of the Lindy Hop shop (Exhibition Room if it rains)",
       "start": "14:00",
       "end": "16:00",
       "kind": "special"
@@ -81,20 +85,22 @@
     },
     {
       "title": "Movie Afternoon: The Hunchback of Notre Dame",
-      "detail": "Klubben. We will celebrate the 30th anniversary of the movie The Hunchback of Notre Dame by watching the Disney movie.",
+      "location": "Klubben",
+      "detail": "We will celebrate the 30th anniversary of the movie The Hunchback of Notre Dame by watching the Disney movie.",
       "start": "15:10",
       "end": "16:40",
       "kind": "special"
     },
     {
       "title": "Surströmming",
-      "detail": "Meet up in front of Folketshus, to go by the lake.",
+      "location": "In front of Folketshus (to go by the lake)",
       "start": "16:00",
       "kind": "special"
     },
     {
       "title": "Sieste Musicale / Quiet Concert",
-      "detail": "Meet in front of ICP, in the meadows near the school area. Herräng can be an overstimulating place – so join us for some soft live music on the meadow (close to school area) to unwind and reflect. Bring your journals, painting and craft supplies, blankets and your frazzled nervous systems. No talking / only whispering allowed. Bring your own pillows, mats or blankets :)",
+      "location": "In front of ICP (meadows near the school area)",
+      "detail": "Herräng can be an overstimulating place – so join us for some soft live music on the meadow (close to school area) to unwind and reflect. Bring your journals, painting and craft supplies, blankets and your frazzled nervous systems. No talking / only whispering allowed. Bring your own pillows, mats or blankets :)",
       "start": "16:00",
       "end": "17:00",
       "kind": "special"
@@ -109,7 +115,8 @@
     },
     {
       "title": "Afternoon Run",
-      "detail": "Meet up in front of Folkets Hus. Let's run together in the forest around the camp. Duration and pace to be determined together.",
+      "location": "In front of Folkets Hus",
+      "detail": "Let's run together in the forest around the camp. Duration and pace to be determined together.",
       "start": "17:00",
       "end": "18:00",
       "kind": "special"
@@ -123,7 +130,8 @@
     },
     {
       "title": "Introduction to International Sign (IS)",
-      "detail": "Klubben. How can we communicate on the dance floor without using spoken language? How can we connect with one another through eye contact, body language, and presence? Led by a Deaf facilitator who uses International Sign (IS), this workshop offers a fun and accessible introduction to this visual means of communication in an intercultural setting that encourages connection and exchange. Through interactive activities and practical situations, participants will learn useful signs to introduce themselves, meet new people, invite someone to dance, show their impressions of a dance event, or simply chat between dances. Beyond learning signs, the workshop is also an opportunity to discover Deaf culture and experience another way of being together, where eye contact, facial expressions, and attentive interaction play a central role. An invitation to broaden your language, your curiosity, and your way of building community on the dance floor. Open to everyone. No previous knowledge is required!",
+      "location": "Klubben",
+      "detail": "How can we communicate on the dance floor without using spoken language? How can we connect with one another through eye contact, body language, and presence? Led by a Deaf facilitator who uses International Sign (IS), this workshop offers a fun and accessible introduction to this visual means of communication in an intercultural setting that encourages connection and exchange. Through interactive activities and practical situations, participants will learn useful signs to introduce themselves, meet new people, invite someone to dance, show their impressions of a dance event, or simply chat between dances. Beyond learning signs, the workshop is also an opportunity to discover Deaf culture and experience another way of being together, where eye contact, facial expressions, and attentive interaction play a central role. An invitation to broaden your language, your curiosity, and your way of building community on the dance floor. Open to everyone. No previous knowledge is required!",
       "start": "18:00",
       "end": "19:10",
       "kind": "special"

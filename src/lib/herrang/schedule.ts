@@ -26,10 +26,11 @@ export function venueName(venues: HerrangVenue[], id: string): string {
 }
 
 /** Short location for a stream event: venue names, or the ex-special's
- * `detail` when there's no registry venue (Klubben, One O'Clock Jump Wine
- * Bar aren't in venues.json). */
+ * `location` (falling back to `detail`, for older data that never had a
+ * separate location field) when there's no registry venue (Klubben, One
+ * O'Clock Jump Wine Bar aren't in venues.json). */
 export function eventLocation(venues: HerrangVenue[], e: DailyEvent): string {
-  if (e.venues.length === 0) return e.detail ?? '';
+  if (e.venues.length === 0) return e.location ?? e.detail ?? '';
   return e.venues.map((v) => venueName(venues, v)).join(' + ');
 }
 
@@ -59,6 +60,7 @@ function timedSpecialsAsEvents(specials: DailySpecial[]): DailyEvent[] {
       start: s.start,
       end: s.end,
       kind: s.kind ?? 'special',
+      location: s.location,
       detail: s.detail,
     }));
 }
