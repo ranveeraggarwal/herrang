@@ -12,12 +12,12 @@
     {"title": "Blues Intro 101 with Christian", "venues": ["sp"], "start": "22:00", "end": "23:00", "kind": "taster"},
     {"title": "DJ Tony", "venues": ["db"], "start": "23:00", "end": "23:30", "kind": "dj"},
     {"title": "Herräng All Stars Band", "venues": ["db"], "start": "23:30", "end": "02:30", "kind": "show"},
-    {"title": "DJ Jach", "venues": ["fh"], "start": "01:30", "end": "02:30", "kind": "dj"},
+    {"title": "DJ Jach", "venues": ["fh"], "start": "01:00", "end": "01:30", "kind": "dj"},
     {"title": "DJ Omar", "venues": ["lb"], "start": "01:00", "end": "08:00", "kind": "dj"},
-    {"title": "DJ Night Train", "venues": ["fh"], "start": "02:30", "end": "03:30", "kind": "dj"},
+    {"title": "DJ Night Train", "venues": ["fh"], "start": "01:30", "end": "02:00", "kind": "dj"},
     {"title": "DJ Victoria", "venues": ["db"], "start": "02:30", "end": "08:00", "kind": "dj"},
-    {"title": "DJ Simon", "venues": ["fh"], "start": "03:30", "end": "04:30", "kind": "dj"},
-    {"title": "DJ Viktor", "venues": ["fh"], "start": "04:30", "end": "08:00", "kind": "dj"}
+    {"title": "DJ Simon", "venues": ["fh"], "start": "02:00", "end": "02:30", "kind": "dj"},
+    {"title": "DJ Viktor", "venues": ["fh"], "start": "02:30", "end": "08:00", "kind": "dj"}
   ],
   "specials": [
     {"title": "Yoga", "venue": "fh", "start": "09:00", "end": "09:45", "kind": "special"},
@@ -28,7 +28,7 @@
     {"title": "Round Table Talk: Organisers/Scene Leaders — Today's Challenges", "start": "18:00", "end": "19:10", "detail": "Heaven's Tent", "kind": "special"},
     {"title": "Neurodivergent & Disability Community Meet Up", "start": "19:10", "end": "20:30", "detail": "Klubben", "kind": "special"},
     {"title": "Tap Jam", "venue": "db", "start": "19:10", "end": "20:00", "kind": "jam"},
-    {"title": "Slow Drag Opening", "venue": "fh", "start": "00:30", "end": "01:30", "kind": "special"},
+    {"title": "Slow Drag Opening", "venue": "fh", "start": "00:30", "end": "01:00", "kind": "special"},
     {"title": "Bedlam Jam", "venue": "bar-bedlam", "start": "03:00", "end": "08:00", "kind": "jam"}
   ]
 }
