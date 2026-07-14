@@ -25,18 +25,16 @@ import {
 import { formatCompactWeekdayDate } from '@/lib/dates';
 import { TodayView } from './TodayView';
 import { TonightView } from './TonightView';
-import { WeekView } from './WeekView';
 import { SettingsSheet, type ThemePref } from './SettingsSheet';
 import { InstallToast } from './InstallToast';
 import { PepTalk } from './PepTalk';
 import { LiveDot } from './bits';
 
-type View = 'today' | 'tonight' | 'week';
+type View = 'today' | 'tonight';
 
 const VIEW_LABELS: Record<View, string> = {
   today: 'classes',
   tonight: 'program',
-  week: 'week',
 };
 
 const TRACKS_KEY = 'herrang.tracks.v1';
@@ -217,9 +215,9 @@ export function HerrangApp({ data }: { data: HerrangData }) {
 
         <nav
           aria-label="View"
-          className="mb-5 grid grid-cols-3 gap-2"
+          className="mb-5 grid grid-cols-2 gap-2"
         >
-          {(['today', 'tonight', 'week'] as const).map((v) => {
+          {(['today', 'tonight'] as const).map((v) => {
             const live = (v === 'today' && classesLive) || (v === 'tonight' && programLive);
             return (
               <button
@@ -249,16 +247,8 @@ export function HerrangApp({ data }: { data: HerrangData }) {
               onPickTracks={() => setSettingsOpen(true)}
               onGoTonight={() => setManualView('tonight')}
             />
-          ) : view === 'tonight' ? (
-            <TonightView data={data} clock={clock} />
           ) : (
-            <WeekView
-              data={data}
-              trackIds={trackIds}
-              today={clock.posterDate}
-              now={clock.posterMinutes}
-              onPickTracks={() => setSettingsOpen(true)}
-            />
+            <TonightView data={data} clock={clock} />
           )}
         </main>
       </div>

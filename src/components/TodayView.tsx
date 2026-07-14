@@ -26,6 +26,7 @@ import {
 } from '@/lib/herrang/schedule';
 import { formatCompactWeekdayDate } from '@/lib/dates';
 import { BigSay, Card, Chip } from './bits';
+import { WeekView } from './WeekView';
 
 // One line per day of camp — sleep debt escalates, the joke doesn't repeat
 // until the pool runs out. Index by day-of-camp so it's stable all night,
@@ -51,11 +52,82 @@ export function TodayView(props: {
     <div className="flex flex-col gap-3">
       <TodayViewBody {...props} />
       <WhereAreThings venues={props.data.venues} />
+      <ThisWeekCard
+        data={props.data}
+        trackIds={props.trackIds}
+        today={props.clock.posterDate}
+        now={props.clock.posterMinutes}
+        onPickTracks={props.onPickTracks}
+      />
     </div>
   );
 }
 
 const WHERE_OPEN_KEY = 'herrang.whereOpen.v1';
+const WEEK_OPEN_KEY = 'herrang.weekOpen.v1';
+
+/** Collapsed by default — the whole week's schedule, tucked below the venue
+ * list. Nobody needs to see next Thursday every time they check what class
+ * is next. */
+function ThisWeekCard({
+  data,
+  trackIds,
+  today,
+  now,
+  onPickTracks,
+}: {
+  data: HerrangData;
+  trackIds: string[];
+  today: string;
+  now: number;
+  onPickTracks: () => void;
+}) {
+  const [open, setOpen] = useState(() => {
+    try {
+      const raw = localStorage.getItem(WEEK_OPEN_KEY);
+      return raw === null ? false : raw === 'true';
+    } catch {
+      return false;
+    }
+  });
+
+  if (data.week.classes.length === 0) return null;
+
+  const handleToggle = (e: SyntheticEvent<HTMLDetailsElement>) => {
+    const isOpen = e.currentTarget.open;
+    setOpen(isOpen);
+    try {
+      localStorage.setItem(WEEK_OPEN_KEY, String(isOpen));
+    } catch {
+      /* private mode etc. — collapse state just won't persist */
+    }
+  };
+
+  return (
+    <Card>
+      <details className="group" open={open} onToggle={handleToggle}>
+        <summary
+          className="hg-display flex cursor-pointer list-none items-center gap-1.5 text-xs"
+          style={{ color: 'var(--hg-soft)' }}
+        >
+          <span className="inline-block transition-transform group-open:rotate-90">
+            ▸
+          </span>
+          The whole week
+        </summary>
+        <div className="mt-3">
+          <WeekView
+            data={data}
+            trackIds={trackIds}
+            today={today}
+            now={now}
+            onPickTracks={onPickTracks}
+          />
+        </div>
+      </details>
+    </Card>
+  );
+}
 
 /** Open by default; the user's collapse choice persists across visits.
  * Safe to read localStorage in the initializer — TodayView only ever mounts
