@@ -78,6 +78,18 @@ export function tonightStream(daily: DailyProgram): StreamGroup[] {
     .sort((a, b) => a.startPM - b.startPM);
 }
 
+/** Events (+ timed specials) from the daily program currently in progress,
+ * given poster-timeline minutes. Shared by the Program stream's running-card
+ * highlight and the nav's live dot, so the two can't drift apart. */
+export function runningEvents(daily: DailyProgram, nowPM: number): DailyEvent[] {
+  const all = [...daily.events, ...timedSpecialsAsEvents(daily.specials)];
+  return all.filter((e) => {
+    const start = toPosterMinutes(e.start);
+    const end = e.end ? toPosterMinutes(e.end) : undefined;
+    return nowPM >= start && (end === undefined ? e.openEnd : nowPM < end);
+  });
+}
+
 // --- track selection -------------------------------------------------------
 
 /** How a split level is resolved: a group number, or both while undecided. */

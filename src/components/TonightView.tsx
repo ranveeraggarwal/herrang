@@ -20,6 +20,7 @@ import { sunTimesFor } from '@/lib/herrang/sun';
 import {
   dailyFor,
   eventLocation,
+  runningEvents,
   tonightStream,
   venueLabel,
   venueName,
@@ -74,15 +75,7 @@ export function TonightView({
   const live = true;
   const nowPM = clock.posterMinutes;
 
-  const running = live
-    ? stream
-        .flatMap((g) => g.events)
-        .filter((e) => {
-          const start = toPosterMinutes(e.start);
-          const end = e.end ? toPosterMinutes(e.end) : undefined;
-          return nowPM >= start && (end === undefined ? e.openEnd : nowPM < end);
-        })
-    : [];
+  const running = live ? runningEvents(daily, nowPM) : [];
   const nextGroup = live ? stream.find((g) => g.startPM > nowPM) : undefined;
 
   return (

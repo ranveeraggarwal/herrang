@@ -16,6 +16,9 @@ import {
   campDayCount,
   campDayNumber,
   classesOn,
+  dailyFor,
+  nowAndNextClass,
+  runningEvents,
   selectedTrackIds,
   type TrackSelection,
 } from '@/lib/herrang/schedule';
@@ -26,6 +29,7 @@ import { WeekView } from './WeekView';
 import { SettingsSheet, type ThemePref } from './SettingsSheet';
 import { InstallToast } from './InstallToast';
 import { PepTalk } from './PepTalk';
+import { LiveDot } from './bits';
 
 type View = 'today' | 'tonight' | 'week';
 
@@ -130,6 +134,21 @@ export function HerrangApp({ data }: { data: HerrangData }) {
       : 'today';
   const view = manualView ?? autoView;
 
+  // The nav's live dots: your track's current class, and anything currently
+  // running on the daily program (DJ set, taster, daytime special, ...).
+  const classesLive = useMemo(() => {
+    if (!clock || clock.mode !== 'day' || trackIds.length === 0) return false;
+    const classes = classesOn(data.week, trackIds, clock.posterDate);
+    return nowAndNextClass(classes, clock.posterMinutes).current !== undefined;
+  }, [clock, data.week, trackIds]);
+
+  const programLive = useMemo(() => {
+    if (!clock) return false;
+    const daily = dailyFor(data.dailies, clock.posterDate);
+    if (!daily) return false;
+    return runningEvents(daily, clock.posterMinutes).length > 0;
+  }, [clock, data.dailies]);
+
   const saveSelection = (s: TrackSelection) => {
     setSelection(s);
     writeJson(TRACKS_KEY, s);
@@ -200,21 +219,25 @@ export function HerrangApp({ data }: { data: HerrangData }) {
           aria-label="View"
           className="mb-5 grid grid-cols-3 gap-2"
         >
-          {(['today', 'tonight', 'week'] as const).map((v) => (
-            <button
-              key={v}
-              onClick={() => setManualView(v)}
-              aria-current={view === v ? 'page' : undefined}
-              className="hg-display rounded-full py-2 text-sm"
-              style={
-                view === v
-                  ? { background: 'var(--hg-ink)', color: 'var(--hg-ground)' }
-                  : { border: '1px solid var(--hg-line)', color: 'var(--hg-ink)' }
-              }
-            >
-              {VIEW_LABELS[v]}
-            </button>
-          ))}
+          {(['today', 'tonight', 'week'] as const).map((v) => {
+            const live = (v === 'today' && classesLive) || (v === 'tonight' && programLive);
+            return (
+              <button
+                key={v}
+                onClick={() => setManualView(v)}
+                aria-current={view === v ? 'page' : undefined}
+                className="hg-display relative rounded-full py-2 text-sm"
+                style={
+                  view === v
+                    ? { background: 'var(--hg-ink)', color: 'var(--hg-ground)' }
+                    : { border: '1px solid var(--hg-line)', color: 'var(--hg-ink)' }
+                }
+              >
+                {VIEW_LABELS[v]}
+                {live && <LiveDot />}
+              </button>
+            );
+          })}
         </nav>
 
         <main className="flex-grow">

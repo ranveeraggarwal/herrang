@@ -106,3 +106,31 @@
     opacity: 0.25;
   }
 }
+
+/* The nav's "something is happening" marker — a flat dot, pulsing in place.
+   No glow/shadow, per the poster language's no-ornament rule. */
+.hg-live-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--hg-special);
+  animation: hg-live-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes hg-live-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hg-live-dot {
+    animation: none;
+  }
+}
