@@ -332,11 +332,12 @@ function TodayViewBody({
 
       {listClasses.length > 0 && (
         <Card>
-          <h3
-            className="hg-display mb-3 text-xs"
-            style={{ color: 'var(--hg-soft)' }}
-          >
-            Today · your track{trackIds.length > 1 ? 's' : ''}
+          <h3 className="hg-display mb-3 text-xs">
+            <span style={{ color: 'var(--hg-soft)' }}>Today · </span>
+            {trackIds
+              .map((id) => week.tracks.find((t) => t.id === id)?.name)
+              .filter(Boolean)
+              .join(' + ')}
           </h3>
           <ul className="flex flex-col gap-2.5">
             {listClasses.map((c) => {
@@ -358,9 +359,15 @@ function TodayViewBody({
                   <span className="text-sm font-semibold">
                     {venueName(data.venues, c.venue)}
                   </span>
-                  <span className="text-xs" style={{ color: 'var(--hg-soft)' }}>
-                    {c.title ?? track?.name}
-                  </span>
+                  {/* The track name's already in the card header above — only
+                      repeat it per-row when there's more than one track to
+                      tell apart. A custom class title is worth showing either
+                      way. */}
+                  {(c.title || trackIds.length > 1) && (
+                    <span className="text-xs" style={{ color: 'var(--hg-soft)' }}>
+                      {c.title ?? track?.name}
+                    </span>
+                  )}
                   {(c.labels ?? []).map((l) => (
                     <Chip key={l}>{l}</Chip>
                   ))}
