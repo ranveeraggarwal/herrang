@@ -107,16 +107,17 @@
   }
 }
 
-/* The nav's "something is happening" marker — a flat dot, pulsing in place.
-   No glow/shadow, per the poster language's no-ornament rule. Sits inline
-   next to the tab label, not corner-pinned. */
+/* The nav's "something is happening" marker — a flat dot. Pulses once when
+   it appears, then settles to a plain static dot — a persistent pulse next
+   to a tab you're not on gets old fast. No glow/shadow, per the poster
+   language's no-ornament rule. Sits inline next to the tab label. */
 .hg-live-dot {
   display: inline-block;
   width: 6px;
   height: 6px;
   border-radius: 999px;
   background: var(--hg-special);
-  animation: hg-live-pulse 1.6s ease-in-out infinite;
+  animation: hg-live-pulse 1.6s ease-in-out 1;
 }
 
 @keyframes hg-live-pulse {
