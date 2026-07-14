@@ -47,6 +47,17 @@ export function blockStyle(kind: EventKind, tba?: boolean): CSSProperties {
   };
 }
 
+/** Pulsating "something is happening right now" marker — sits inline next
+ * to a label. */
+export function LiveDot() {
+  return (
+    <>
+      <span aria-hidden className="hg-live-dot -mt-[1.5px]" />
+      <span className="sr-only"> — live now</span>
+    </>
+  );
+}
+
 export function Chip({
   children,
   filled,
