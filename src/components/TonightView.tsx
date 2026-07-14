@@ -44,16 +44,27 @@ function SunLine({ posterDate }: { posterDate: string }) {
 export function TonightView({
   data,
   clock,
+  posterDate,
+  live = true,
 }: {
   data: HerrangData;
   clock: ClockState;
+  /** Which poster to render. Defaults to the one in force now; the "next
+   *  day" tab passes tomorrow's poster date. */
+  posterDate?: string;
+  /** False for a read-only preview of a future day: no running/next cards,
+   *  no progress scrims, no "ends in" math — nothing is running yet. Gated
+   *  structurally rather than by faking the clock, which would produce wrong
+   *  "ends in" numbers if the pattern were reused. */
+  live?: boolean;
 }) {
   // Across-the-room mode: which running event (if any) is currently blown
   // up full-screen. Lives here, not in BigNow, so closing it is just
   // setting it back to null.
   const [bigNow, setBigNow] = useState<DailyEvent | null>(null);
 
-  const daily = dailyFor(data.dailies, clock.posterDate);
+  const date = posterDate ?? clock.posterDate;
+  const daily = dailyFor(data.dailies, date);
 
   if (!daily) {
     return (
@@ -62,17 +73,16 @@ export function TonightView({
           title="Tonight's program isn't up yet."
           sub="Check the notice board (or nag Ranveer)."
         />
-        <SunLine posterDate={clock.posterDate} />
+        <SunLine posterDate={date} />
       </div>
     );
   }
 
   const stream = tonightStream(daily);
   // Live for the whole poster window (08:00 today through 07:59 tomorrow),
-  // not just party hours: `daily` is always the currently active poster
+  // not just party hours: when `live`, `daily` is the currently active poster
   // (`dailyFor` resolves via `clock.posterDate`), and daytime specials like
   // Yoga can genuinely be running well before the night program starts.
-  const live = true;
   const nowPM = clock.posterMinutes;
 
   const running = live ? runningEvents(daily, nowPM) : [];
@@ -194,7 +204,7 @@ export function TonightView({
         </p>
       )}
 
-      <SunLine posterDate={clock.posterDate} />
+      <SunLine posterDate={date} />
 
       {bigNow && (
         <BigNow
