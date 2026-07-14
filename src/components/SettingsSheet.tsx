@@ -83,7 +83,7 @@ export function SettingsSheet({
             className="shrink-0 rounded-full px-3 py-1 text-xs font-bold uppercase whitespace-nowrap"
             style={{ border: '1px solid var(--hg-ink)' }}
           >
-            {selection.levels.length === 0 ? 'No tracks, just vibes' : 'Done'}
+            {selection.levels.length === 0 ? 'Just vibes · Done' : 'Done'}
           </button>
         </div>
 
