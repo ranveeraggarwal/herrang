@@ -52,7 +52,7 @@ export function blockStyle(kind: EventKind, tba?: boolean): CSSProperties {
 export function LiveDot() {
   return (
     <>
-      <span aria-hidden className="hg-live-dot" />
+      <span aria-hidden className="hg-live-dot -mt-[1.5px]" />
       <span className="sr-only"> — live now</span>
     </>
   );
