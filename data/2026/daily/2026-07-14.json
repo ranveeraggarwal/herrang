@@ -11,7 +11,7 @@
     {"title": "Swing Rueda with Nathan", "venues": ["ab"], "start": "22:00", "end": "23:00", "kind": "taster"},
     {"title": "Blues Intro 101 with Christian", "venues": ["sp"], "start": "22:00", "end": "23:00", "kind": "taster"},
     {"title": "DJ Tony", "venues": ["db"], "start": "23:00", "end": "23:30", "kind": "dj"},
-    {"title": "Herräng All Stars Band", "venues": ["db"], "start": "23:30", "end": "02:30", "kind": "show"},
+    {"title": "Herräng All Stars Band", "venues": ["db"], "start": "23:30", "end": "02:30", "kind": "show", "detail": "Band break: DJ Tony"},
     {"title": "DJ Jach", "venues": ["fh"], "start": "00:30", "end": "01:30", "kind": "dj"},
     {"title": "DJ Omar", "venues": ["lb"], "start": "01:00", "end": "08:00", "kind": "dj"},
     {"title": "DJ Night Train", "venues": ["fh"], "start": "01:30", "end": "02:30", "kind": "dj"},
