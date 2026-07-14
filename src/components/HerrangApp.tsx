@@ -121,8 +121,13 @@ export function HerrangApp({ data }: { data: HerrangData }) {
     return clock.posterMinutes >= lastEnd;
   }, [clock, data.week, trackIds]);
 
+  // No tracks picked means no classes to show on Today — the program is the
+  // more useful default (also covers first-visit, before the track picker
+  // has been dismissed).
   const autoView: View =
-    clock?.mode === 'night' || classesDoneForToday ? 'tonight' : 'today';
+    trackIds.length === 0 || clock?.mode === 'night' || classesDoneForToday
+      ? 'tonight'
+      : 'today';
   const view = manualView ?? autoView;
 
   const saveSelection = (s: TrackSelection) => {
