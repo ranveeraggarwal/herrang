@@ -206,7 +206,7 @@ export function HerrangApp({ data }: { data: HerrangData }) {
           </div>
           <button
             onClick={() => setSettingsOpen(true)}
-            className="rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-wide"
+            className="shrink-0 rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-wide whitespace-nowrap"
             style={{ border: '1px solid var(--hg-ink)' }}
           >
             Tracks&thinsp;·&thinsp;⚙
