@@ -1,10 +1,14 @@
 'use client';
 
-// Week view: the user's tracks only, grouped by day, compact rows.
+// Week view: the user's tracks only, grouped by day, compact rows. Lives
+// nested inside a single collapsed card on the Classes view (TodayView), so
+// it renders flat sections with hairline dividers rather than its own boxed
+// cards — a card inside a card inside a card was the previous look.
 // Wednesday's row shows the whole-camp special instead of classes.
 // Days already behind us drop into a collapsed archive — nobody's
 // scrolling back to check what track they picked on Tuesday.
 
+import type { ReactNode } from 'react';
 import type { HerrangData } from '@/lib/herrang/types';
 import { addDays } from '@/lib/dates';
 import {
@@ -16,7 +20,11 @@ import {
 } from '@/lib/herrang/schedule';
 import { toPosterMinutes } from '@/lib/herrang/time';
 import { formatCompactWeekdayDate } from '@/lib/dates';
-import { BigSay, Card, Chip } from './bits';
+import { Chip } from './bits';
+
+function Divider() {
+  return <hr style={{ borderColor: 'var(--hg-line)' }} />;
+}
 
 export function WeekView({
   data,
@@ -37,43 +45,39 @@ export function WeekView({
 
   if (week.classes.length === 0) {
     return (
-      <BigSay
-        title="The class schedule isn't loaded yet."
-        sub="The week 2 master schedule lands here soon."
-      />
+      <p className="text-sm" style={{ color: 'var(--hg-soft)' }}>
+        The week 2 master schedule lands here soon.
+      </p>
     );
   }
 
   if (trackIds.length === 0) {
     return (
-      <BigSay
-        title="Pick your track."
-        sub={
-          <button className="font-bold underline" onClick={onPickTracks}>
-            Choose from the week 2 tracks →
-          </button>
-        }
-      />
+      <p className="text-sm" style={{ color: 'var(--hg-soft)' }}>
+        <button className="font-bold underline" onClick={onPickTracks}>
+          Choose from the week 2 tracks →
+        </button>
+      </p>
     );
   }
 
   const dates: string[] = [];
   for (let d = week.start; d <= week.end; d = addDays(d, 1)) dates.push(d);
 
-  const dayCard = (date: string) => {
+  const daySection = (date: string) => {
     const classes = classesOn(week, trackIds, date);
     const specials = weekSpecialsOn(week, date);
     const free = isClassFreeDay(week, date);
     if (classes.length === 0 && specials.length === 0 && !free) return null;
 
-    // Only today's card can have finished items sitting next to upcoming
+    // Only today's section can have finished items sitting next to upcoming
     // ones — earlier days are already behind the "today" split, later days
     // haven't started.
     const isToday = date === today;
 
     return (
-      <Card key={date}>
-        <h3 className="hg-display mb-3 text-sm">
+      <div key={date}>
+        <h3 className="hg-display mb-3 text-xs" style={{ color: 'var(--hg-soft)' }}>
           {formatCompactWeekdayDate(date)}
         </h3>
         <ul className="flex flex-col gap-2">
@@ -129,21 +133,27 @@ export function WeekView({
             );
           })}
         </ul>
-      </Card>
+      </div>
     );
   };
 
+  // Flat sections with a hairline divider between each day, instead of a
+  // card per day — this whole view already sits inside one card.
+  const withDividers = (nodes: ReactNode[]) =>
+    nodes.flatMap((node, i) => (i === 0 ? [node] : [<Divider key={`d-${i}`} />, node]));
+
   const upcoming = dates.filter((d) => d >= today);
   const past = dates.filter((d) => d < today);
-  const pastCards = past.map(dayCard).filter(Boolean);
+  const upcomingSections = upcoming.map(daySection).filter(Boolean) as ReactNode[];
+  const pastSections = past.map(daySection).filter(Boolean) as ReactNode[];
 
   return (
-    <div className="flex flex-col gap-3">
-      {upcoming.map(dayCard)}
+    <div className="flex flex-col gap-4">
+      {withDividers(upcomingSections)}
 
-      {pastCards.length > 0 && (
+      {pastSections.length > 0 && (
         <>
-          <hr className="my-1" style={{ borderColor: 'var(--hg-line)' }} />
+          <Divider />
           <details className="group">
             <summary
               className="hg-display flex cursor-pointer list-none items-center gap-1.5 text-xs"
@@ -152,9 +162,11 @@ export function WeekView({
               <span className="inline-block transition-transform group-open:rotate-90">
                 ▸
               </span>
-              Already happened. Relax. ({pastCards.length})
+              Already happened. Relax. ({pastSections.length})
             </summary>
-            <div className="mt-3 flex flex-col gap-3 opacity-60">{pastCards}</div>
+            <div className="mt-4 flex flex-col gap-4 opacity-60">
+              {withDividers(pastSections)}
+            </div>
           </details>
         </>
       )}

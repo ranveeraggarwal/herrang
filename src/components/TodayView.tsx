@@ -26,6 +26,7 @@ import {
 } from '@/lib/herrang/schedule';
 import { formatCompactWeekdayDate } from '@/lib/dates';
 import { BigSay, Card, Chip } from './bits';
+import { WeekView } from './WeekView';
 
 // One line per day of camp — sleep debt escalates, the joke doesn't repeat
 // until the pool runs out. Index by day-of-camp so it's stable all night,
@@ -51,22 +52,93 @@ export function TodayView(props: {
     <div className="flex flex-col gap-3">
       <TodayViewBody {...props} />
       <WhereAreThings venues={props.data.venues} />
+      <ThisWeekCard
+        data={props.data}
+        trackIds={props.trackIds}
+        today={props.clock.posterDate}
+        now={props.clock.posterMinutes}
+        onPickTracks={props.onPickTracks}
+      />
     </div>
   );
 }
 
 const WHERE_OPEN_KEY = 'herrang.whereOpen.v1';
+const WEEK_OPEN_KEY = 'herrang.weekOpen.v1';
 
-/** Open by default; the user's collapse choice persists across visits.
- * Safe to read localStorage in the initializer — TodayView only ever mounts
+/** Collapsed by default — the whole week's schedule, tucked below the venue
+ * list. Nobody needs to see next Thursday every time they check what class
+ * is next. */
+function ThisWeekCard({
+  data,
+  trackIds,
+  today,
+  now,
+  onPickTracks,
+}: {
+  data: HerrangData;
+  trackIds: string[];
+  today: string;
+  now: number;
+  onPickTracks: () => void;
+}) {
+  const [open, setOpen] = useState(() => {
+    try {
+      const raw = localStorage.getItem(WEEK_OPEN_KEY);
+      return raw === null ? false : raw === 'true';
+    } catch {
+      return false;
+    }
+  });
+
+  if (data.week.classes.length === 0) return null;
+
+  const handleToggle = (e: SyntheticEvent<HTMLDetailsElement>) => {
+    const isOpen = e.currentTarget.open;
+    setOpen(isOpen);
+    try {
+      localStorage.setItem(WEEK_OPEN_KEY, String(isOpen));
+    } catch {
+      /* private mode etc. — collapse state just won't persist */
+    }
+  };
+
+  return (
+    <Card>
+      <details className="group" open={open} onToggle={handleToggle}>
+        <summary
+          className="hg-display flex cursor-pointer list-none items-center gap-1.5 text-xs"
+          style={{ color: 'var(--hg-soft)' }}
+        >
+          <span className="inline-block transition-transform group-open:rotate-90">
+            ▸
+          </span>
+          The whole week
+        </summary>
+        <div className="mt-3">
+          <WeekView
+            data={data}
+            trackIds={trackIds}
+            today={today}
+            now={now}
+            onPickTracks={onPickTracks}
+          />
+        </div>
+      </details>
+    </Card>
+  );
+}
+
+/** Collapsed by default; the user's choice persists across visits. Safe to
+ * read localStorage in the initializer — TodayView only ever mounts
  * client-side, after HerrangApp's clock gate has already passed. */
 function WhereAreThings({ venues }: { venues: HerrangVenue[] }) {
   const [open, setOpen] = useState(() => {
     try {
       const raw = localStorage.getItem(WHERE_OPEN_KEY);
-      return raw === null ? true : raw === 'true';
+      return raw === null ? false : raw === 'true';
     } catch {
-      return true;
+      return false;
     }
   });
 
@@ -260,11 +332,12 @@ function TodayViewBody({
 
       {listClasses.length > 0 && (
         <Card>
-          <h3
-            className="hg-display mb-3 text-xs"
-            style={{ color: 'var(--hg-soft)' }}
-          >
-            Today · your track{trackIds.length > 1 ? 's' : ''}
+          <h3 className="hg-display mb-3 text-xs">
+            <span style={{ color: 'var(--hg-soft)' }}>Today · </span>
+            {trackIds
+              .map((id) => week.tracks.find((t) => t.id === id)?.name)
+              .filter(Boolean)
+              .join(' + ')}
           </h3>
           <ul className="flex flex-col gap-2.5">
             {listClasses.map((c) => {
@@ -286,9 +359,15 @@ function TodayViewBody({
                   <span className="text-sm font-semibold">
                     {venueName(data.venues, c.venue)}
                   </span>
-                  <span className="text-xs" style={{ color: 'var(--hg-soft)' }}>
-                    {c.title ?? track?.name}
-                  </span>
+                  {/* The track name's already in the card header above — only
+                      repeat it per-row when there's more than one track to
+                      tell apart. A custom class title is worth showing either
+                      way. */}
+                  {(c.title || trackIds.length > 1) && (
+                    <span className="text-xs" style={{ color: 'var(--hg-soft)' }}>
+                      {c.title ?? track?.name}
+                    </span>
+                  )}
                   {(c.labels ?? []).map((l) => (
                     <Chip key={l}>{l}</Chip>
                   ))}
