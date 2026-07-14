@@ -14,7 +14,6 @@
     },
     {
       "title": "Nature and Culture Hike",
-      "venue": "rb",
       "detail": "Meet up outside Roseland. What is Herräng beyond the dance camp? On this hike we will both explore local flora/fauna as well as try to learn a bit more about the town's history together by walking along the beautiful \"culture trail\". Hike is approximately 6–7 km. Bring your water bottle, a swimsuit (optional) and a positive attitude! :D",
       "start": "11:00",
       "end": "13:00",
@@ -89,7 +88,6 @@
     },
     {
       "title": "Surströmming",
-      "venue": "fh",
       "detail": "Meet up in front of Folketshus, to go by the lake.",
       "start": "16:00",
       "kind": "special"
@@ -111,8 +109,7 @@
     },
     {
       "title": "Afternoon Run",
-      "venue": "fh",
-      "detail": "Let's run together in the forest around the camp. Duration and pace to be determined together.",
+      "detail": "Meet up in front of Folkets Hus. Let's run together in the forest around the camp. Duration and pace to be determined together.",
       "start": "17:00",
       "end": "18:00",
       "kind": "special"
