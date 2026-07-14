@@ -226,7 +226,7 @@ export function HerrangApp({ data }: { data: HerrangData }) {
                 key={v}
                 onClick={() => setManualView(v)}
                 aria-current={view === v ? 'page' : undefined}
-                className="hg-display relative rounded-full py-2 text-sm"
+                className="hg-display inline-flex items-center justify-center gap-1.5 rounded-full py-2 text-sm"
                 style={
                   view === v
                     ? { background: 'var(--hg-ink)', color: 'var(--hg-ground)' }

@@ -47,12 +47,12 @@ export function blockStyle(kind: EventKind, tba?: boolean): CSSProperties {
   };
 }
 
-/** Pulsating "something is happening right now" marker — position the
- * parent `relative` and drop this in a corner. */
+/** Pulsating "something is happening right now" marker — sits inline next
+ * to a label. */
 export function LiveDot() {
   return (
     <>
-      <span aria-hidden className="hg-live-dot -top-0.5 -right-0.5" />
+      <span aria-hidden className="hg-live-dot" />
       <span className="sr-only"> — live now</span>
     </>
   );
