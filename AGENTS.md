@@ -105,6 +105,9 @@ don't remove one because it looks like dead or odd code. The current roster:
   color per beat, gone without comment.
 - **The no-signal compliment** (`shenanigans.tsx`) — offline adds one
   footer line: "No signal. Correct. You're in a field."
+- **Pull-to-refresh honesty** (`shenanigans.tsx` + `globals.css`) — the
+  app is static, so the native refresh gesture is off and pulling gets
+  "Refreshing changes nothing. Like the lunch queue…" instead.
 
 Adding a new one: keep it silent (no tooltips, no sparkle icons), keep it
 offline, one joke per egg, and never let a shenanigan invent schedule data.

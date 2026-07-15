@@ -103,6 +103,74 @@ export function ShimSham({ onClose }: { onClose: () => void }) {
   );
 }
 
+/* --------------------------- Pull to refresh --------------------------- */
+
+// The app is fully static; pulling to refresh has never once helped.
+// Say so. (Native pull-to-refresh is switched off in globals.css — this
+// note answers the gesture instead.)
+
+const PULL_LINE =
+  'Refreshing changes nothing. Like the lunch queue, it moves at its own pace.';
+const PULL_THRESHOLD_PX = 90;
+const PULL_SHOW_MS = 4000;
+const PULL_COOLDOWN_MS = 8000;
+
+export function PullNote() {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    let startY = 0;
+    let armed = false;
+    let lastShown = 0;
+    let hideTimer = 0;
+    const onStart = (e: TouchEvent) => {
+      if (window.scrollY <= 0) {
+        armed = true;
+        startY = e.touches[0].clientY;
+      }
+    };
+    const onMove = (e: TouchEvent) => {
+      if (!armed || window.scrollY > 0) return;
+      if (
+        e.touches[0].clientY - startY > PULL_THRESHOLD_PX &&
+        Date.now() - lastShown > PULL_COOLDOWN_MS
+      ) {
+        armed = false;
+        lastShown = Date.now();
+        setShow(true);
+        window.clearTimeout(hideTimer);
+        hideTimer = window.setTimeout(() => setShow(false), PULL_SHOW_MS);
+      }
+    };
+    const onEnd = () => {
+      armed = false;
+    };
+    window.addEventListener('touchstart', onStart, { passive: true });
+    window.addEventListener('touchmove', onMove, { passive: true });
+    window.addEventListener('touchend', onEnd, { passive: true });
+    return () => {
+      window.clearTimeout(hideTimer);
+      window.removeEventListener('touchstart', onStart);
+      window.removeEventListener('touchmove', onMove);
+      window.removeEventListener('touchend', onEnd);
+    };
+  }, []);
+
+  if (!show) return null;
+  return (
+    <p
+      className="fixed left-1/2 z-40 w-[88%] max-w-md -translate-x-1/2 rounded-full px-4 py-2 text-center text-xs font-semibold"
+      style={{
+        top: 'calc(env(safe-area-inset-top) + 10px)',
+        background: 'var(--hg-ink)',
+        color: 'var(--hg-ground)',
+      }}
+    >
+      {PULL_LINE}
+    </p>
+  );
+}
+
 /* -------------------------------- Offline ------------------------------- */
 
 /** Camp Wi-Fi is a rumor, and the app doesn't need it anyway. One extra

@@ -43,6 +43,13 @@
   --hg-social: #f5aeb7;
 }
 
+/* The page is static and always current — native pull-to-refresh only
+   pretends to help, so it's off. PullNote (shenanigans.tsx) answers the
+   gesture instead. */
+html {
+  overscroll-behavior-y: contain;
+}
+
 .hg-body {
   background: var(--hg-ground);
   color: var(--hg-ink);
