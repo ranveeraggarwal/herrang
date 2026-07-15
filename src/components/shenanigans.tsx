@@ -102,3 +102,23 @@ export function ShimSham({ onClose }: { onClose: () => void }) {
     </div>
   );
 }
+
+/* -------------------------------- Offline ------------------------------- */
+
+/** Camp Wi-Fi is a rumor, and the app doesn't need it anyway. One extra
+ * footer line while there's no signal. */
+export function OfflineLine() {
+  const [offline, setOffline] = useState(false);
+  useEffect(() => {
+    const sync = () => setOffline(!navigator.onLine);
+    sync();
+    window.addEventListener('online', sync);
+    window.addEventListener('offline', sync);
+    return () => {
+      window.removeEventListener('online', sync);
+      window.removeEventListener('offline', sync);
+    };
+  }, []);
+  if (!offline) return null;
+  return <p className="mt-1">No signal. Correct. You&apos;re in a field.</p>;
+}

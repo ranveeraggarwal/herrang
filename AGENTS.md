@@ -103,6 +103,8 @@ don't remove one because it looks like dead or odd code. The current roster:
 - **The Shim Sham count-in** (`shenanigans.tsx`) — long-press anywhere for
   three seconds during party hours: SHIM SHAM? then 5-6-7-8, one poster
   color per beat, gone without comment.
+- **The no-signal compliment** (`shenanigans.tsx`) — offline adds one
+  footer line: "No signal. Correct. You're in a field."
 
 Adding a new one: keep it silent (no tooltips, no sparkle icons), keep it
 offline, one joke per egg, and never let a shenanigan invent schedule data.
