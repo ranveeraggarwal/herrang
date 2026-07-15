@@ -115,6 +115,9 @@ don't remove one because it looks like dead or odd code. The current roster:
   still a lake. Temperature: character-building."
 - **The hundredth pep talk** (`PepTalk.tsx`) — open #100 gets ten times
   the rain and the Frankie line. Once, then never again.
+- **One slow spin** (`shenanigans.tsx`) — draw a full circle on the screen
+  and the page rotates 360° once, unhurried, about whatever you were
+  looking at. Sits out reduced motion.
 
 Adding a new one: keep it silent (no tooltips, no sparkle icons), keep it
 offline, one joke per egg, and never let a shenanigan invent schedule data.

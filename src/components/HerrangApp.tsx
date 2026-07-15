@@ -33,6 +33,7 @@ import {
   OfflineLine,
   PullNote,
   ShimSham,
+  useCircleSpin,
   useShimShamLongPress,
 } from './shenanigans';
 import { LiveDot } from './bits';
@@ -78,10 +79,11 @@ export function HerrangApp({ data }: { data: HerrangData }) {
   const [pepTalkOpen, setPepTalkOpen] = useState(false);
 
   // Shenanigans (see shenanigans.tsx): the Shim Sham long-press only arms
-  // during party hours.
+  // during party hours; the spin is armed whenever someone draws a circle.
   const { shimShamOpen, closeShimSham } = useShimShamLongPress(
     clock?.mode === 'night'
   );
+  const { spinStyle, onSpinEnd } = useCircleSpin();
 
   useEffect(() => {
     const tick = () => setClock(clockStateFor(new Date()));
@@ -189,7 +191,11 @@ export function HerrangApp({ data }: { data: HerrangData }) {
   };
 
   return (
-    <div className="flex min-h-dvh w-full flex-col">
+    <div
+      className="flex min-h-dvh w-full flex-col"
+      style={spinStyle}
+      onAnimationEnd={onSpinEnd}
+    >
       <div className="mx-auto flex w-full max-w-xl flex-grow flex-col px-4">
         <header className="flex items-start justify-between gap-3 pt-5 pb-4">
           <div>

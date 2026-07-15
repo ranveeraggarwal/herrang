@@ -4,7 +4,12 @@
 // connectivity-triggered, all silent until found. See the roster in
 // AGENTS.md — every one of these is deliberate. One joke per egg.
 
-import { useCallback, useEffect, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useState,
+  type CSSProperties,
+} from 'react';
 
 /* ------------------------------ Shim Sham ------------------------------ */
 
@@ -189,4 +194,107 @@ export function OfflineLine() {
   }, []);
   if (!offline) return null;
   return <p className="mt-1">No signal. Correct. You&apos;re in a field.</p>;
+}
+
+/* ------------------------------- The spin ------------------------------- */
+
+// Draw a full circle on the screen — finger or mouse, one stroke — and the
+// page does a single unhurried 360° around the middle of whatever you're
+// looking at, then pretends nothing happened. Sits out reduced motion.
+
+const SPIN_MIN_SEGMENT_PX = 12;
+// A full circle minus a little slack — nobody draws a protractor circle.
+const SPIN_FULL_TURN = 2 * Math.PI * 0.9;
+
+export function useCircleSpin() {
+  const [spinning, setSpinning] = useState(false);
+  const [origin, setOrigin] = useState('50% 50%');
+
+  useEffect(() => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let tracking = false;
+    let prevX = 0;
+    let prevY = 0;
+    let prevDir: number | null = null;
+    let turn = 0;
+
+    const start = (x: number, y: number) => {
+      tracking = true;
+      prevX = x;
+      prevY = y;
+      prevDir = null;
+      turn = 0;
+    };
+    const move = (x: number, y: number) => {
+      if (!tracking) return;
+      const dx = x - prevX;
+      const dy = y - prevY;
+      if (Math.hypot(dx, dy) < SPIN_MIN_SEGMENT_PX) return;
+      const dir = Math.atan2(dy, dx);
+      if (prevDir !== null) {
+        let d = dir - prevDir;
+        if (d > Math.PI) d -= 2 * Math.PI;
+        if (d < -Math.PI) d += 2 * Math.PI;
+        // A sharp jag is scroll jitter, not part of any circle — start over.
+        if (Math.abs(d) > Math.PI / 2) turn = 0;
+        else turn += d;
+        if (Math.abs(turn) >= SPIN_FULL_TURN) {
+          tracking = false;
+          // Rotate about the center of the current viewport, not the (much
+          // taller) page box — the spin should orbit what you're looking at.
+          setOrigin(`50% ${window.scrollY + window.innerHeight / 2}px`);
+          setSpinning(true);
+        }
+      }
+      prevDir = dir;
+      prevX = x;
+      prevY = y;
+    };
+    const end = () => {
+      tracking = false;
+    };
+
+    const ts = (e: TouchEvent) => start(e.touches[0].clientX, e.touches[0].clientY);
+    const tm = (e: TouchEvent) => move(e.touches[0].clientX, e.touches[0].clientY);
+    const ms = (e: MouseEvent) => start(e.clientX, e.clientY);
+    const mm = (e: MouseEvent) => {
+      if (e.buttons & 1) move(e.clientX, e.clientY);
+    };
+    window.addEventListener('touchstart', ts, { passive: true });
+    window.addEventListener('touchmove', tm, { passive: true });
+    window.addEventListener('touchend', end, { passive: true });
+    window.addEventListener('mousedown', ms);
+    window.addEventListener('mousemove', mm);
+    window.addEventListener('mouseup', end);
+    return () => {
+      window.removeEventListener('touchstart', ts);
+      window.removeEventListener('touchmove', tm);
+      window.removeEventListener('touchend', end);
+      window.removeEventListener('mousedown', ms);
+      window.removeEventListener('mousemove', mm);
+      window.removeEventListener('mouseup', end);
+    };
+  }, []);
+
+  // Clip the corners while the page is mid-rotation.
+  useEffect(() => {
+    if (!spinning) return;
+    const prev = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = 'hidden';
+    return () => {
+      document.documentElement.style.overflow = prev;
+    };
+  }, [spinning]);
+
+  return {
+    spinStyle: spinning
+      ? ({
+          animation: 'hg-spin 1.6s ease-in-out',
+          transformOrigin: origin,
+        } as CSSProperties)
+      : undefined,
+    onSpinEnd: (e: { animationName: string }) => {
+      if (e.animationName === 'hg-spin') setSpinning(false);
+    },
+  };
 }
