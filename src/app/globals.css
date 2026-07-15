@@ -143,3 +143,16 @@ html {
     animation: none;
   }
 }
+
+/* One slow spin (shenanigans.tsx): draw a circle on the screen and the whole
+   page does a single unhurried 360°, then pretends nothing happened. Applied
+   as an inline animation so the transform-origin can follow the viewport;
+   the gesture itself never arms under prefers-reduced-motion. */
+@keyframes hg-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
