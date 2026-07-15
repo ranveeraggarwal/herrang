@@ -100,6 +100,9 @@ don't remove one because it looks like dead or odd code. The current roster:
   program-not-up-yet card's nag opens a prefilled email. It should stay
   functional; the joke is that it works.
 - **The 404** (`src/app/not-found.tsx`) — "This page isn't on the poster."
+- **The Shim Sham count-in** (`shenanigans.tsx`) — long-press anywhere for
+  three seconds during party hours: SHIM SHAM? then 5-6-7-8, one poster
+  color per beat, gone without comment.
 
 Adding a new one: keep it silent (no tooltips, no sparkle icons), keep it
 offline, one joke per egg, and never let a shenanigan invent schedule data.

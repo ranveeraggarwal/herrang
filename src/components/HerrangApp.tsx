@@ -29,6 +29,7 @@ import { TonightView } from './TonightView';
 import { SettingsSheet, type ThemePref } from './SettingsSheet';
 import { InstallToast } from './InstallToast';
 import { PepTalk } from './PepTalk';
+import { ShimSham, useShimShamLongPress } from './shenanigans';
 import { LiveDot } from './bits';
 
 type View = 'today' | 'tonight' | 'nextday';
@@ -70,6 +71,12 @@ export function HerrangApp({ data }: { data: HerrangData }) {
   const [manualView, setManualView] = useState<View | null>(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [pepTalkOpen, setPepTalkOpen] = useState(false);
+
+  // Shenanigans (see shenanigans.tsx): the Shim Sham long-press only arms
+  // during party hours.
+  const { shimShamOpen, closeShimSham } = useShimShamLongPress(
+    clock?.mode === 'night'
+  );
 
   useEffect(() => {
     const tick = () => setClock(clockStateFor(new Date()));
@@ -323,6 +330,7 @@ export function HerrangApp({ data }: { data: HerrangData }) {
       {pepTalkOpen && clock && (
         <PepTalk mode={clock.mode} onClose={() => setPepTalkOpen(false)} />
       )}
+      {shimShamOpen && <ShimSham onClose={closeShimSham} />}
     </div>
   );
 }
