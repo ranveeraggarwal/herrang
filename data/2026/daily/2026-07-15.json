@@ -2,9 +2,22 @@
   "date": "2026-07-15",
   "weekday": "Wednesday",
   "title": "Wednesday's Activities",
-  "source": "Wednesday's Activities notice board",
-  "note": "Class-free day — daytime activities only.",
-  "events": [],
+  "source": "Wednesday's Activities notice board + A day in Herräng daily poster",
+  "note": "Times read off the poster grid — treat mid-hour times as ±15 min.",
+  "events": [
+    {"title": "DJ R2Steve2 🤖", "venues": ["lb"], "start": "20:00", "end": "21:00", "kind": "dj"},
+    {"title": "Cabaret / Variety Revue", "venues": ["fh", "db", "lb"], "start": "21:00", "end": "22:00", "kind": "show"},
+    {"title": "Library Talk — Ms. Sugar Sullivan", "venues": ["lb"], "start": "22:00", "end": "23:00", "kind": "special"},
+    {"title": "Jammin at the Blues Class with Melanie", "venues": ["ab"], "start": "22:00", "end": "23:00", "kind": "taster"},
+    {"title": "Fun Rhythms & Musicality with Ceren & Georgi", "venues": ["sp"], "start": "22:00", "end": "23:00", "kind": "taster"},
+    {"title": "Guest DJ Nika", "venues": ["db"], "start": "22:00", "end": "00:00", "kind": "dj"},
+    {"title": "DJ Simon", "venues": ["fh"], "start": "23:00", "end": "00:00", "kind": "dj"},
+    {"title": "Ramble", "venues": ["lb"], "start": "00:00", "end": "07:59", "kind": "dj"},
+    {"title": "DJ Victoria & Ermira", "venues": ["fh"], "start": "00:00", "end": "02:00", "kind": "dj"},
+    {"title": "DJ Omar", "venues": ["db"], "start": "00:00", "end": "02:00", "kind": "dj", "theme": "Soul & Funk"},
+    {"title": "DJ Antonin", "venues": ["fh"], "start": "02:30", "end": "07:59", "kind": "dj"},
+    {"title": "DJ Viktor", "venues": ["db"], "start": "03:00", "end": "07:59", "kind": "dj"}
+  ],
   "specials": [
     {
       "title": "Bike Ride to Haberödal (Church)",
@@ -149,6 +162,39 @@
       "venue": "db",
       "start": "19:00",
       "end": "20:00",
+      "kind": "jam"
+    },
+    {
+      "title": "Chorus Line Movie Screening",
+      "venue": "lb",
+      "start": "14:40",
+      "end": "16:40",
+      "kind": "special"
+    },
+    {
+      "title": "Round Table Discussion: Preventing Harm in Dance Spaces: From Intention to Action",
+      "location": "Heaven's Tent",
+      "start": "17:00",
+      "end": "18:00",
+      "kind": "special"
+    },
+    {
+      "title": "Balboa Strictly Prelims",
+      "venue": "lb",
+      "start": "20:00",
+      "end": "21:00",
+      "kind": "special"
+    },
+    {
+      "title": "Swing Out Drop Out",
+      "venue": "db",
+      "start": "00:00",
+      "kind": "jam"
+    },
+    {
+      "title": "Bedlam Jam",
+      "venue": "bar-bedlam",
+      "start": "01:00",
       "kind": "jam"
     }
   ]
