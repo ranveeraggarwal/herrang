@@ -41,6 +41,15 @@ const WEIRD_HOURS_LINES = [
   'Go to bed. Home is soon enough.',
 ];
 
+// Tapping the weird-hours card opens a negotiation you cannot win. It
+// escalates through resignation and ends with your next class, enormous —
+// the threat is the schedule itself. Tapping the threat starts over.
+const BEDTIME_NEGOTIATION = [
+  'Still up?',
+  'Seriously?',
+  'Okay. You leave us no choice.',
+];
+
 export function TodayView(props: {
   data: HerrangData;
   clock: ClockState;
@@ -191,20 +200,14 @@ function TodayViewBody({
 }) {
   const { week, venues } = data;
 
-  // 04:00–08:00 — a single card.
+  // 04:00–08:00 — a single card (which will argue back if pressed).
   if (clock.mode === 'weird') {
-    const dayIndex = (campDayNumber(week, clock.posterDate) - 1) % WEIRD_HOURS_LINES.length;
     return (
-      <BigSay
-        title={WEIRD_HOURS_LINES[dayIndex]}
-        sub={
-          <NextClassLine
-            data={data}
-            trackIds={trackIds}
-            fromDate={clock.dateISO}
-            onPickTracks={onPickTracks}
-          />
-        }
+      <BedtimeNegotiation
+        data={data}
+        clock={clock}
+        trackIds={trackIds}
+        onPickTracks={onPickTracks}
       />
     );
   }
@@ -378,6 +381,101 @@ function TodayViewBody({
         </Card>
       )}
     </div>
+  );
+}
+
+/** The weird-hours card. Reads like the plain BigSay it replaced — the
+ * negotiation only reveals itself if you argue with it. */
+function BedtimeNegotiation({
+  data,
+  clock,
+  trackIds,
+  onPickTracks,
+}: {
+  data: HerrangData;
+  clock: ClockState;
+  trackIds: string[];
+  onPickTracks: () => void;
+}) {
+  const [stage, setStage] = useState(0);
+  const dayIndex =
+    (campDayNumber(data.week, clock.posterDate) - 1) % WEIRD_HOURS_LINES.length;
+  const first = firstClassOnOrAfter(data.week, trackIds, clock.dateISO);
+  const titleButton = (label: string, onClick: () => void) => (
+    <h2 className="hg-display text-[clamp(1.6rem,7.5vw,2.6rem)]">
+      {/* Same trick as the header title: a button dressed as plain text.
+          The explicit inherits matter — the UA stylesheet strips
+          text-transform (and friends) off buttons. */}
+      <button
+        type="button"
+        onClick={onClick}
+        className="block w-full text-left"
+        style={{
+          font: 'inherit',
+          color: 'inherit',
+          textTransform: 'inherit',
+          letterSpacing: 'inherit',
+          lineHeight: 'inherit',
+        }}
+      >
+        {label}
+      </button>
+    </h2>
+  );
+
+  // Past the last word: the schedule delivers the closing argument.
+  if (stage > BEDTIME_NEGOTIATION.length) {
+    if (!first) {
+      return (
+        <Card>
+          {titleButton('Nothing scheduled tomorrow. You win. Go to bed anyway.', () =>
+            setStage(0)
+          )}
+        </Card>
+      );
+    }
+    return (
+      <Card>
+        <button
+          type="button"
+          onClick={() => setStage(0)}
+          className="block w-full text-left"
+          style={{ font: 'inherit', color: 'inherit' }}
+        >
+          <span
+            className="hg-display block text-xs"
+            style={{ color: 'var(--hg-soft)' }}
+          >
+            Your first class
+          </span>
+          <span className="hg-display hg-time block text-[clamp(4.5rem,28vw,8rem)]">
+            {first.start}
+          </span>
+          <span className="mt-1 block text-sm" style={{ color: 'var(--hg-soft)' }}>
+            It knows you&apos;re awake.
+          </span>
+        </button>
+      </Card>
+    );
+  }
+
+  return (
+    <Card>
+      {titleButton(
+        stage === 0 ? WEIRD_HOURS_LINES[dayIndex] : BEDTIME_NEGOTIATION[stage - 1],
+        () => setStage((s) => s + 1)
+      )}
+      {stage === 0 && (
+        <div className="mt-3 text-sm" style={{ color: 'var(--hg-soft)' }}>
+          <NextClassLine
+            data={data}
+            trackIds={trackIds}
+            fromDate={clock.dateISO}
+            onPickTracks={onPickTracks}
+          />
+        </div>
+      )}
+    </Card>
   );
 }
 

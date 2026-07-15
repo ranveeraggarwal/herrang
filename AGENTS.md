@@ -108,6 +108,9 @@ don't remove one because it looks like dead or odd code. The current roster:
 - **Pull-to-refresh honesty** (`shenanigans.tsx` + `globals.css`) — the
   app is static, so the native refresh gesture is off and pulling gets
   "Refreshing changes nothing. Like the lunch queue…" instead.
+- **The bedtime negotiation** (`TodayView.tsx`) — tapping the weird-hours
+  card escalates through resignation until your first class shows up,
+  enormous. The threat is the schedule itself.
 
 Adding a new one: keep it silent (no tooltips, no sparkle icons), keep it
 offline, one joke per egg, and never let a shenanigan invent schedule data.
