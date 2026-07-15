@@ -330,7 +330,7 @@ function TodayViewBody({
       ) : classes.length === 0 ? (
         <BigSay title="No classes for your track today." />
       ) : (
-        <BigSay title="Nothing on right now. Go swim." />
+        <GoSwimCard />
       )}
 
       {listClasses.length > 0 && (
@@ -474,6 +474,37 @@ function BedtimeNegotiation({
             onPickTracks={onPickTracks}
           />
         </div>
+      )}
+    </Card>
+  );
+}
+
+/** "Go swim" is secretly a lake report. Tap to check, tap to put away. */
+function GoSwimCard() {
+  const [lake, setLake] = useState(false);
+  return (
+    <Card>
+      <h2 className="hg-display text-[clamp(1.6rem,7.5vw,2.6rem)]">
+        {/* Dressed as plain text; the inherits undo the UA button styles. */}
+        <button
+          type="button"
+          onClick={() => setLake((v) => !v)}
+          className="block w-full text-left"
+          style={{
+            font: 'inherit',
+            color: 'inherit',
+            textTransform: 'inherit',
+            letterSpacing: 'inherit',
+            lineHeight: 'inherit',
+          }}
+        >
+          Nothing on right now. Go swim.
+        </button>
+      </h2>
+      {lake && (
+        <p className="mt-3 text-sm" style={{ color: 'var(--hg-soft)' }}>
+          🌊 Lake status: still a lake. Temperature: character-building.
+        </p>
       )}
     </Card>
   );

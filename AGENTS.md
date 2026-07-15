@@ -111,6 +111,8 @@ don't remove one because it looks like dead or odd code. The current roster:
 - **The bedtime negotiation** (`TodayView.tsx`) — tapping the weird-hours
   card escalates through resignation until your first class shows up,
   enormous. The threat is the schedule itself.
+- **The lake report** (`TodayView.tsx`) — "Go swim." tapped: "Lake status:
+  still a lake. Temperature: character-building."
 
 Adding a new one: keep it silent (no tooltips, no sparkle icons), keep it
 offline, one joke per egg, and never let a shenanigan invent schedule data.
