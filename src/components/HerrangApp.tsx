@@ -29,7 +29,12 @@ import { TonightView } from './TonightView';
 import { SettingsSheet, type ThemePref } from './SettingsSheet';
 import { InstallToast } from './InstallToast';
 import { PepTalk } from './PepTalk';
-import { OfflineLine, ShimSham, useShimShamLongPress } from './shenanigans';
+import {
+  OfflineLine,
+  PullNote,
+  ShimSham,
+  useShimShamLongPress,
+} from './shenanigans';
 import { LiveDot } from './bits';
 
 type View = 'today' | 'tonight' | 'nextday';
@@ -327,6 +332,7 @@ export function HerrangApp({ data }: { data: HerrangData }) {
       />
 
       <InstallToast />
+      <PullNote />
 
       {pepTalkOpen && clock && (
         <PepTalk mode={clock.mode} onClose={() => setPepTalkOpen(false)} />
