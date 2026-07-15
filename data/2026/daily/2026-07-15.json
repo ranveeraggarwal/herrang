@@ -12,7 +12,7 @@
     {"title": "Fun Rhythms & Musicality with Ceren & Georgi", "venues": ["sp"], "start": "22:00", "end": "23:00", "kind": "taster"},
     {"title": "Guest DJ Nika", "venues": ["db"], "start": "22:00", "end": "00:00", "kind": "dj"},
     {"title": "DJ Simon", "venues": ["fh"], "start": "23:00", "end": "00:00", "kind": "dj"},
-    {"title": "Ramble", "venues": ["lb"], "start": "23:00", "end": "04:00", "openEnd": true, "kind": "dj"},
+    {"title": "Ramble", "venues": ["lb"], "start": "00:00", "end": "07:59", "kind": "dj"},
     {"title": "DJ Victoria & Ermira", "venues": ["fh"], "start": "00:00", "end": "02:00", "kind": "dj"},
     {"title": "DJ Omar", "venues": ["db"], "start": "00:00", "end": "02:00", "kind": "dj", "theme": "Soul & Funk"},
     {"title": "DJ Antonin", "venues": ["fh"], "start": "02:00", "end": "04:00", "openEnd": true, "kind": "dj"},
