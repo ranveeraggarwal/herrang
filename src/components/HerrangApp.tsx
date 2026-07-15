@@ -23,7 +23,7 @@ import {
   selectedTrackIds,
   type TrackSelection,
 } from '@/lib/herrang/schedule';
-import { addDays, formatCompactWeekdayDate } from '@/lib/dates';
+import { formatCompactWeekdayDate } from '@/lib/dates';
 import { TodayView } from './TodayView';
 import { TonightView } from './TonightView';
 import { SettingsSheet, type ThemePref } from './SettingsSheet';
@@ -32,12 +32,12 @@ import { PepTalk } from './PepTalk';
 import { ShimSham, useShimShamLongPress } from './shenanigans';
 import { LiveDot } from './bits';
 
-type View = 'today' | 'tonight' | 'nextday';
+type View = 'today' | 'wednesday' | 'tonight';
 
 const VIEW_LABELS: Record<View, string> = {
   today: 'classes',
+  wednesday: 'wednesday',
   tonight: 'program',
-  nextday: 'next day',
 };
 
 const TRACKS_KEY = 'herrang.tracks.v1';
@@ -132,30 +132,34 @@ export function HerrangApp({ data }: { data: HerrangData }) {
     return clock.posterMinutes >= lastEnd;
   }, [clock, data.week, trackIds]);
 
-  // No tracks picked means no classes to show on Today — the program is the
-  // more useful default (also covers first-visit, before the track picker
-  // has been dismissed). Same on a class-free day like Wednesday: the
-  // day's activities live in the daily program now, not the class view.
-  const autoView: View =
-    trackIds.length === 0 ||
-    clock?.mode === 'night' ||
-    classesDoneForToday ||
-    (clock ? isClassFreeDay(data.week, clock.posterDate) : false)
-      ? 'tonight'
-      : 'today';
-
-  // Tomorrow's program only earns a tab once its poster has actually been
-  // ingested — poster-date arithmetic, not calendar tomorrow (see TIME.md).
-  const hasNextDay = useMemo(() => {
+  // Wednesday only earns its own tab once its poster has actually been
+  // ingested — driven by the daily file's own `weekday`, not day-of-week
+  // arithmetic, so it can never disagree with what the poster itself says.
+  const isWednesdayToday = useMemo(() => {
     if (!clock) return false;
-    return dailyFor(data.dailies, addDays(clock.posterDate, 1)) !== undefined;
+    return dailyFor(data.dailies, clock.posterDate)?.weekday === 'Wednesday';
   }, [clock, data.dailies]);
 
-  // manualView wins, except when it points at a "next day" tab that no longer
-  // exists (poster rolled over, or tomorrow's file went away) — then fall
-  // back to autoView instead of rendering a blank tab.
+  // No tracks picked means no classes to show on Today — the program is the
+  // more useful default (also covers first-visit, before the track picker
+  // has been dismissed). Same on any other class-free day (e.g. arrival
+  // Saturday). Wednesday itself gets its own tab as the daytime default
+  // instead, until night hours hand the default back to the program.
+  const autoView: View =
+    isWednesdayToday && clock?.mode === 'day'
+      ? 'wednesday'
+      : trackIds.length === 0 ||
+          clock?.mode === 'night' ||
+          classesDoneForToday ||
+          (clock ? isClassFreeDay(data.week, clock.posterDate) : false)
+        ? 'tonight'
+        : 'today';
+
+  // manualView wins, except when it points at the Wednesday tab on a day
+  // that isn't Wednesday (or no longer is) — then fall back to autoView
+  // instead of rendering a tab that shouldn't exist.
   const view: View =
-    manualView && (manualView !== 'nextday' || hasNextDay)
+    manualView && (manualView !== 'wednesday' || isWednesdayToday)
       ? manualView
       : autoView;
 
@@ -242,15 +246,17 @@ export function HerrangApp({ data }: { data: HerrangData }) {
 
         <nav
           aria-label="View"
-          className={`mb-5 grid gap-2 ${hasNextDay ? 'grid-cols-3' : 'grid-cols-2'}`}
+          className={`mb-5 grid gap-2 ${isWednesdayToday ? 'grid-cols-3' : 'grid-cols-2'}`}
         >
-          {(hasNextDay
-            ? (['today', 'tonight', 'nextday'] as const)
+          {(isWednesdayToday
+            ? (['today', 'wednesday', 'tonight'] as const)
             : (['today', 'tonight'] as const)
           ).map((v) => {
-            // "next day" is a preview of a future poster — nothing there is
-            // running now, so it never carries a live dot.
-            const live = (v === 'today' && classesLive) || (v === 'tonight' && programLive);
+            // Wednesday and Program point at the same daily file on
+            // Wednesday, so they share its live dot.
+            const live =
+              (v === 'today' && classesLive) ||
+              ((v === 'tonight' || v === 'wednesday') && programLive);
             return (
               <button
                 key={v}
@@ -279,14 +285,9 @@ export function HerrangApp({ data }: { data: HerrangData }) {
               onPickTracks={() => setSettingsOpen(true)}
               onGoTonight={() => setManualView('tonight')}
             />
-          ) : view === 'nextday' ? (
-            <TonightView
-              data={data}
-              clock={clock}
-              posterDate={addDays(clock.posterDate, 1)}
-              live={false}
-            />
           ) : (
+            // Wednesday and Program are the same underlying daily file on
+            // Wednesday — only the tab and its default timing differ.
             <TonightView data={data} clock={clock} />
           )}
         </main>
