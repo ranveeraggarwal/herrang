@@ -43,6 +43,9 @@ const PEP_REGULAR_LINES = [
   'You keep tapping. We keep meaning it.',
 ];
 
+// The hundredth pep talk. Once, then never again.
+const PEP_CENTURY_LINE = "That's a hundred. Frankie would've loved you.";
+
 const PEP_OPENS_KEY = 'herrang.peptalks.v1';
 
 const RAIN_EMOJI = ['✨', '💛', '🌞', '💃', '🕺', '🎷', '❤️', '🌈'];
@@ -64,9 +67,13 @@ export function PepTalk({ mode, onClose }: { mode: Mode; onClose: () => void }) 
     }
   });
 
+  // Open #100 gets the Frankie line and a biblical downpour.
+  const century = opens === 100;
+
   // Fresh pick on every open, not date-seeded — this isn't the poster,
   // it's a friend saying whatever comes to mind.
   const line = useMemo(() => {
+    if (century) return PEP_CENTURY_LINE;
     const pool = [
       ...PEP_TALK_LINES,
       ...(mode === 'night' ? PEP_NIGHT_LINES : []),
@@ -74,12 +81,12 @@ export function PepTalk({ mode, onClose }: { mode: Mode; onClose: () => void }) 
       ...(opens >= 10 ? PEP_REGULAR_LINES : []),
     ];
     return pool[Math.floor(Math.random() * pool.length)];
-  }, [mode, opens]);
+  }, [mode, opens, century]);
 
   // Randomized once per mount so the rain doesn't reshuffle on every render.
   const rain = useMemo(() => {
     const emoji = mode === 'day' ? RAIN_EMOJI : [...RAIN_EMOJI, ...NIGHT_RAIN_EMOJI];
-    return Array.from({ length: RAIN_COUNT }, (_, i) => ({
+    return Array.from({ length: century ? RAIN_COUNT * 10 : RAIN_COUNT }, (_, i) => ({
       key: i,
       emoji: emoji[Math.floor(Math.random() * emoji.length)],
       x: Math.random() * 100,
@@ -90,7 +97,7 @@ export function PepTalk({ mode, onClose }: { mode: Mode; onClose: () => void }) 
       delay: -(Math.random() * 6),
       dur: 3 + Math.random() * 3,
     }));
-  }, [mode]);
+  }, [mode, century]);
 
   useEffect(() => {
     const prev = document.body.style.overflow;
