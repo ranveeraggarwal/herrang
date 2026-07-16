@@ -227,14 +227,25 @@ export function TonightView({
       )}
       {/* The stream, next-first. No separate now-line — the currently
           running card(s) carry their own progress scrim instead (see
-          EventBlock) and sit under "Still going" below. */}
-      <ol className="flex flex-col gap-3">
-        {upcoming.map((group) => (
-          <li key={group.start}>
-            <StreamBlock group={group} data={data} live={live} nowPM={nowPM} />
-          </li>
-        ))}
-      </ol>
+          EventBlock) and sit under "Still going" below. The headings only
+          exist live: a preview day is all one plain program, nothing on it
+          is "next" yet. */}
+      {upcoming.length > 0 && (
+        <>
+          {live && (
+            <p className="hg-display text-xs" style={{ color: 'var(--hg-soft)' }}>
+              What&apos;s next
+            </p>
+          )}
+          <ol className="flex flex-col gap-3">
+            {upcoming.map((group) => (
+              <li key={group.start}>
+                <StreamBlock group={group} data={data} live={live} nowPM={nowPM} />
+              </li>
+            ))}
+          </ol>
+        </>
+      )}
 
       {stillGoing.length > 0 && (
         <>
