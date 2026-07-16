@@ -6,7 +6,10 @@
 // stream at their actual slot; only specials with no start time (can't be
 // placed on a timeline) stay pinned as red cards. TBA items render as
 // mystery cards. Currently-running cards carry their own progress scrim
-// instead of a separate now-line — see EventBlock.
+// instead of a separate now-line — see EventBlock. Finished events don't
+// clutter the top of the stream: they sink into a collapsed "Already
+// happened" archive at the bottom (splitStream), still dimmed, still there
+// for the "wait, when was the show?" conversations.
 
 import { useState } from 'react';
 import type { DailyEvent, HerrangData } from '@/lib/herrang/types';
@@ -21,6 +24,7 @@ import {
   dailyFor,
   eventLocation,
   runningEvents,
+  splitStream,
   tonightStream,
   venueLabel,
   venueName,
@@ -119,6 +123,13 @@ export function TonightView({
 
   const running = live ? runningEvents(daily, nowPM) : [];
   const nextGroup = live ? stream.find((g) => g.startPM > nowPM) : undefined;
+
+  // Finished events sink to the bottom so the top of the stream is always
+  // "what's next", not a scroll past everything you already missed. Preview
+  // days archive nothing — nothing has happened yet.
+  const { current, over } = live
+    ? splitStream(stream, nowPM)
+    : { current: stream, over: [] };
 
   return (
     <div className="flex flex-col gap-3">
@@ -223,12 +234,39 @@ export function TonightView({
       {/* The stream. No separate now-line — the currently running card(s)
           carry their own progress scrim instead (see EventBlock). */}
       <ol className="flex flex-col gap-3">
-        {stream.map((group) => (
+        {current.map((group) => (
           <li key={group.start}>
             <StreamBlock group={group} data={data} live={live} nowPM={nowPM} />
           </li>
         ))}
       </ol>
+
+      {live && current.length === 0 && over.length > 0 && (
+        <BigSay title="That's the whole poster, danced." />
+      )}
+
+      {/* The archive: everything already over, in order, folded away at the
+          bottom. Same cards, still dimmed — history, not a second program. */}
+      {over.length > 0 && (
+        <details className="group">
+          <summary
+            className="hg-display flex cursor-pointer list-none items-center gap-1.5 text-xs"
+            style={{ color: 'var(--hg-soft)' }}
+          >
+            <span className="inline-block transition-transform group-open:rotate-90">
+              ▸
+            </span>
+            Already happened
+          </summary>
+          <ol className="mt-3 flex flex-col gap-3">
+            {over.map((group) => (
+              <li key={group.start}>
+                <StreamBlock group={group} data={data} live={live} nowPM={nowPM} />
+              </li>
+            ))}
+          </ol>
+        </details>
+      )}
 
       {daily.note && (
         <p className="text-xs" style={{ color: 'var(--hg-soft)' }}>
