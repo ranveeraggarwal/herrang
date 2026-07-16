@@ -80,6 +80,30 @@ export function tonightStream(daily: DailyProgram): StreamGroup[] {
     .sort((a, b) => a.startPM - b.startPM);
 }
 
+/** Split the Tonight stream around "now": anything still running or yet to
+ * start stays up top; events whose end has passed sink to the archive. The
+ * cut is per event, not per group — a 22:00 group with one finished show and
+ * one still-running social appears in both halves, keeping its start header.
+ * End-less events (open-ended DJ sets, TBA mysteries) never archive: nobody
+ * printed when they stop. `nowPM` is poster-timeline minutes, as always. */
+export function splitStream(
+  stream: StreamGroup[],
+  nowPM: number
+): { current: StreamGroup[]; over: StreamGroup[] } {
+  const current: StreamGroup[] = [];
+  const over: StreamGroup[] = [];
+  for (const g of stream) {
+    const done = g.events.filter(
+      (e) => e.end !== undefined && nowPM >= toPosterMinutes(e.end)
+    );
+    if (done.length < g.events.length) {
+      current.push({ ...g, events: g.events.filter((e) => !done.includes(e)) });
+    }
+    if (done.length > 0) over.push({ ...g, events: done });
+  }
+  return { current, over };
+}
+
 /** Events (+ timed specials) from the daily program currently in progress,
  * given poster-timeline minutes. Shared by the Program stream's running-card
  * highlight and the nav's live dot, so the two can't drift apart. */

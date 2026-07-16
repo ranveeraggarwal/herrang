@@ -6,13 +6,16 @@
 // stream at their actual slot; only specials with no start time (can't be
 // placed on a timeline) stay pinned as red cards. TBA items render as
 // mystery cards. Currently-running cards carry their own progress scrim
-// instead of a separate now-line — see EventBlock.
+// instead of a separate now-line — see EventBlock. The stream reads
+// next-first: upcoming blocks on top, already-running groups under a
+// "Still going" label below them, and finished events sink into a collapsed
+// "Already happened" archive at the bottom (splitStream), still dimmed,
+// still there for the "wait, when was the show?" conversations.
 
 import { useState } from 'react';
 import type { DailyEvent, HerrangData } from '@/lib/herrang/types';
 import {
   endsChip,
-  relativeChip,
   toPosterMinutes,
   type ClockState,
 } from '@/lib/herrang/time';
@@ -21,6 +24,7 @@ import {
   dailyFor,
   eventLocation,
   runningEvents,
+  splitStream,
   tonightStream,
   venueLabel,
   venueName,
@@ -118,7 +122,21 @@ export function TonightView({
   const nowPM = clock.posterMinutes;
 
   const running = live ? runningEvents(daily, nowPM) : [];
-  const nextGroup = live ? stream.find((g) => g.startPM > nowPM) : undefined;
+
+  // Finished events sink to the bottom so the top of the stream is always
+  // "what's next", not a scroll past everything you already missed. Preview
+  // days archive nothing — nothing has happened yet.
+  const { current, over } = live
+    ? splitStream(stream, nowPM)
+    : { current: stream, over: [] };
+
+  // Within the live stream, what's next reads first: already-running groups
+  // sink below the upcoming ones (the Now cards above announce them anyway),
+  // so the first block on the poster is the next thing to happen — which is
+  // also why there's no separate "Next · …" line anymore. Group starts are
+  // uniform per group, so this split never tears a group apart.
+  const upcoming = live ? current.filter((g) => g.startPM > nowPM) : current;
+  const stillGoing = live ? current.filter((g) => g.startPM <= nowPM) : [];
 
   return (
     <div className="flex flex-col gap-3">
@@ -207,28 +225,69 @@ export function TonightView({
           })}
         </div>
       )}
-      {live && nextGroup && (
-        <p className="text-sm font-semibold" style={{ color: 'var(--hg-soft)' }}>
-          <span className="hg-display text-xs">Next&nbsp;·&nbsp;</span>
-          {nextGroup.events
-            .map((e) => {
-              const loc = eventLocation(data.venues, e);
-              return loc ? `${e.title} (${loc})` : e.title;
-            })
-            .join(' + ')}{' '}
-          — {relativeChip(nowPM, nextGroup.startPM)}
-        </p>
+      {/* The stream, next-first. No separate now-line — the currently
+          running card(s) carry their own progress scrim instead (see
+          EventBlock) and sit under "Still going" below. The headings only
+          exist live: a preview day is all one plain program, nothing on it
+          is "next" yet. */}
+      {upcoming.length > 0 && (
+        <>
+          {live && (
+            <p className="hg-display text-xs" style={{ color: 'var(--hg-soft)' }}>
+              What&apos;s next
+            </p>
+          )}
+          <ol className="flex flex-col gap-3">
+            {upcoming.map((group) => (
+              <li key={group.start}>
+                <StreamBlock group={group} data={data} live={live} nowPM={nowPM} />
+              </li>
+            ))}
+          </ol>
+        </>
       )}
 
-      {/* The stream. No separate now-line — the currently running card(s)
-          carry their own progress scrim instead (see EventBlock). */}
-      <ol className="flex flex-col gap-3">
-        {stream.map((group) => (
-          <li key={group.start}>
-            <StreamBlock group={group} data={data} live={live} nowPM={nowPM} />
-          </li>
-        ))}
-      </ol>
+      {stillGoing.length > 0 && (
+        <>
+          <p className="hg-display text-xs" style={{ color: 'var(--hg-soft)' }}>
+            Still going
+          </p>
+          <ol className="flex flex-col gap-3">
+            {stillGoing.map((group) => (
+              <li key={group.start}>
+                <StreamBlock group={group} data={data} live={live} nowPM={nowPM} />
+              </li>
+            ))}
+          </ol>
+        </>
+      )}
+
+      {live && current.length === 0 && over.length > 0 && (
+        <BigSay title="That's the whole poster, danced." />
+      )}
+
+      {/* The archive: everything already over, in order, folded away at the
+          bottom. Same cards, still dimmed — history, not a second program. */}
+      {over.length > 0 && (
+        <details className="group">
+          <summary
+            className="hg-display flex cursor-pointer list-none items-center gap-1.5 text-xs"
+            style={{ color: 'var(--hg-soft)' }}
+          >
+            <span className="inline-block transition-transform group-open:rotate-90">
+              ▸
+            </span>
+            Already happened
+          </summary>
+          <ol className="mt-3 flex flex-col gap-3">
+            {over.map((group) => (
+              <li key={group.start}>
+                <StreamBlock group={group} data={data} live={live} nowPM={nowPM} />
+              </li>
+            ))}
+          </ol>
+        </details>
+      )}
 
       {daily.note && (
         <p className="text-xs" style={{ color: 'var(--hg-soft)' }}>
