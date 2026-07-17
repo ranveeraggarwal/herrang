@@ -23,6 +23,6 @@
     {"title": "Tap Jam", "venue": "db", "start": "20:00", "end": "21:00", "kind": "jam"},
     {"title": "Friday Party Festivities", "location": "Folkets Hus Plaza", "start": "21:00", "kind": "social"},
     {"title": "Ramble Competition", "venue": "lb", "start": "01:00", "kind": "special"},
-    {"title": "Bedlam Jam", "venue": "bar-bedlam", "kind": "jam", "tba": true, "detail": "After the band"}
+    {"title": "Bedlam Jam", "venue": "bar-bedlam", "start": "02:30", "kind": "jam", "detail": "After the band"}
   ]
 }
