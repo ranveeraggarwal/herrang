@@ -21,6 +21,7 @@ import {
   nowAndNextClass,
   runningEvents,
   selectedTrackIds,
+  weekFor,
   type TrackSelection,
 } from '@/lib/herrang/schedule';
 import { addDays, formatCompactWeekdayDate } from '@/lib/dates';
@@ -40,8 +41,14 @@ const VIEW_LABELS: Record<View, string> = {
   nextday: 'next day',
 };
 
-const TRACKS_KEY = 'herrang.tracks.v1';
+// v2 keys selections by week number — groups get re-auditioned every week,
+// so a week 2 pick must not silently carry into week 3. v1 (a single
+// TrackSelection, from when week 2 was the only week) migrates to {2: …}.
+const TRACKS_KEY = 'herrang.tracks.v2';
+const LEGACY_TRACKS_KEY = 'herrang.tracks.v1';
 const THEME_KEY = 'herrang.theme.v1';
+
+type WeekSelections = Record<number, TrackSelection>;
 
 function readJson<T>(key: string, fallback: T): T {
   try {
@@ -66,7 +73,9 @@ export function HerrangApp({ data }: { data: HerrangData }) {
   // Everything time- and storage-dependent renders only after mount, so the
   // statically generated HTML never disagrees with the client.
   const [clock, setClock] = useState<ClockState | null>(null);
-  const [selection, setSelection] = useState<TrackSelection>(EMPTY_SELECTION);
+  // null until localStorage has been read — the first-visit prompt below
+  // must not fire off the not-yet-loaded default.
+  const [selections, setSelections] = useState<WeekSelections | null>(null);
   const [themePref, setThemePref] = useState<ThemePref>('auto');
   const [manualView, setManualView] = useState<View | null>(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -86,18 +95,44 @@ export function HerrangApp({ data }: { data: HerrangData }) {
   }, []);
 
   useEffect(() => {
-    setSelection(readJson<TrackSelection>(TRACKS_KEY, EMPTY_SELECTION));
-    setThemePref(readJson<ThemePref>(THEME_KEY, 'auto'));
-    // First visit: nothing stored yet → offer the track picker (only once the
-    // master schedule actually has tracks to pick).
-    try {
-      if (localStorage.getItem(TRACKS_KEY) === null && data.week.tracks.length > 0) {
-        setSettingsOpen(true);
-      }
-    } catch {
-      /* ignore */
+    let stored = readJson<WeekSelections | null>(TRACKS_KEY, null);
+    if (stored === null) {
+      // Migrate a v1 selection: it could only ever have described week 2.
+      const legacy = readJson<TrackSelection | null>(LEGACY_TRACKS_KEY, null);
+      stored = legacy === null ? {} : { 2: legacy };
+      if (legacy !== null) writeJson(TRACKS_KEY, stored);
     }
-  }, [data.week.tracks.length]);
+    setSelections(stored);
+    setThemePref(readJson<ThemePref>(THEME_KEY, 'auto'));
+  }, []);
+
+  // The week in force follows the calendar date — the flip happens at
+  // midnight into arrival Saturday, not at 08:00. The outgoing week's
+  // Friday-night party is unaffected: Tonight renders from the poster date,
+  // which stays on Friday until 08:00. Only the classes machinery flips,
+  // and week 2's last class ended at 19:10 anyway. Until the clock ticks
+  // nothing week-dependent renders, so the placeholder pick doesn't matter.
+  const week = useMemo(
+    () => weekFor(data.weeks, clock?.dateISO ?? data.weeks[0].start),
+    [data.weeks, clock?.dateISO]
+  );
+  const selection = selections?.[week.week] ?? EMPTY_SELECTION;
+
+  // No selection stored for the week in force → offer the track picker (only
+  // once that week's master schedule actually has tracks to pick). Fires
+  // again when the camp rolls into a new week: new week, new audition, new
+  // groups — last week's pick is honestly stale. Day mode only: the week
+  // flips at midnight, and nobody at the Friday party needs a track picker
+  // popping up at 00:00 — it can wait for daylight.
+  useEffect(() => {
+    if (!clock || clock.mode !== 'day' || selections === null) return;
+    if (week.tracks.length > 0 && selections[week.week] === undefined) {
+      setSettingsOpen(true);
+    }
+    // Deliberately not keyed on `selections`: dismissing the sheet without
+    // picking shouldn't re-open it until the next visit (or the next week).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [clock === null, clock?.mode, selections === null, week.week]);
 
   // The ground follows the clock (night 20:00–08:00) unless overridden.
   useEffect(() => {
@@ -116,8 +151,8 @@ export function HerrangApp({ data }: { data: HerrangData }) {
   }, []);
 
   const trackIds = useMemo(
-    () => selectedTrackIds(data.week, selection),
-    [data.week, selection]
+    () => selectedTrackIds(week, selection),
+    [week, selection]
   );
 
   // Once the last of today's classes for the picked tracks has ended, jump
@@ -126,11 +161,11 @@ export function HerrangApp({ data }: { data: HerrangData }) {
   // on right now" until the fixed cutoff.
   const classesDoneForToday = useMemo(() => {
     if (!clock || clock.mode !== 'day' || trackIds.length === 0) return false;
-    const todaysClasses = classesOn(data.week, trackIds, clock.posterDate);
+    const todaysClasses = classesOn(week, trackIds, clock.posterDate);
     if (todaysClasses.length === 0) return false;
     const lastEnd = Math.max(...todaysClasses.map((c) => toPosterMinutes(c.end)));
     return clock.posterMinutes >= lastEnd;
-  }, [clock, data.week, trackIds]);
+  }, [clock, week, trackIds]);
 
   // No tracks picked means no classes to show on Today — the program is the
   // more useful default (also covers first-visit, before the track picker
@@ -140,7 +175,7 @@ export function HerrangApp({ data }: { data: HerrangData }) {
     trackIds.length === 0 ||
     clock?.mode === 'night' ||
     classesDoneForToday ||
-    (clock ? isClassFreeDay(data.week, clock.posterDate) : false)
+    (clock ? isClassFreeDay(week, clock.posterDate) : false)
       ? 'tonight'
       : 'today';
 
@@ -163,9 +198,9 @@ export function HerrangApp({ data }: { data: HerrangData }) {
   // running on the daily program (DJ set, taster, daytime special, ...).
   const classesLive = useMemo(() => {
     if (!clock || clock.mode !== 'day' || trackIds.length === 0) return false;
-    const classes = classesOn(data.week, trackIds, clock.posterDate);
+    const classes = classesOn(week, trackIds, clock.posterDate);
     return nowAndNextClass(classes, clock.posterMinutes).current !== undefined;
-  }, [clock, data.week, trackIds]);
+  }, [clock, week, trackIds]);
 
   const programLive = useMemo(() => {
     if (!clock) return false;
@@ -175,8 +210,9 @@ export function HerrangApp({ data }: { data: HerrangData }) {
   }, [clock, data.dailies]);
 
   const saveSelection = (s: TrackSelection) => {
-    setSelection(s);
-    writeJson(TRACKS_KEY, s);
+    const all = { ...(selections ?? {}), [week.week]: s };
+    setSelections(all);
+    writeJson(TRACKS_KEY, all);
   };
   const saveTheme = (t: ThemePref) => {
     setThemePref(t);
@@ -222,11 +258,11 @@ export function HerrangApp({ data }: { data: HerrangData }) {
                   is read as "what day is it" and must not look stuck. */}
               {clock ? formatCompactWeekdayDate(clock.dateISO) : ' '}
             </p>
-            {clock && data.week.classes.length > 0 && (
+            {clock && week.classes.length > 0 && (
               <p className="mt-0.5 text-[11px]" style={{ color: 'var(--hg-soft)' }}>
-                Day {campDayNumber(data.week, clock.posterDate)} of{' '}
-                {campDayCount(data.week)} · ~
-                {Math.max(0, campDayNumber(data.week, clock.posterDate) - 1) * 4}h
+                Week {week.week} · Day {campDayNumber(week, clock.posterDate)} of{' '}
+                {campDayCount(week)} · ~
+                {Math.max(0, campDayNumber(week, clock.posterDate) - 1) * 4}h
                 slept, allegedly
               </p>
             )}
@@ -274,6 +310,7 @@ export function HerrangApp({ data }: { data: HerrangData }) {
           {clock === null ? null : view === 'today' ? (
             <TodayView
               data={data}
+              week={week}
               clock={clock}
               trackIds={trackIds}
               onPickTracks={() => setSettingsOpen(true)}
@@ -317,7 +354,7 @@ export function HerrangApp({ data }: { data: HerrangData }) {
       <SettingsSheet
         open={settingsOpen}
         onClose={() => setSettingsOpen(false)}
-        week={data.week}
+        week={week}
         selection={selection}
         onSelection={saveSelection}
         themePref={themePref}

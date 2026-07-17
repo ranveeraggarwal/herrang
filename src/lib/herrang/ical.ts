@@ -12,8 +12,13 @@ function location(venues: HerrangVenue[], id: string): string {
   return v ? `${v.name}, ${v.area}, Herräng` : id;
 }
 
+/**
+ * One feed per track id, spanning every week that offers the track — ids are
+ * stable across weeks (lh-beg-int is lh-beg-int in week 2 and week 3), so a
+ * two-week camper's subscription rolls over the transition on its own.
+ */
 export function buildTrackCalendar(
-  week: WeekSchedule,
+  weeks: WeekSchedule[],
   track: Track,
   venues: HerrangVenue[],
   opts: { now?: Date } = {}
@@ -53,31 +58,33 @@ export function buildTrackCalendar(
     lines.push('STATUS:CONFIRMED', 'END:VEVENT');
   };
 
-  for (const c of week.classes.filter((cls) => cls.track === track.id)) {
-    const labels = (c.labels ?? []).join(', ');
-    push(
-      `herrang-${track.id}-${c.date}-${c.start.replace(':', '')}`,
-      c.date,
-      c.start,
-      c.end,
-      [c.title ?? track.name, labels && `[${labels}]`].filter(Boolean).join(' '),
-      location(venues, c.venue),
-      c.teachers
-    );
-  }
+  for (const week of weeks) {
+    for (const c of week.classes.filter((cls) => cls.track === track.id)) {
+      const labels = (c.labels ?? []).join(', ');
+      push(
+        `herrang-${track.id}-${c.date}-${c.start.replace(':', '')}`,
+        c.date,
+        c.start,
+        c.end,
+        [c.title ?? track.name, labels && `[${labels}]`].filter(Boolean).join(' '),
+        location(venues, c.venue),
+        c.teachers
+      );
+    }
 
-  // Whole-camp specials (the Wednesday special) go in every track's feed.
-  for (const s of week.specials) {
-    if (!s.date || !s.start) continue;
-    push(
-      `herrang-special-${s.date}-${s.start.replace(':', '')}`,
-      s.date,
-      s.start,
-      s.end ?? s.start,
-      s.title,
-      (s.venues ?? []).map((v) => location(venues, v)).join(' / ') || 'Herräng',
-      s.detail
-    );
+    // Whole-camp specials (the Wednesday special) go in every track's feed.
+    for (const s of week.specials) {
+      if (!s.date || !s.start) continue;
+      push(
+        `herrang-special-${s.date}-${s.start.replace(':', '')}`,
+        s.date,
+        s.start,
+        s.end ?? s.start,
+        s.title,
+        (s.venues ?? []).map((v) => location(venues, v)).join(' / ') || 'Herräng',
+        s.detail
+      );
+    }
   }
 
   lines.push('END:VCALENDAR');

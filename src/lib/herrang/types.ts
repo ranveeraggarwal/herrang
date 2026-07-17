@@ -99,9 +99,11 @@ export interface WeekSchedule {
   specials: WeekSpecial[];
 }
 
-/** Everything the page ships to the client — a few kB of JSON, all static. */
+/** Everything the page ships to the client — a few kB of JSON, all static.
+ * `weeks` holds every committed master schedule, ordered by start date;
+ * `weekFor` in schedule.ts picks the one in force for a poster date. */
 export interface HerrangData {
   venues: HerrangVenue[];
-  week: WeekSchedule;
+  weeks: WeekSchedule[];
   dailies: DailyProgram[];
 }

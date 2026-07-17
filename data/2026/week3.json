@@ -1,0 +1,1431 @@
+{
+  "week": 3,
+  "year": 2026,
+  "start": "2026-07-18",
+  "end": "2026-07-24",
+  "note": "Week 3 master schedule from the W3 participant course sheet: 171 classes, the Wednesday whole-camp special, and the two extra evening class series (Bring Your Instrument / Embodied Rhythm) folded into specials[].",
+  "tracks": [
+    {
+      "id": "lh-beg-int",
+      "name": "Lindy Hop Beg-Int",
+      "level": "Lindy Hop Beg-Int"
+    },
+    {
+      "id": "lh-interm-g1",
+      "name": "Lindy Hop Interm — Group 1",
+      "level": "Lindy Hop Interm",
+      "group": 1
+    },
+    {
+      "id": "lh-interm-g2",
+      "name": "Lindy Hop Interm — Group 2",
+      "level": "Lindy Hop Interm",
+      "group": 2
+    },
+    {
+      "id": "lh-int-adv-g1",
+      "name": "Lindy Hop Int-Adv — Group 1",
+      "level": "Lindy Hop Int-Adv",
+      "group": 1
+    },
+    {
+      "id": "lh-int-adv-g2",
+      "name": "Lindy Hop Int-Adv — Group 2",
+      "level": "Lindy Hop Int-Adv",
+      "group": 2
+    },
+    {
+      "id": "lh-advanced",
+      "name": "Lindy Hop Advanced",
+      "level": "Lindy Hop Advanced"
+    },
+    {
+      "id": "lh-int-adv-ht",
+      "name": "Lindy Hop Int-Adv (HT)",
+      "level": "Lindy Hop Int-Adv (HT)"
+    },
+    {
+      "id": "solo-jazz",
+      "name": "Solo Jazz Int-Adv+ (HT)",
+      "level": "Solo Jazz Int-Adv+ (HT)"
+    },
+    {
+      "id": "tap-beg-int",
+      "name": "Tap Beg-Int",
+      "level": "Tap Beg-Int"
+    },
+    {
+      "id": "tap-int-to-int-adv",
+      "name": "Tap Int to Int-Adv",
+      "level": "Tap Int to Int-Adv"
+    },
+    {
+      "id": "tap-adv",
+      "name": "Tap Adv",
+      "level": "Tap Adv"
+    },
+    {
+      "id": "stepping",
+      "name": "Stepping",
+      "level": "Stepping"
+    }
+  ],
+  "classes": [
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-19",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-19",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "ab"
+    },
+    {
+      "track": "tap-int-to-int-adv",
+      "date": "2026-07-19",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "db"
+    },
+    {
+      "track": "tap-adv",
+      "date": "2026-07-19",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-19",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "ab",
+      "labels": [
+        "Audition"
+      ]
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-19",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "ab",
+      "labels": [
+        "Audition"
+      ]
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-19",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "ab",
+      "labels": [
+        "Audition"
+      ]
+    },
+    {
+      "track": "tap-int-to-int-adv",
+      "date": "2026-07-19",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "db"
+    },
+    {
+      "track": "tap-adv",
+      "date": "2026-07-19",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-19",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "sp"
+    },
+    {
+      "track": "tap-beg-int",
+      "date": "2026-07-19",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-19",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-19",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-19",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-19",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-19",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "sp"
+    },
+    {
+      "track": "tap-adv",
+      "date": "2026-07-19",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "db"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-19",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-19",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-19",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-19",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "fh"
+    },
+    {
+      "track": "tap-int-to-int-adv",
+      "date": "2026-07-19",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "sb"
+    },
+    {
+      "track": "tap-adv",
+      "date": "2026-07-19",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "db"
+    },
+    {
+      "track": "stepping",
+      "date": "2026-07-19",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-19",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-19",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "fh"
+    },
+    {
+      "track": "solo-jazz",
+      "date": "2026-07-19",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "ab"
+    },
+    {
+      "track": "tap-beg-int",
+      "date": "2026-07-19",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "sb"
+    },
+    {
+      "track": "stepping",
+      "date": "2026-07-19",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-19",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "rb"
+    },
+    {
+      "track": "solo-jazz",
+      "date": "2026-07-19",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "ab"
+    },
+    {
+      "track": "tap-beg-int",
+      "date": "2026-07-19",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-20",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-20",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-20",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-20",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-20",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "db"
+    },
+    {
+      "track": "tap-beg-int",
+      "date": "2026-07-20",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "sb"
+    },
+    {
+      "track": "tap-int-to-int-adv",
+      "date": "2026-07-20",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-20",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-20",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-20",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-20",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-20",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "db"
+    },
+    {
+      "track": "tap-beg-int",
+      "date": "2026-07-20",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "sb"
+    },
+    {
+      "track": "tap-int-to-int-adv",
+      "date": "2026-07-20",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-20",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "rb"
+    },
+    {
+      "track": "tap-adv",
+      "date": "2026-07-20",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-20",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-20",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-20",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-20",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "db"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-20",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "fh"
+    },
+    {
+      "track": "tap-beg-int",
+      "date": "2026-07-20",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "sp"
+    },
+    {
+      "track": "tap-int-to-int-adv",
+      "date": "2026-07-20",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "ab"
+    },
+    {
+      "track": "stepping",
+      "date": "2026-07-20",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "lb"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-20",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-20",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-20",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "db"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-20",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-int-adv-ht",
+      "date": "2026-07-20",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "rb"
+    },
+    {
+      "track": "tap-int-to-int-adv",
+      "date": "2026-07-20",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "ab"
+    },
+    {
+      "track": "tap-adv",
+      "date": "2026-07-20",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "sp"
+    },
+    {
+      "track": "stepping",
+      "date": "2026-07-20",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "lb"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-20",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "db"
+    },
+    {
+      "track": "lh-int-adv-ht",
+      "date": "2026-07-20",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "rb"
+    },
+    {
+      "track": "solo-jazz",
+      "date": "2026-07-20",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "ab"
+    },
+    {
+      "track": "tap-adv",
+      "date": "2026-07-20",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-21",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-21",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-21",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "rb"
+    },
+    {
+      "track": "tap-beg-int",
+      "date": "2026-07-21",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "sb"
+    },
+    {
+      "track": "tap-adv",
+      "date": "2026-07-21",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-21",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-21",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-21",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "db"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-21",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-21",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "pb"
+    },
+    {
+      "track": "tap-beg-int",
+      "date": "2026-07-21",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "sb"
+    },
+    {
+      "track": "tap-adv",
+      "date": "2026-07-21",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-21",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-21",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "pb"
+    },
+    {
+      "track": "tap-int-to-int-adv",
+      "date": "2026-07-21",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-21",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-21",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-21",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "db"
+    },
+    {
+      "track": "tap-beg-int",
+      "date": "2026-07-21",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "rb"
+    },
+    {
+      "track": "tap-int-to-int-adv",
+      "date": "2026-07-21",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-21",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "fh",
+      "labels": [
+        "Culture Class"
+      ]
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-21",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "fh",
+      "labels": [
+        "Culture Class"
+      ]
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-21",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "fh",
+      "labels": [
+        "Culture Class"
+      ]
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-21",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "db"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-21",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-21",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-int-adv-ht",
+      "date": "2026-07-21",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "pb"
+    },
+    {
+      "track": "tap-adv",
+      "date": "2026-07-21",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "sp"
+    },
+    {
+      "track": "stepping",
+      "date": "2026-07-21",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "lb"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-21",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "db"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-21",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-21",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-int-adv-ht",
+      "date": "2026-07-21",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "pb"
+    },
+    {
+      "track": "tap-int-to-int-adv",
+      "date": "2026-07-21",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "sb"
+    },
+    {
+      "track": "stepping",
+      "date": "2026-07-21",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "lb"
+    },
+    {
+      "track": "solo-jazz",
+      "date": "2026-07-21",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "ab"
+    },
+    {
+      "track": "tap-int-to-int-adv",
+      "date": "2026-07-21",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-23",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-23",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-23",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-23",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "db"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-23",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-23",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-23",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-23",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-23",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "db"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-23",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-23",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "rb"
+    },
+    {
+      "track": "tap-beg-int",
+      "date": "2026-07-23",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "ab"
+    },
+    {
+      "track": "tap-adv",
+      "date": "2026-07-23",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-23",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "sb"
+    },
+    {
+      "track": "tap-beg-int",
+      "date": "2026-07-23",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "ab"
+    },
+    {
+      "track": "tap-adv",
+      "date": "2026-07-23",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-23",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-23",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-23",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-23",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "fh",
+      "labels": [
+        "Culture Class"
+      ]
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-23",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "fh",
+      "labels": [
+        "Culture Class"
+      ]
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-23",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "fh",
+      "labels": [
+        "Culture Class"
+      ]
+    },
+    {
+      "track": "tap-int-to-int-adv",
+      "date": "2026-07-23",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "ab"
+    },
+    {
+      "track": "stepping",
+      "date": "2026-07-23",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "lb"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-23",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-23",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-23",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "db"
+    },
+    {
+      "track": "lh-int-adv-ht",
+      "date": "2026-07-23",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "sb"
+    },
+    {
+      "track": "solo-jazz",
+      "date": "2026-07-23",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "pb"
+    },
+    {
+      "track": "tap-int-to-int-adv",
+      "date": "2026-07-23",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "ab"
+    },
+    {
+      "track": "tap-adv",
+      "date": "2026-07-23",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "sp"
+    },
+    {
+      "track": "stepping",
+      "date": "2026-07-23",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "lb"
+    },
+    {
+      "track": "lh-int-adv-ht",
+      "date": "2026-07-23",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "sb"
+    },
+    {
+      "track": "solo-jazz",
+      "date": "2026-07-23",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "pb"
+    },
+    {
+      "track": "tap-beg-int",
+      "date": "2026-07-23",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "db"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-24",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "rb"
+    },
+    {
+      "track": "tap-adv",
+      "date": "2026-07-24",
+      "start": "10:00",
+      "end": "11:10",
+      "venue": "db"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-24",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-24",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-24",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "rb"
+    },
+    {
+      "track": "tap-beg-int",
+      "date": "2026-07-24",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "pb"
+    },
+    {
+      "track": "tap-adv",
+      "date": "2026-07-24",
+      "start": "11:20",
+      "end": "12:30",
+      "venue": "db"
+    },
+    {
+      "track": "lh-beg-int",
+      "date": "2026-07-24",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-24",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-24",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-int-adv-ht",
+      "date": "2026-07-24",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "rb"
+    },
+    {
+      "track": "tap-beg-int",
+      "date": "2026-07-24",
+      "start": "12:40",
+      "end": "13:50",
+      "venue": "pb"
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-24",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-24",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "sb"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-24",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "fh"
+    },
+    {
+      "track": "lh-advanced",
+      "date": "2026-07-24",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-int-adv-ht",
+      "date": "2026-07-24",
+      "start": "14:00",
+      "end": "15:10",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-interm-g2",
+      "date": "2026-07-24",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "sb"
+    },
+    {
+      "track": "tap-beg-int",
+      "date": "2026-07-24",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "fh",
+      "labels": [
+        "Culture Class"
+      ]
+    },
+    {
+      "track": "tap-int-to-int-adv",
+      "date": "2026-07-24",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "fh",
+      "labels": [
+        "Culture Class"
+      ]
+    },
+    {
+      "track": "tap-adv",
+      "date": "2026-07-24",
+      "start": "15:20",
+      "end": "16:30",
+      "venue": "fh",
+      "labels": [
+        "Culture Class"
+      ]
+    },
+    {
+      "track": "lh-interm-g1",
+      "date": "2026-07-24",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "sp"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-24",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-24",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "fh"
+    },
+    {
+      "track": "solo-jazz",
+      "date": "2026-07-24",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "sb"
+    },
+    {
+      "track": "tap-beg-int",
+      "date": "2026-07-24",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "db"
+    },
+    {
+      "track": "tap-int-to-int-adv",
+      "date": "2026-07-24",
+      "start": "16:40",
+      "end": "17:50",
+      "venue": "ab"
+    },
+    {
+      "track": "lh-int-adv-g1",
+      "date": "2026-07-24",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "rb"
+    },
+    {
+      "track": "lh-int-adv-g2",
+      "date": "2026-07-24",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "fh"
+    },
+    {
+      "track": "solo-jazz",
+      "date": "2026-07-24",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "sb"
+    },
+    {
+      "track": "tap-int-to-int-adv",
+      "date": "2026-07-24",
+      "start": "18:00",
+      "end": "19:10",
+      "venue": "ab"
+    }
+  ],
+  "specials": [
+    {
+      "title": "Special Class with Barbara Billups and Sugar Sullivan",
+      "date": "2026-07-22",
+      "start": "14:00",
+      "end": "15:10",
+      "venues": [
+        "fh",
+        "db"
+      ],
+      "kind": "special"
+    },
+    {
+      "title": "Bring Your Instrument",
+      "date": "2026-07-19",
+      "start": "19:10",
+      "end": "20:20",
+      "venues": [
+        "lb"
+      ],
+      "detail": "Extra evening class",
+      "kind": "special"
+    },
+    {
+      "title": "Embodied Rhythm",
+      "date": "2026-07-19",
+      "start": "19:10",
+      "end": "20:20",
+      "venues": [
+        "pb"
+      ],
+      "detail": "Extra evening class",
+      "kind": "special"
+    },
+    {
+      "title": "Bring Your Instrument",
+      "date": "2026-07-20",
+      "start": "19:10",
+      "end": "20:20",
+      "venues": [
+        "lb"
+      ],
+      "detail": "Extra evening class",
+      "kind": "special"
+    },
+    {
+      "title": "Embodied Rhythm",
+      "date": "2026-07-20",
+      "start": "19:10",
+      "end": "20:20",
+      "venues": [
+        "pb"
+      ],
+      "detail": "Extra evening class",
+      "kind": "special"
+    },
+    {
+      "title": "Bring Your Instrument",
+      "date": "2026-07-21",
+      "start": "19:10",
+      "end": "20:20",
+      "venues": [
+        "lb"
+      ],
+      "detail": "Extra evening class",
+      "kind": "special"
+    },
+    {
+      "title": "Embodied Rhythm",
+      "date": "2026-07-21",
+      "start": "19:10",
+      "end": "20:20",
+      "venues": [
+        "pb"
+      ],
+      "detail": "Extra evening class",
+      "kind": "special"
+    },
+    {
+      "title": "Bring Your Instrument",
+      "date": "2026-07-23",
+      "start": "19:10",
+      "end": "20:20",
+      "venues": [
+        "lb"
+      ],
+      "detail": "Extra evening class",
+      "kind": "special"
+    },
+    {
+      "title": "Embodied Rhythm",
+      "date": "2026-07-23",
+      "start": "19:10",
+      "end": "20:20",
+      "venues": [
+        "pb"
+      ],
+      "detail": "Extra evening class",
+      "kind": "special"
+    },
+    {
+      "title": "Bring Your Instrument",
+      "date": "2026-07-24",
+      "start": "19:10",
+      "end": "20:20",
+      "venues": [
+        "lb"
+      ],
+      "detail": "Extra evening class",
+      "kind": "special"
+    },
+    {
+      "title": "Embodied Rhythm",
+      "date": "2026-07-24",
+      "start": "19:10",
+      "end": "20:20",
+      "venues": [
+        "pb"
+      ],
+      "detail": "Extra evening class",
+      "kind": "special"
+    }
+  ]
+}

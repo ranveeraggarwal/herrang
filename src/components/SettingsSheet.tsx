@@ -77,7 +77,10 @@ export function SettingsSheet({
         }}
       >
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="hg-display text-lg">Your tracks</h2>
+          {/* The week number matters on transition days, when two crowds
+              share the camp — this sheet always picks for the week in
+              force, not the one you arrived for. */}
+          <h2 className="hg-display text-lg">Your week {week.week} tracks</h2>
           <button
             onClick={onClose}
             className="rounded-full px-3 py-1 text-xs font-bold uppercase"
@@ -89,8 +92,8 @@ export function SettingsSheet({
 
         {options.length === 0 ? (
           <p className="text-sm" style={{ color: 'var(--hg-soft)' }}>
-            The track picker unlocks when the week 2 class schedule lands.
-            Tonight&apos;s program works without it.
+            The track picker unlocks when the week {week.week} class schedule
+            lands. Tonight&apos;s program works without it.
           </p>
         ) : (
           <ul className="flex flex-col gap-3">

@@ -86,7 +86,15 @@ Cross-midnight rule: anything before 08:00 belongs to the poster's date's
 night (02:00 on the 11th's poster = 02:00 on the 12th in real time). Store as
 printed; the site's now-logic handles the shift.
 
-### `2026/week2.json` — the week's master class schedule
+### `2026/week<N>.json` — one master class schedule per camp week
+
+New week = new file (`week3.json` next to `week2.json`), never an edit of
+the old one — the app keeps every committed week and flips between them at
+midnight into arrival Saturday (see `TIME.md` for why midnight and not the
+poster date). Reuse track ids across weeks wherever the track continues
+(`lh-beg-int` stays `lh-beg-int`) so calendar subscriptions survive the
+transition. Week windows run arrival Saturday → final Friday and must not
+overlap; the validator fails on overlap.
 
 ```jsonc
 {
