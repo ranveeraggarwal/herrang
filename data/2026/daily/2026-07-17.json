@@ -8,10 +8,10 @@
     {"title": "Guest DJ Johan", "venues": ["fh"], "start": "22:00", "end": "00:00", "kind": "dj"},
     {"title": "DJ Victoria", "venues": ["fh"], "start": "00:00", "end": "01:30", "kind": "dj"},
     {"title": "DJ Nii", "venues": ["fh"], "start": "01:30", "end": "02:15", "kind": "dj"},
-    {"title": "DJ Simon & DJ Tony", "venues": ["fh"], "start": "02:15", "end": "05:00", "openEnd": true, "kind": "dj"},
+    {"title": "DJ Simon & DJ Tony", "venues": ["fh"], "start": "02:30", "end": "05:00", "openEnd": true, "kind": "dj"},
     {"title": "DJ Viktor", "venues": ["db"], "start": "21:00", "end": "23:00", "kind": "dj"},
     {"title": "Hornsgatan Jazz Orchestra", "venues": ["db"], "start": "23:00", "end": "02:15", "kind": "show", "detail": "Band break: DJ Sam"},
-    {"title": "DJ Omar", "venues": ["db"], "start": "02:15", "end": "05:00", "openEnd": true, "kind": "dj"},
+    {"title": "DJ Omar", "venues": ["db"], "start": "02:30", "end": "05:00", "openEnd": true, "kind": "dj"},
     {"title": "DJ Autumn Leaves", "venues": ["lb"], "start": "21:00", "end": "00:00", "kind": "dj"},
     {"title": "Best of Ramble", "venues": ["lb"], "start": "00:00", "end": "05:00", "openEnd": true, "kind": "dj"}
   ],
