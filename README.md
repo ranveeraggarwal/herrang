@@ -45,3 +45,8 @@ mkdir -p .github/workflows && git mv ci/validate.yml .github/workflows/validate.
 
 All programme data belongs to Herräng Dance Camp; the printed posters are
 authoritative. This app is an unofficial companion.
+
+---
+
+Built this on the side. If it saved you a trip to the office board, [buy me a
+coffee](https://ko-fi.com/ranveeraggarwal) — but honestly, no pressure.
