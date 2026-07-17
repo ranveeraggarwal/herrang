@@ -18,7 +18,12 @@ function readJson<T>(file: string): T {
 
 export function loadHerrangData(): HerrangData {
   const venues = readJson<VenueRegistry>(path.join(ROOT, 'venues.json')).venues;
-  const week = readJson<WeekSchedule>(path.join(ROOT, 'week2.json'));
+  // One file per camp week (week2.json, week3.json, …), ordered by start
+  // date. Which one is "current" is a client-side question — see weekFor.
+  const weeks = readdirSync(ROOT)
+    .filter((name) => /^week\d+\.json$/.test(name))
+    .map((name) => readJson<WeekSchedule>(path.join(ROOT, name)))
+    .sort((a, b) => a.start.localeCompare(b.start));
 
   const dailyDir = path.join(ROOT, 'daily');
   const dailies: DailyProgram[] = existsSync(dailyDir)
@@ -28,5 +33,5 @@ export function loadHerrangData(): HerrangData {
         .map((name) => readJson<DailyProgram>(path.join(dailyDir, name)))
     : [];
 
-  return { venues, week, dailies };
+  return { venues, weeks, dailies };
 }

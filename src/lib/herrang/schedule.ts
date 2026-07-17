@@ -15,6 +15,25 @@ import type {
 } from './types';
 import { toPosterMinutes } from './time';
 
+/** The week in force for a poster date: the first week (by start date)
+ * whose window hasn't ended yet. On a transition day both crowds are at
+ * camp, but only one week's classes are actually running — the outgoing
+ * week keeps the app through its last day (and, via the poster date, its
+ * last night's party until 08:00), then the incoming week takes over on
+ * arrival Saturday. Before camp that's the first week; after, the last —
+ * so the wrap state has something to point at. */
+export function weekFor(weeks: WeekSchedule[], posterDate: string): WeekSchedule {
+  return weeks.find((w) => posterDate <= w.end) ?? weeks[weeks.length - 1];
+}
+
+/** The week after this one, if a later master schedule is committed. */
+export function nextWeekAfter(
+  weeks: WeekSchedule[],
+  week: WeekSchedule
+): WeekSchedule | undefined {
+  return weeks.find((w) => w.start > week.end);
+}
+
 /** "Roseland Ballroom · Camping Area" — the Venue · Area formula. */
 export function venueLabel(venues: HerrangVenue[], id: string): string {
   const v = venues.find((venue) => venue.id === id);

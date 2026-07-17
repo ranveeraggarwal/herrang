@@ -42,6 +42,20 @@ instant is really on the *next calendar day*.
 Never invent `25:00`/`26:00`-style notation or ISO datetimes in data
 files. Times are always plain `HH:MM` as printed on the poster.
 
+## Week transitions follow the poster date
+
+Multiple camp weeks can be committed at once (`week2.json`, `week3.json`,
+…) and `weekFor(weeks, posterDate)` picks the one in force: the first
+week whose `end` is on or after the poster date. Because the input is the
+**poster date**, the flip happens at 08:00, not midnight — the outgoing
+week's Friday-night party (which runs past midnight into arrival
+Saturday) still belongs to the outgoing week, and the incoming week takes
+over when its arrival Saturday's poster day starts. Before camp that
+yields the first week; after the last class it stays on the final week so
+the wrap state has something to point at. On transition days both crowds
+are physically at camp, but only one week's classes are running — that's
+the week the app shows, and the wrap card points forward to the next one.
+
 ## Two flavors of minutes — this is the whole game
 
 - **`toMinutes(hhmm)`** — minutes since local midnight. Resets to 0 at

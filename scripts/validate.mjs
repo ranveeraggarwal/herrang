@@ -47,14 +47,20 @@ const checkTime = (file, t, ctx) => {
   if (!TIME_RE.test(t)) err(file, `${ctx}: bad time "${t}" (want HH:MM)`);
 };
 
-// --- week2.json: master class schedule ---
-const weekFile = path.join(ROOT, 'week2.json');
-if (existsSync(weekFile)) {
-  const week = loadJson(weekFile);
+// --- week<N>.json: one master class schedule per camp week ---
+const weekFiles = readdirSync(ROOT)
+  .filter((n) => /^week\d+\.json$/.test(n))
+  .sort();
+if (weekFiles.length === 0) err('data/2026', 'no week<N>.json master schedule found');
+const weekWindows = []; // { file, week, start, end } for cross-week checks
+for (const f of weekFiles) {
+  const week = loadJson(path.join(ROOT, f));
   if (week) {
-    const f = 'week2.json';
+    if (week.week !== Number(f.match(/^week(\d+)\.json$/)[1]))
+      err(f, `week number ${week.week} does not match filename`);
     if (!DATE_RE.test(week.start ?? '')) err(f, `bad week start "${week.start}"`);
     if (!DATE_RE.test(week.end ?? '')) err(f, `bad week end "${week.end}"`);
+    weekWindows.push({ file: f, week: week.week, start: week.start, end: week.end });
     const trackIds = new Set();
     for (const t of week.tracks ?? []) {
       if (!t.id) err(f, `track missing id: ${JSON.stringify(t)}`);
@@ -80,11 +86,21 @@ if (existsSync(weekFile)) {
       if (!s.title) err(f, `${ctx}: missing title`);
       if (s.date && !DATE_RE.test(s.date)) err(f, `${ctx}: bad date "${s.date}"`);
       if (s.start) checkTime(f, s.start, ctx);
+      if (s.end) checkTime(f, s.end, ctx);
       for (const v of s.venues ?? []) checkVenueRef(f, v, ctx);
     });
   }
-} else {
-  err('week2.json', 'missing');
+}
+
+// The app picks "the week in force" by comparing a poster date against the
+// windows (weekFor in schedule.ts) — overlapping windows would make that
+// pick ambiguous, so they must fail here, not render as something random.
+weekWindows.sort((a, b) => (a.start < b.start ? -1 : 1));
+for (let i = 1; i < weekWindows.length; i++) {
+  const prev = weekWindows[i - 1];
+  const cur = weekWindows[i];
+  if (cur.start <= prev.end)
+    err(cur.file, `window ${cur.start}–${cur.end} overlaps ${prev.file} (${prev.start}–${prev.end})`);
 }
 
 // --- daily/*.json: one per poster day ---
@@ -128,5 +144,5 @@ if (errors.length > 0) {
   process.exit(1);
 }
 console.log(
-  `herrang data OK — ${venueIds.size} venues, ${dailyFiles.length} daily file(s)`
+  `herrang data OK — ${venueIds.size} venues, ${weekFiles.length} week(s), ${dailyFiles.length} daily file(s)`
 );

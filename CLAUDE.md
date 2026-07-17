@@ -57,7 +57,13 @@ validator.
 ## Layout
 
 - `data/2026/venues.json` — canonical venue registry (ids, aliases, areas)
-- `data/2026/week2.json` — the week's master class schedule (all tracks)
+- `data/2026/week<N>.json` — one master class schedule per camp week (all
+  tracks). The app picks the week in force by poster date (`weekFor` in
+  `src/lib/herrang/schedule.ts`): the outgoing week keeps the app through
+  its last night, the incoming week takes over on arrival Saturday at
+  08:00. Track ids stay stable across weeks (`lh-beg-int` is `lh-beg-int`
+  every week) so ICS subscriptions roll over on their own; track picks are
+  stored per week, since groups get re-auditioned.
 - `data/2026/daily/YYYY-MM-DD.json` — one file per poster/evening program
 - `data/2026/INGEST.md` — the ingestion contract (schemas + prompt)
 - `src/lib/herrang/` — types, the three-clock time logic, pure selectors,

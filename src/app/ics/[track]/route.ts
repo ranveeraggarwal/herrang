@@ -10,7 +10,11 @@ export const dynamic = 'force-static';
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return loadHerrangData().week.tracks.map((t) => ({ track: t.id }));
+  // Track ids are stable across weeks — one route per unique id.
+  const ids = new Set(
+    loadHerrangData().weeks.flatMap((w) => w.tracks.map((t) => t.id))
+  );
+  return [...ids].map((track) => ({ track }));
 }
 
 export async function GET(
@@ -18,11 +22,16 @@ export async function GET(
   { params }: { params: Promise<{ track: string }> }
 ) {
   const { track: trackId } = await params;
-  const { week, venues } = loadHerrangData();
-  const track = week.tracks.find((t) => t.id === trackId);
+  const { weeks, venues } = loadHerrangData();
+  // The feed spans every week that offers this track; a subscription made
+  // in week 2 keeps working through week 3 without resubscribing.
+  const withTrack = weeks.filter((w) => w.tracks.some((t) => t.id === trackId));
+  const track = withTrack
+    .at(-1)
+    ?.tracks.find((t) => t.id === trackId);
   if (!track) return new Response('Not found', { status: 404 });
 
-  const body = buildTrackCalendar(week, track, venues);
+  const body = buildTrackCalendar(withTrack, track, venues);
   return new Response(body, {
     headers: {
       'Content-Type': 'text/calendar; charset=utf-8',

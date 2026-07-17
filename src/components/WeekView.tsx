@@ -9,7 +9,7 @@
 // scrolling back to check what track they picked on Tuesday.
 
 import type { ReactNode } from 'react';
-import type { HerrangData } from '@/lib/herrang/types';
+import type { HerrangData, WeekSchedule } from '@/lib/herrang/types';
 import { addDays } from '@/lib/dates';
 import {
   classesOn,
@@ -28,12 +28,15 @@ function Divider() {
 
 export function WeekView({
   data,
+  week,
   trackIds,
   today,
   now,
   onPickTracks,
 }: {
   data: HerrangData;
+  /** The week in force for `today` (see weekFor). */
+  week: WeekSchedule;
   trackIds: string[];
   /** Poster date "now" is in force — days before it are already behind us. */
   today: string;
@@ -41,12 +44,12 @@ export function WeekView({
   now: number;
   onPickTracks: () => void;
 }) {
-  const { week, venues } = data;
+  const { venues } = data;
 
   if (week.classes.length === 0) {
     return (
       <p className="text-sm" style={{ color: 'var(--hg-soft)' }}>
-        The week 2 master schedule lands here soon.
+        The week {week.week} master schedule lands here soon.
       </p>
     );
   }
@@ -55,7 +58,7 @@ export function WeekView({
     return (
       <p className="text-sm" style={{ color: 'var(--hg-soft)' }}>
         <button className="font-bold underline" onClick={onPickTracks}>
-          Choose from the week 2 tracks →
+          Choose from the week {week.week} tracks →
         </button>
       </p>
     );

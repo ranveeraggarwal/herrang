@@ -5,7 +5,12 @@
 // and the 04:00–08:00 weird hours.
 
 import { useState, type SyntheticEvent } from 'react';
-import type { HerrangData, HerrangVenue, WeekClass } from '@/lib/herrang/types';
+import type {
+  HerrangData,
+  HerrangVenue,
+  WeekClass,
+  WeekSchedule,
+} from '@/lib/herrang/types';
 import {
   endsChip,
   relativeChip,
@@ -19,12 +24,13 @@ import {
   freeDayLine,
   isClassFreeDay,
   isWeekWrapped,
+  nextWeekAfter,
   nowAndNextClass,
   venueLabel,
   venueName,
   weekSpecialsOn,
 } from '@/lib/herrang/schedule';
-import { formatCompactWeekdayDate } from '@/lib/dates';
+import { addDays, formatCompactWeekdayDate } from '@/lib/dates';
 import { BigSay, Card, Chip } from './bits';
 import { WeekView } from './WeekView';
 
@@ -43,6 +49,8 @@ const WEIRD_HOURS_LINES = [
 
 export function TodayView(props: {
   data: HerrangData;
+  /** The week in force for the clock's poster date (see weekFor). */
+  week: WeekSchedule;
   clock: ClockState;
   trackIds: string[];
   onPickTracks: () => void;
@@ -54,6 +62,7 @@ export function TodayView(props: {
       <WhereAreThings venues={props.data.venues} />
       <ThisWeekCard
         data={props.data}
+        week={props.week}
         trackIds={props.trackIds}
         today={props.clock.posterDate}
         now={props.clock.posterMinutes}
@@ -71,12 +80,14 @@ const WEEK_OPEN_KEY = 'herrang.weekOpen.v1';
  * is next. */
 function ThisWeekCard({
   data,
+  week,
   trackIds,
   today,
   now,
   onPickTracks,
 }: {
   data: HerrangData;
+  week: WeekSchedule;
   trackIds: string[];
   today: string;
   now: number;
@@ -91,7 +102,7 @@ function ThisWeekCard({
     }
   });
 
-  if (data.week.classes.length === 0) return null;
+  if (week.classes.length === 0) return null;
 
   const handleToggle = (e: SyntheticEvent<HTMLDetailsElement>) => {
     const isOpen = e.currentTarget.open;
@@ -118,6 +129,7 @@ function ThisWeekCard({
         <div className="mt-3">
           <WeekView
             data={data}
+            week={week}
             trackIds={trackIds}
             today={today}
             now={now}
@@ -178,18 +190,20 @@ function WhereAreThings({ venues }: { venues: HerrangVenue[] }) {
 
 function TodayViewBody({
   data,
+  week,
   clock,
   trackIds,
   onPickTracks,
   onGoTonight,
 }: {
   data: HerrangData;
+  week: WeekSchedule;
   clock: ClockState;
   trackIds: string[];
   onPickTracks: () => void;
   onGoTonight: () => void;
 }) {
-  const { week, venues } = data;
+  const { venues } = data;
 
   // 04:00–08:00 — a single card.
   if (clock.mode === 'weird') {
@@ -200,6 +214,7 @@ function TodayViewBody({
         sub={
           <NextClassLine
             data={data}
+            week={week}
             trackIds={trackIds}
             fromDate={clock.dateISO}
             onPickTracks={onPickTracks}
@@ -250,13 +265,28 @@ function TodayViewBody({
   }
 
   if (isWeekWrapped(week, clock.posterDate, clock.posterMinutes)) {
+    // Transition days have both crowds at camp: while week 2 wraps up, the
+    // week 3 arrivals are already unpacking. Say when the next week's file
+    // takes over instead of leaving them staring at someone else's wrap.
+    const next = nextWeekAfter(data.weeks, week);
     return (
       <BigSay
         title={`Week ${week.week} is a wrap 🎉`}
         sub={
-          <button className="font-bold underline" onClick={onGoTonight}>
-            The night program is still live →
-          </button>
+          <span className="flex flex-col items-start gap-1.5">
+            <button className="font-bold underline" onClick={onGoTonight}>
+              The night program is still live →
+            </button>
+            {next && (
+              <span>
+                Week {next.week} rolls in{' '}
+                {next.start === addDays(clock.posterDate, 1)
+                  ? 'tomorrow'
+                  : formatCompactWeekdayDate(next.start)}
+                .
+              </span>
+            )}
+          </span>
         }
       />
     );
@@ -266,7 +296,7 @@ function TodayViewBody({
     return (
       <BigSay
         title="The class schedule isn't loaded yet."
-        sub="The 210-entry week 2 master schedule lands here soon. Tonight's program already works."
+        sub={`The week ${week.week} master schedule lands here soon. Tonight's program already works.`}
       />
     );
   }
@@ -277,7 +307,7 @@ function TodayViewBody({
         title="Pick your track."
         sub={
           <button className="font-bold underline" onClick={onPickTracks}>
-            Choose from the week 2 tracks →
+            Choose from the week {week.week} tracks →
           </button>
         }
       />
@@ -300,7 +330,7 @@ function TodayViewBody({
   return (
     <div className="flex flex-col gap-3">
       {current || next ? (
-        <NowClassCard data={data} clock={clock} current={current} next={next} />
+        <NowClassCard data={data} week={week} clock={clock} current={current} next={next} />
       ) : clock.mode === 'night' ? (
         <BigSay
           title="Classes are done."
@@ -316,6 +346,7 @@ function TodayViewBody({
               {clock.dateISO !== clock.posterDate && (
                 <NextClassLine
                   data={data}
+                  week={week}
                   trackIds={trackIds}
                   fromDate={clock.dateISO}
                   onPickTracks={onPickTracks}
@@ -387,16 +418,18 @@ function TodayViewBody({
  * both are "should I go to bed" moments. */
 function NextClassLine({
   data,
+  week,
   trackIds,
   fromDate,
   onPickTracks,
 }: {
   data: HerrangData;
+  week: WeekSchedule;
   trackIds: string[];
   fromDate: string;
   onPickTracks: () => void;
 }) {
-  const first = firstClassOnOrAfter(data.week, trackIds, fromDate);
+  const first = firstClassOnOrAfter(week, trackIds, fromDate);
   if (first) {
     return (
       <span>
@@ -408,7 +441,7 @@ function NextClassLine({
       </span>
     );
   }
-  if (trackIds.length === 0 && data.week.tracks.length > 0) {
+  if (trackIds.length === 0 && week.tracks.length > 0) {
     return (
       <button className="font-bold underline" onClick={onPickTracks}>
         Pick your track to see what&apos;s next →
@@ -421,17 +454,19 @@ function NextClassLine({
 /** The signature component, day flavor: one card, full width, display type. */
 function NowClassCard({
   data,
+  week,
   clock,
   current,
   next,
 }: {
   data: HerrangData;
+  week: WeekSchedule;
   clock: ClockState;
   current?: WeekClass;
   next?: WeekClass;
 }) {
   const c = current ?? next!;
-  const track = data.week.tracks.find((t) => t.id === c.track);
+  const track = week.tracks.find((t) => t.id === c.track);
   const chip = current
     ? endsChip(clock.posterMinutes, toPosterMinutes(current.end))
     : relativeChip(clock.posterMinutes, toPosterMinutes(next!.start));
