@@ -89,8 +89,9 @@ printed; the site's now-logic handles the shift.
 ### `2026/week<N>.json` — one master class schedule per camp week
 
 New week = new file (`week3.json` next to `week2.json`), never an edit of
-the old one — the app keeps every committed week and flips between them by
-poster date. Reuse track ids across weeks wherever the track continues
+the old one — the app keeps every committed week and flips between them at
+midnight into arrival Saturday (see `TIME.md` for why midnight and not the
+poster date). Reuse track ids across weeks wherever the track continues
 (`lh-beg-int` stays `lh-beg-int`) so calendar subscriptions survive the
 transition. Week windows run arrival Saturday → final Friday and must not
 overlap; the validator fails on overlap.

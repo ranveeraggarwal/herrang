@@ -15,15 +15,16 @@ import type {
 } from './types';
 import { toPosterMinutes } from './time';
 
-/** The week in force for a poster date: the first week (by start date)
- * whose window hasn't ended yet. On a transition day both crowds are at
- * camp, but only one week's classes are actually running — the outgoing
- * week keeps the app through its last day (and, via the poster date, its
- * last night's party until 08:00), then the incoming week takes over on
- * arrival Saturday. Before camp that's the first week; after, the last —
- * so the wrap state has something to point at. */
-export function weekFor(weeks: WeekSchedule[], posterDate: string): WeekSchedule {
-  return weeks.find((w) => posterDate <= w.end) ?? weeks[weeks.length - 1];
+/** The week in force for a date: the first week (by start date) whose
+ * window hasn't ended yet. Callers pass the CALENDAR date (`clock.dateISO`),
+ * not the poster date — the class week flips at midnight into arrival
+ * Saturday. The outgoing week's Friday-night party is unaffected by the
+ * flip: Tonight renders from the poster date, which stays on Friday until
+ * 08:00, and the outgoing week has no classes left after Friday 19:10
+ * anyway. Before camp this yields the first week; after, the last — so the
+ * wrap state has something to point at. */
+export function weekFor(weeks: WeekSchedule[], dateISO: string): WeekSchedule {
+  return weeks.find((w) => dateISO <= w.end) ?? weeks[weeks.length - 1];
 }
 
 /** The week after this one, if a later master schedule is committed. */

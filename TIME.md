@@ -42,19 +42,30 @@ instant is really on the *next calendar day*.
 Never invent `25:00`/`26:00`-style notation or ISO datetimes in data
 files. Times are always plain `HH:MM` as printed on the poster.
 
-## Week transitions follow the poster date
+## Week transitions flip at midnight — deliberately NOT the poster date
 
 Multiple camp weeks can be committed at once (`week2.json`, `week3.json`,
-…) and `weekFor(weeks, posterDate)` picks the one in force: the first
-week whose `end` is on or after the poster date. Because the input is the
-**poster date**, the flip happens at 08:00, not midnight — the outgoing
-week's Friday-night party (which runs past midnight into arrival
-Saturday) still belongs to the outgoing week, and the incoming week takes
-over when its arrival Saturday's poster day starts. Before camp that
-yields the first week; after the last class it stays on the final week so
-the wrap state has something to point at. On transition days both crowds
-are physically at camp, but only one week's classes are running — that's
-the week the app shows, and the wrap card points forward to the next one.
+…) and `weekFor(weeks, dateISO)` picks the one in force: the first week
+whose `end` is on or after the **calendar date**. This is one of the few
+legitimate `dateISO` uses, and the exception to the "everything compares
+on the poster timeline" rule — feeding `posterDate` here would delay the
+flip to 08:00 on arrival Saturday for no benefit. The split works because
+the two week-keyed systems don't overlap at the boundary:
+
+- The outgoing week's Friday-night party lives in the **Tonight** view,
+  which is keyed by `posterDate` — that stays on Friday until 08:00, so
+  the party is untouched by the week flip.
+- The **classes** machinery (Today view, track picker, day counter, wrap
+  card) flips to the incoming week at midnight — and the outgoing week
+  has had no classes since Friday 19:10, so nothing real is lost.
+
+Before camp this yields the first week; after the last class it stays on
+the final week so the wrap state has something to point at. On transition
+days both crowds are physically at camp, but only one week's classes are
+running — that's the week the app shows, and the wrap card points forward
+to the next one. (The track-picker auto-prompt for a week with no stored
+selection additionally waits for day mode, so the week flip doesn't pop a
+picker over the party at midnight.)
 
 ## Two flavors of minutes — this is the whole game
 
@@ -75,7 +86,9 @@ both of which want the *actual* clock, not the poster-shifted one:
 
 - `isNightGround(clock.minutes)` — the day/night ground color follows
   the real clock (20:00–08:00), independent of which poster is showing.
-- `clock.dateISO` — the header's "what day is it" line.
+- `clock.dateISO` — the header's "what day is it" line, and
+  `weekFor(weeks, dateISO)`: the camp week flips at midnight, not at
+  08:00 (see "Week transitions" below).
 
 Everything else — `nowAndNextClass`, `isWeekWrapped`, `isPast`,
 `relativeChip`, `endsChip`, the finished-item dimming in `TodayView` and
@@ -144,6 +157,7 @@ ever mattering even off-season:
 |---|---|
 | Compare "now" against a class/special/event time | `clock.posterMinutes` vs `toPosterMinutes(x)` |
 | The poster currently in force (for `classesOn`, `dailyFor`, etc.) | `clock.posterDate` |
+| The camp week currently in force | `clock.dateISO` via `weekFor` |
 | "What calendar day is it" for display | `clock.dateISO` |
 | Day/night ground theme | `clock.minutes` via `isNightGround` |
 | Step or diff `YYYY-MM-DD` strings | `addDays`/`diffDays` from `src/lib/dates.ts` |

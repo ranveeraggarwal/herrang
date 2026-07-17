@@ -106,29 +106,33 @@ export function HerrangApp({ data }: { data: HerrangData }) {
     setThemePref(readJson<ThemePref>(THEME_KEY, 'auto'));
   }, []);
 
-  // The week in force follows the poster date — the outgoing week keeps the
-  // app through its last night, the incoming one takes over on arrival
-  // Saturday at 08:00. Until the clock ticks nothing week-dependent renders,
-  // so the placeholder pick doesn't matter.
+  // The week in force follows the calendar date — the flip happens at
+  // midnight into arrival Saturday, not at 08:00. The outgoing week's
+  // Friday-night party is unaffected: Tonight renders from the poster date,
+  // which stays on Friday until 08:00. Only the classes machinery flips,
+  // and week 2's last class ended at 19:10 anyway. Until the clock ticks
+  // nothing week-dependent renders, so the placeholder pick doesn't matter.
   const week = useMemo(
-    () => weekFor(data.weeks, clock?.posterDate ?? data.weeks[0].start),
-    [data.weeks, clock?.posterDate]
+    () => weekFor(data.weeks, clock?.dateISO ?? data.weeks[0].start),
+    [data.weeks, clock?.dateISO]
   );
   const selection = selections?.[week.week] ?? EMPTY_SELECTION;
 
   // No selection stored for the week in force → offer the track picker (only
   // once that week's master schedule actually has tracks to pick). Fires
   // again when the camp rolls into a new week: new week, new audition, new
-  // groups — last week's pick is honestly stale.
+  // groups — last week's pick is honestly stale. Day mode only: the week
+  // flips at midnight, and nobody at the Friday party needs a track picker
+  // popping up at 00:00 — it can wait for daylight.
   useEffect(() => {
-    if (!clock || selections === null) return;
+    if (!clock || clock.mode !== 'day' || selections === null) return;
     if (week.tracks.length > 0 && selections[week.week] === undefined) {
       setSettingsOpen(true);
     }
     // Deliberately not keyed on `selections`: dismissing the sheet without
     // picking shouldn't re-open it until the next visit (or the next week).
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [clock === null, selections === null, week.week]);
+  }, [clock === null, clock?.mode, selections === null, week.week]);
 
   // The ground follows the clock (night 20:00–08:00) unless overridden.
   useEffect(() => {
@@ -256,7 +260,7 @@ export function HerrangApp({ data }: { data: HerrangData }) {
             </p>
             {clock && week.classes.length > 0 && (
               <p className="mt-0.5 text-[11px]" style={{ color: 'var(--hg-soft)' }}>
-                Day {campDayNumber(week, clock.posterDate)} of{' '}
+                Week {week.week} · Day {campDayNumber(week, clock.posterDate)} of{' '}
                 {campDayCount(week)} · ~
                 {Math.max(0, campDayNumber(week, clock.posterDate) - 1) * 4}h
                 slept, allegedly
