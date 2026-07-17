@@ -1,0 +1,28 @@
+{
+  "date": "2026-07-17",
+  "weekday": "Friday",
+  "title": "Friday's Activities",
+  "source": "A day in Herräng daily poster",
+  "note": "Times read off the poster grid — treat mid-hour times as ±15 min.",
+  "events": [
+    {"title": "Guest DJ Johan", "venues": ["fh"], "start": "22:00", "end": "00:00", "kind": "dj"},
+    {"title": "DJ Victoria", "venues": ["fh"], "start": "00:00", "end": "01:30", "kind": "dj"},
+    {"title": "DJ Nii", "venues": ["fh"], "start": "01:30", "end": "02:15", "kind": "dj"},
+    {"title": "DJ Simon & DJ Tony", "venues": ["fh"], "start": "02:15", "end": "05:00", "openEnd": true, "kind": "dj"},
+    {"title": "DJ Viktor", "venues": ["db"], "start": "22:00", "end": "23:00", "kind": "dj"},
+    {"title": "Hornsgatan Jazz Orchestra", "venues": ["db"], "start": "23:00", "end": "02:15", "kind": "show", "detail": "Band break: DJ Sam"},
+    {"title": "DJ Omar", "venues": ["db"], "start": "02:15", "end": "05:00", "openEnd": true, "kind": "dj"},
+    {"title": "DJ Autumn Leaves", "venues": ["lb"], "start": "21:00", "end": "00:00", "kind": "dj"},
+    {"title": "Best of Ramble", "venues": ["lb"], "start": "00:00", "end": "05:00", "openEnd": true, "kind": "dj"}
+  ],
+  "specials": [
+    {"title": "Yoga", "venue": "fh", "start": "09:00", "end": "09:45", "kind": "special"},
+    {"title": "Learn/Teach an Instrument", "location": "Folkets Hus Plaza", "start": "15:00", "end": "16:00", "kind": "special"},
+    {"title": "Music Practice Jam", "location": "Folkets Hus Plaza", "start": "16:00", "end": "17:30", "kind": "jam"},
+    {"title": "Balboa Ice Square", "venue": "sb", "start": "19:10", "kind": "social"},
+    {"title": "Tap Jam", "venue": "db", "start": "20:00", "end": "21:00", "kind": "jam"},
+    {"title": "Friday Party Festivities", "location": "Folkets Hus Plaza", "start": "21:00", "kind": "social"},
+    {"title": "Ramble Competition", "venue": "lb", "start": "01:00", "kind": "special"},
+    {"title": "Bedlam Jam", "venue": "bar-bedlam", "kind": "jam", "tba": true, "detail": "After the band"}
+  ]
+}
