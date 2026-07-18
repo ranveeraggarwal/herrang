@@ -224,7 +224,7 @@ export function HerrangApp({ data }: { data: HerrangData }) {
       <div className="mx-auto flex w-full max-w-xl flex-grow flex-col px-4">
         <header className="flex items-start justify-between gap-3 pt-5 pb-4">
           <div>
-            <h1 className="hg-display text-xl leading-none">
+            <h1 className="hg-display relative inline-block text-xl leading-none">
               {/* Secret trigger: looks exactly like the plain title, no hint
                   it does anything. See PepTalk.tsx. */}
               <button
@@ -247,6 +247,12 @@ export function HerrangApp({ data }: { data: HerrangData }) {
               >
                 Herräng Companion
               </button>
+              {/* Fan-project honesty, worn as a rubber stamp. Decorative and
+                  non-interactive so the pep-talk button keeps the whole title
+                  as its tap target. */}
+              <span className="hg-stamp" aria-hidden="true">
+                Unofficial
+              </span>
             </h1>
             <p
               className="hg-time mt-1 text-xs font-semibold uppercase tracking-wider"
