@@ -222,9 +222,9 @@ export function HerrangApp({ data }: { data: HerrangData }) {
   return (
     <div className="flex min-h-dvh w-full flex-col">
       <div className="mx-auto flex w-full max-w-xl flex-grow flex-col px-4">
-        <header className="flex items-start justify-between gap-3 pt-5 pb-4">
+        <header className="relative flex items-start justify-between gap-3 pt-5 pb-4">
           <div>
-            <h1 className="hg-display relative inline-block text-xl leading-none">
+            <h1 className="hg-display text-xl leading-none">
               {/* Secret trigger: looks exactly like the plain title, no hint
                   it does anything. See PepTalk.tsx. */}
               <button
@@ -247,12 +247,6 @@ export function HerrangApp({ data }: { data: HerrangData }) {
               >
                 Herräng Companion
               </button>
-              {/* Fan-project honesty, worn as a rubber stamp. Decorative and
-                  non-interactive so the pep-talk button keeps the whole title
-                  as its tap target. */}
-              <span className="hg-stamp" aria-hidden="true">
-                Unofficial
-              </span>
             </h1>
             <p
               className="hg-time mt-1 text-xs font-semibold uppercase tracking-wider"
@@ -280,6 +274,14 @@ export function HerrangApp({ data }: { data: HerrangData }) {
           >
             Tracks&thinsp;·&thinsp;⚙
           </button>
+          {/* Fan-project honesty, worn as a rubber stamp. Sits in the empty
+              lower-right corner — below the Tracks button, clear of the title —
+              so the title reads plainly. Decorative and pointer-events: none,
+              so nothing here steals a tap from the pep-talk trigger or the
+              Tracks button. */}
+          <span className="hg-stamp" aria-hidden="true">
+            Unofficial
+          </span>
         </header>
 
         <nav

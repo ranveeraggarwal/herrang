@@ -115,8 +115,8 @@
    secret pep-talk trigger underneath the title (PepTalk.tsx). */
 .hg-stamp {
   position: absolute;
-  top: -0.45rem;
-  right: -0.15rem;
+  bottom: 0.9rem;
+  right: 0.1rem;
   transform: rotate(-8deg);
   padding: 1px 5px 0;
   border: 2px solid var(--hg-special);
