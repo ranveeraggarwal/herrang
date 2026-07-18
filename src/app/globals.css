@@ -109,10 +109,10 @@
 
 /* The "unofficial" stamp over the title. This is a fan project and it wears
    that like a rubber stamp slapped across the poster: flat saturated specials
-   red, a hard border, pressed on at an angle by an unsteady hand. No ink
-   texture or drop shadow — that'd be ornament; the tilt and the double rule
-   do all the work. pointer-events: none so it never steals a tap from the
-   secret pep-talk trigger underneath the title (PepTalk.tsx). */
+   red, a single hard border, pressed on at an angle by an unsteady hand. No
+   ink texture or drop shadow — that'd be ornament; the tilt does the work.
+   pointer-events: none so it never steals a tap from the secret pep-talk
+   trigger underneath the title (PepTalk.tsx). */
 .hg-stamp {
   position: absolute;
   bottom: 0.9rem;
@@ -121,7 +121,6 @@
   padding: 1px 5px 0;
   border: 2px solid var(--hg-special);
   border-radius: 3px;
-  box-shadow: inset 0 0 0 3px var(--hg-ground), inset 0 0 0 4px var(--hg-special);
   color: var(--hg-special);
   font-family: var(--font-hg-display), var(--font-hg-body), sans-serif;
   font-size: 10px;
