@@ -11,8 +11,8 @@
     {"title": "DJ Sam", "venues": ["fh"], "start": "23:00", "end": "01:30", "kind": "dj"},
     {"title": "DJ Georgi", "venues": ["fh"], "start": "01:30", "end": "03:00", "kind": "dj"},
     {"title": "DJ Christophe", "venues": ["fh"], "start": "03:00", "end": "05:00", "openEnd": true, "kind": "dj"},
-    {"title": "Herräng All Stars Band", "venues": ["db"], "start": "22:30", "end": "02:00", "kind": "show", "detail": "Band breaks: DJ Nii"},
-    {"title": "DJ Omar", "venues": ["db"], "start": "02:00", "end": "05:00", "openEnd": true, "kind": "dj"},
+    {"title": "Herräng All Stars Band", "venues": ["db"], "start": "23:30", "end": "02:30", "kind": "show", "detail": "Band breaks: DJ Nii"},
+    {"title": "DJ Omar", "venues": ["db"], "start": "02:30", "end": "05:00", "openEnd": true, "kind": "dj"},
     {"title": "DJ Victoria", "venues": ["lb"], "start": "22:00", "end": "00:00", "kind": "dj", "theme": "Minor Swing"},
     {"title": "DJ Viktor", "venues": ["lb"], "start": "00:00", "end": "01:30", "kind": "dj", "theme": "Minor Swing"}
   ],
