@@ -22,6 +22,7 @@
   "specials": [
     {"title": "Yoga", "venue": "fh", "start": "09:00", "end": "10:00", "kind": "special"},
     {"title": "Writers of Herräng Meet Up", "location": "Lindy Hop Shop", "start": "15:10", "end": "16:00", "kind": "special"},
+    {"title": "Shag Dancers Meetup", "location": "In front of Lindy Hop Shop", "start": "16:00", "end": "17:00", "kind": "social", "detail": "Meet other Collegiate Shag dancers, get to know who's around, and stay connected."},
     {"title": "Stretching", "venue": "fh", "start": "18:00", "end": "19:10", "kind": "special"},
     {"title": "Tap Jam", "venue": "db", "start": "19:10", "end": "20:00", "kind": "jam"},
     {"title": "Pub Night", "location": "Wine Bar", "start": "22:00", "detail": "Moves to Heaven's Tent if it rains", "kind": "special"},
