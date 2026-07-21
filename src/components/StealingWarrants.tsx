@@ -155,13 +155,13 @@ export function StealingWarrants({ onClose }: { onClose: () => void }) {
             <span className="hg-display" style={{ color: 'var(--hg-taster)' }}>
               Band on
             </span>{' '}
-            — you&apos;re happy being stolen from a dance.
+            = you&apos;re happy being stolen from a dance.
           </p>
           <p>
             <span className="hg-display" style={{ color: 'var(--hg-soft)' }}>
               Band off
             </span>{' '}
-            — you do not consent to stealing.
+            = you do not consent to stealing.
           </p>
         </div>
 
