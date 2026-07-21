@@ -32,6 +32,7 @@ import {
 } from '@/lib/herrang/schedule';
 import { blockStyle, kindColor, kindLabel, BigSay, Chip } from './bits';
 import { BigNow } from './BigNow';
+import { StealableBand, StealingWarrants } from './StealingWarrants';
 
 // Tapping the sun line cycles through the mosquito forecast, then puts it
 // away again. No hint it does anything — same rule as the title's pep talk.
@@ -86,6 +87,9 @@ export function TonightView({
   // up full-screen. Lives here, not in BigNow, so closing it is just
   // setting it back to null.
   const [bigNow, setBigNow] = useState<DailyEvent | null>(null);
+  // The stealing warrants, opened by the little teal band below. See
+  // StealingWarrants.tsx — it's a secret, so no hint it opens anything.
+  const [warrantsOpen, setWarrantsOpen] = useState(false);
 
   const date = posterDate ?? clock.posterDate;
   const daily = dailyFor(data.dailies, date);
@@ -110,6 +114,10 @@ export function TonightView({
           }
         />
         <SunLine posterDate={date} />
+        <StealableBand onOpen={() => setWarrantsOpen(true)} />
+        {warrantsOpen && (
+          <StealingWarrants onClose={() => setWarrantsOpen(false)} />
+        )}
       </div>
     );
   }
@@ -296,6 +304,7 @@ export function TonightView({
       )}
 
       <SunLine posterDate={date} />
+      <StealableBand onOpen={() => setWarrantsOpen(true)} />
 
       {bigNow && (
         <BigNow
@@ -304,6 +313,9 @@ export function TonightView({
           clock={clock}
           onClose={() => setBigNow(null)}
         />
+      )}
+      {warrantsOpen && (
+        <StealingWarrants onClose={() => setWarrantsOpen(false)} />
       )}
     </div>
   );
