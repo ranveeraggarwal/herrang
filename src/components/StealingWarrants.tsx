@@ -155,13 +155,13 @@ export function StealingWarrants({ onClose }: { onClose: () => void }) {
             <span className="hg-display" style={{ color: 'var(--hg-taster)' }}>
               Band on
             </span>{' '}
-            — you&apos;re happy being stolen from a dance.
+            = you&apos;re happy being stolen from a dance.
           </p>
           <p>
             <span className="hg-display" style={{ color: 'var(--hg-soft)' }}>
               Band off
             </span>{' '}
-            — you do not consent to stealing.
+            = you do not consent to stealing.
           </p>
         </div>
 
@@ -186,7 +186,13 @@ export function StealingWarrants({ onClose }: { onClose: () => void }) {
           ))}
         </ol>
 
-        <p className="mt-6 text-xs" style={{ color: 'var(--hg-soft)' }}>
+        <p className="mt-6 text-sm font-bold">
+          What band? It&apos;s a little blue wristband that says{' '}
+          <span style={{ color: 'var(--hg-taster)' }}>STEALABLE</span>. Limited
+          edition, please share.
+        </p>
+
+        <p className="mt-4 text-xs" style={{ color: 'var(--hg-soft)' }}>
           Bands live at the info point. Tap away to put this back.
         </p>
       </div>
