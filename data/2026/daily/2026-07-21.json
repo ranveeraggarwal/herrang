@@ -14,8 +14,8 @@
     {"title": "DJ Felix", "venues": ["db"], "start": "23:45", "end": "01:30", "kind": "dj"},
     {"title": "DJ Jonas", "venues": ["db"], "start": "01:30", "end": "03:30", "kind": "dj"},
     {"title": "DJ Nii", "venues": ["db"], "start": "03:30", "end": "05:00", "openEnd": true, "kind": "dj"},
-    {"title": "Slow Drag Opening", "venues": ["fh"], "start": "00:00", "end": "00:45", "kind": "social"},
-    {"title": "Mimmi and the Original Blue", "venues": ["fh"], "start": "00:45", "end": "03:30", "kind": "show", "detail": "Band break: DJ Viktor"},
+    {"title": "Slow Drag Opening", "venues": ["fh"], "start": "00:00", "end": "00:30", "kind": "social"},
+    {"title": "Mimmi and the Original Blue", "venues": ["fh"], "start": "00:30", "end": "03:30", "kind": "show", "detail": "Band break: DJ Viktor"},
     {"title": "DJ Jach", "venues": ["fh"], "start": "03:30", "end": "05:00", "kind": "dj"},
     {"title": "DJ Omar", "venues": ["fh"], "start": "05:00", "end": "05:45", "openEnd": true, "kind": "dj"},
     {"title": "DJ Sam", "venues": ["lb"], "start": "00:30", "end": "02:30", "kind": "dj"}
