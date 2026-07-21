@@ -186,7 +186,13 @@ export function StealingWarrants({ onClose }: { onClose: () => void }) {
           ))}
         </ol>
 
-        <p className="mt-6 text-xs" style={{ color: 'var(--hg-soft)' }}>
+        <p className="mt-6 text-sm font-bold">
+          What band? It&apos;s a little blue wristband that says{' '}
+          <span style={{ color: 'var(--hg-taster)' }}>STEALABLE</span>. Limited
+          edition, please share.
+        </p>
+
+        <p className="mt-4 text-xs" style={{ color: 'var(--hg-soft)' }}>
           Bands live at the info point. Tap away to put this back.
         </p>
       </div>
