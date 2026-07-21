@@ -1,0 +1,33 @@
+{
+  "date": "2026-07-21",
+  "weekday": "Tuesday",
+  "title": "Tuesday's Activities",
+  "source": "A day in Herräng daily poster",
+  "note": "Times read off the poster grid — treat mid-hour times as ±15 min.",
+  "events": [
+    {"title": "Variety Revue", "venues": ["fh", "db", "lb"], "start": "21:00", "end": "22:00", "kind": "show"},
+    {"title": "Library Talk — Christi Jay Wells & Felix Berghäll", "venues": ["lb"], "start": "22:00", "end": "23:00", "kind": "special"},
+    {"title": "Electric Slide & Bus Stop with Ceren", "venues": ["ab"], "start": "22:00", "end": "23:00", "kind": "taster"},
+    {"title": "Listening & Communicating with Gabs & Karoline", "venues": ["sp"], "start": "22:00", "end": "23:00", "kind": "taster"},
+    {"title": "Al & Leon Charleston with Slops", "venues": ["sb"], "start": "22:00", "end": "23:00", "kind": "taster"},
+    {"title": "DJ Christophe", "venues": ["db"], "start": "22:00", "end": "23:45", "kind": "dj"},
+    {"title": "DJ Felix", "venues": ["db"], "start": "23:45", "end": "01:30", "kind": "dj"},
+    {"title": "DJ Jonas", "venues": ["db"], "start": "01:30", "end": "03:30", "kind": "dj"},
+    {"title": "DJ Nii", "venues": ["db"], "start": "03:30", "end": "05:00", "openEnd": true, "kind": "dj"},
+    {"title": "Slow Drag Opening", "venues": ["fh"], "start": "00:00", "end": "00:30", "kind": "social"},
+    {"title": "Mimmi and the Original Blue", "venues": ["fh"], "start": "00:30", "end": "03:30", "kind": "show", "detail": "Band break: DJ Viktor"},
+    {"title": "DJ Jach", "venues": ["fh"], "start": "03:30", "end": "05:00", "kind": "dj"},
+    {"title": "DJ Omar", "venues": ["fh"], "start": "05:00", "end": "05:45", "openEnd": true, "kind": "dj"},
+    {"title": "DJ Sam", "venues": ["lb"], "start": "00:30", "end": "02:30", "kind": "dj"}
+  ],
+  "specials": [
+    {"title": "Yoga", "venue": "fh", "start": "09:00", "end": "09:45", "kind": "special"},
+    {"title": "Learn/Teach an Instrument", "location": "Folkets Hus Plaza", "start": "15:00", "end": "16:00", "kind": "special"},
+    {"title": "Music Practice Jam", "location": "Folkets Hus Plaza", "start": "16:00", "end": "17:30", "kind": "jam"},
+    {"title": "Stretching", "venue": "fh", "start": "18:00", "end": "18:45", "kind": "special"},
+    {"title": "Round Table Talk: Why This Song Is Banned?", "location": "Klubben", "start": "18:00", "end": "19:10", "kind": "special"},
+    {"title": "Neurodivergent & Disability Community Meet Up", "location": "Klubben", "start": "19:10", "end": "20:30", "kind": "social"},
+    {"title": "Tap Jam", "venue": "db", "start": "19:10", "end": "20:00", "kind": "jam"},
+    {"title": "Bedlam Jam", "venue": "bar-bedlam", "start": "03:00", "kind": "jam"}
+  ]
+}
