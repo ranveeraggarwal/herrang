@@ -13,7 +13,8 @@
 import { useEffect } from 'react';
 
 /** The little teal band. Looks like the wristband it is; tapping opens the
- *  rules. Sits quietly under the program — decoration until you press it. */
+ *  rules. Sits quietly under the program — decoration until you press it, and
+ *  nothing says it's a button. Finding it is the point. */
 export function StealableBand({ onOpen }: { onOpen: () => void }) {
   return (
     <button
@@ -29,41 +30,6 @@ export function StealableBand({ onOpen }: { onOpen: () => void }) {
     >
       Stealable
     </button>
-  );
-}
-
-/** First-visit only: the same band, dropped in at the top of the screen so
- *  it gets seen without scrolling all the way to the quiet one under the
- *  program. Drops in, holds a beat, retreats back up — one run, then it's
- *  marked seen (onDone) and never nags again. The wrapper eats no taps
- *  except on the band itself. */
-export function StealableReveal({
-  onOpen,
-  onDone,
-}: {
-  onOpen: () => void;
-  onDone: () => void;
-}) {
-  return (
-    <div
-      className="hg-band-reveal pointer-events-none fixed inset-x-0 top-0 z-40 flex justify-center"
-      style={{ paddingTop: 'calc(env(safe-area-inset-top) + 10rem)' }}
-      onAnimationEnd={onDone}
-    >
-      <button
-        type="button"
-        onClick={onOpen}
-        aria-label="Stealing warrants"
-        className="hg-display pointer-events-auto rounded-full px-3.5 py-1 text-[11px] tracking-[0.14em]"
-        style={{
-          background: 'var(--hg-taster)',
-          color: 'var(--hg-on-block)',
-          border: '1px solid rgba(0,0,0,0.18)',
-        }}
-      >
-        Stealable
-      </button>
-    </div>
   );
 }
 
