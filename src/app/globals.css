@@ -131,50 +131,6 @@
   user-select: none;
 }
 
-/* First-visit reveal for the stealing-warrants band (StealingWarrants.tsx).
-   Drops the band in from above so a first-timer sees it without scrolling
-   down to the quiet one under the program, holds a beat, then retreats.
-   Runs once; the component marks itself seen on animationend. */
-.hg-band-reveal {
-  animation: hg-band-reveal 5.5s ease-in-out forwards;
-}
-
-@keyframes hg-band-reveal {
-  0% {
-    transform: translateY(-7rem);
-    opacity: 0;
-  }
-  14% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  88% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-7rem);
-    opacity: 0;
-  }
-}
-
-/* Reduced motion: no drop, just a quiet fade in and out over the same beat. */
-@media (prefers-reduced-motion: reduce) {
-  .hg-band-reveal {
-    animation: hg-band-fade 5.5s ease-in-out forwards;
-  }
-  @keyframes hg-band-fade {
-    0%,
-    100% {
-      opacity: 0;
-    }
-    10%,
-    88% {
-      opacity: 1;
-    }
-  }
-}
-
 /* The nav's "something is happening" marker — a flat dot. Pulses three
    times when it appears, then settles to a plain static dot — a persistent
    pulse next to a tab you're not on gets old fast. No glow/shadow, per the

@@ -12,7 +12,7 @@
 // "Already happened" archive at the bottom (splitStream), still dimmed,
 // still there for the "wait, when was the show?" conversations.
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { DailyEvent, HerrangData } from '@/lib/herrang/types';
 import {
   endsChip,
@@ -32,11 +32,7 @@ import {
 } from '@/lib/herrang/schedule';
 import { blockStyle, kindColor, kindLabel, BigSay, Chip } from './bits';
 import { BigNow } from './BigNow';
-import { StealableBand, StealableReveal, StealingWarrants } from './StealingWarrants';
-
-// Seen-once flag for the first-visit band drop-in. Once set, only the quiet
-// band under the program remains — the reveal never nags a returning dancer.
-const WARRANTS_SEEN_KEY = 'herrang.warrants.v1';
+import { StealableBand, StealingWarrants } from './StealingWarrants';
 
 // Tapping the sun line cycles through the mosquito forecast, then puts it
 // away again. No hint it does anything — same rule as the title's pep talk.
@@ -94,27 +90,6 @@ export function TonightView({
   // The stealing warrants, opened by the little teal band below. See
   // StealingWarrants.tsx — it's a secret, so no hint it opens anything.
   const [warrantsOpen, setWarrantsOpen] = useState(false);
-  // First visit only, and only on the live Tonight (never the next-day
-  // preview): drop the band in from the top so it's seen without scrolling.
-  const [reveal, setReveal] = useState(false);
-  useEffect(() => {
-    if (!live) return;
-    try {
-      if (!localStorage.getItem(WARRANTS_SEEN_KEY)) {
-        setReveal(true);
-        // Persist the moment it shows, not when the drop finishes — a reload
-        // or tab-away mid-animation still counts as "seen", so it drops in
-        // exactly once ever.
-        localStorage.setItem(WARRANTS_SEEN_KEY, '1');
-      }
-    } catch {
-      /* private mode — no reveal, no harm */
-    }
-  }, [live]);
-  const openWarrants = () => {
-    setWarrantsOpen(true);
-    setReveal(false);
-  };
 
   const date = posterDate ?? clock.posterDate;
   const daily = dailyFor(data.dailies, date);
@@ -139,10 +114,7 @@ export function TonightView({
           }
         />
         <SunLine posterDate={date} />
-        <StealableBand onOpen={openWarrants} />
-        {reveal && (
-          <StealableReveal onOpen={openWarrants} onDone={() => setReveal(false)} />
-        )}
+        <StealableBand onOpen={() => setWarrantsOpen(true)} />
         {warrantsOpen && (
           <StealingWarrants onClose={() => setWarrantsOpen(false)} />
         )}
@@ -332,11 +304,8 @@ export function TonightView({
       )}
 
       <SunLine posterDate={date} />
-      <StealableBand onOpen={openWarrants} />
+      <StealableBand onOpen={() => setWarrantsOpen(true)} />
 
-      {reveal && (
-        <StealableReveal onOpen={openWarrants} onDone={() => setReveal(false)} />
-      )}
       {bigNow && (
         <BigNow
           event={bigNow}

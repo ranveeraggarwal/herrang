@@ -107,11 +107,9 @@ don't remove one because it looks like dead or odd code. The current roster:
   "Stealable" band under tonight's program, mirroring the real silicone
   wristbands camp hands out. Tapping it opens the consent system for stealing
   dances (band on = happy to be stolen from; band off = not). The band looks
-  like decoration; nothing says it's a button. The four rules stay plain and
-  faithful on purpose — it's a real consent system, not a bit. On the very
-  first visit only (localStorage `herrang.warrants.v1`) a copy drops in from
-  the top and retreats, so it's seen without scrolling; after that just the
-  quiet band under the program remains.
+  like decoration; nothing says it's a button, and there's no reveal or
+  drop-in nudge — like the other eggs, finding it is the point. The four rules
+  stay plain and faithful on purpose — it's a real consent system, not a bit.
 
 Adding a new one: keep it silent (no tooltips, no sparkle icons), keep it
 offline, one joke per egg, and never let a shenanigan invent schedule data.
