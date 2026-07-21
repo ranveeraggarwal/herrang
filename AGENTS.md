@@ -103,6 +103,15 @@ don't remove one because it looks like dead or odd code. The current roster:
 - **The Shim Sham count-in** (`shenanigans.tsx`) — long-press anywhere for
   three seconds during party hours: SHIM SHAM? then 5-6-7-8, one poster
   color per beat, gone without comment.
+- **The stealing warrants** (`StealingWarrants.tsx`) — a little teal
+  "Stealable" band under tonight's program, mirroring the real silicone
+  wristbands camp hands out. Tapping it opens the consent system for stealing
+  dances (band on = happy to be stolen from; band off = not). The band looks
+  like decoration; nothing says it's a button. The four rules stay plain and
+  faithful on purpose — it's a real consent system, not a bit. On the very
+  first visit only (localStorage `herrang.warrants.v1`) a copy drops in from
+  the top and retreats, so it's seen without scrolling; after that just the
+  quiet band under the program remains.
 
 Adding a new one: keep it silent (no tooltips, no sparkle icons), keep it
 offline, one joke per egg, and never let a shenanigan invent schedule data.
