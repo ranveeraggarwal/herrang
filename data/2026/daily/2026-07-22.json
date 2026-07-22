@@ -11,14 +11,14 @@
     {"title": "Al Minns Savoy Shim Sham — Part 2, with Marco Scherrer", "venues": ["ab"], "start": "22:00", "end": "23:00", "kind": "taster"},
     {"title": "Ending Moves for Lindy Hop with Francesca & Davide", "venues": ["sp"], "start": "22:00", "end": "23:00", "kind": "taster"},
     {"title": "Trickeration Part 1 with Irene Largo", "venues": ["sb"], "start": "22:00", "end": "23:00", "kind": "taster"},
-    {"title": "DJ Omar", "venues": ["fh"], "start": "23:00", "end": "04:00", "kind": "dj"},
-    {"title": "Guest DJ", "venues": ["db"], "start": "23:30", "end": "00:30", "kind": "dj", "tba": true},
+    {"title": "DJ Omar", "venues": ["fh"], "start": "23:00", "end": "03:30", "kind": "dj"},
+    {"title": "Guest DJ", "venues": ["db"], "start": "23:30", "end": "00:30", "kind": "dj"},
     {"title": "DJ Victoria & DJ Maka", "venues": ["lb"], "start": "23:30", "end": "01:00", "kind": "dj", "theme": "R'nB"},
     {"title": "DJ Christophe", "venues": ["db"], "start": "00:30", "end": "03:30", "kind": "dj"},
     {"title": "DJ Deniz", "venues": ["lb"], "start": "01:00", "end": "02:30", "kind": "dj"},
     {"title": "DJ Erdi", "venues": ["lb"], "start": "02:30", "kind": "dj", "openEnd": true},
     {"title": "DJ Sam", "venues": ["db"], "start": "03:30", "kind": "dj", "openEnd": true},
-    {"title": "DJ Nii", "venues": ["fh"], "start": "04:00", "kind": "dj", "openEnd": true}
+    {"title": "DJ Nii", "venues": ["fh"], "start": "03:30", "kind": "dj", "openEnd": true}
   ],
   "specials": [
     {
