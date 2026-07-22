@@ -1,0 +1,125 @@
+{
+  "date": "2026-07-22",
+  "weekday": "Wednesday",
+  "title": "Wednesday's Activities",
+  "source": "Wednesday's Activities notice board",
+  "note": "Daytime side activities transcribed from the notice board; the evening program is ingested separately.",
+  "events": [],
+  "specials": [
+    {
+      "title": "Bike Tour to the Church",
+      "location": "In front of Bike Shop",
+      "start": "11:00",
+      "end": "12:00",
+      "kind": "special"
+    },
+    {
+      "title": "Geology Excursion",
+      "location": "In front of Folkets Hus",
+      "detail": "Herräng would not exist without its mines. So join the geology excursion and learn more about them. Appropriate for everyone who like cool rocks.",
+      "start": "12:00",
+      "end": "13:00",
+      "kind": "special"
+    },
+    {
+      "title": "Typewriting Poetry",
+      "location": "Lindy Hop Shop",
+      "start": "13:00",
+      "end": "14:00",
+      "kind": "special"
+    },
+    {
+      "title": "Self-Massage Feet and Hands",
+      "venue": "lb",
+      "detail": "We will learn different techniques to auto-massage our body to release feet and wrist pain. Bring your own body lotion/oil if you want.",
+      "start": "14:30",
+      "end": "15:00",
+      "kind": "special"
+    },
+    {
+      "title": "Costume Construction for Friday Party",
+      "location": "In front of Lindy Hop shop (Exhibition Room if it rains)",
+      "start": "14:00",
+      "end": "16:00",
+      "kind": "special"
+    },
+    {
+      "title": "Choir: Norwegian Drinking Song",
+      "location": "Small's Tent",
+      "detail": "Want to learn a Norwegian drinking song by heart? Don't get fooled by the \"drinking\" part, it is a nice sounding, easy-to-learn four part song. No singing experience required!",
+      "start": "14:30",
+      "end": "15:30",
+      "kind": "special"
+    },
+    {
+      "title": "Explore the Herräng DJ Booths",
+      "location": "Stairs of the DJ box",
+      "detail": "Are you a DJ (or want to be), curious about the places where DJs and tech crew work? Or are you just feeling nosy? Take a tour of the DJ booths and tech bridge with DJ Sam and tech crew. Everyone is welcome!",
+      "start": "15:00",
+      "end": "16:20",
+      "kind": "special"
+    },
+    {
+      "title": "Herräng Haiku Walk",
+      "location": "Outside of Roseland tent",
+      "detail": "Interested in nature, poetry or mindfulness? Then let's combine the three and go on a Ginko together, a walk in nature where we walk together and write haiku poems, to slow down and capture the Herräng nature and vibes. You'll learn about what haiku is, how to write it, and some examples from the masters before the walk.",
+      "start": "15:30",
+      "end": "16:30",
+      "kind": "special"
+    },
+    {
+      "title": "Tea Dance",
+      "venue": "db",
+      "detail": "Come in for a social dance at teatime.",
+      "start": "15:30",
+      "end": "16:30",
+      "kind": "social"
+    },
+    {
+      "title": "Learn to Make Fun Knots",
+      "location": "In front of Lindy Hop shop (Exhibition Room if it rains)",
+      "start": "16:00",
+      "end": "17:00",
+      "kind": "special"
+    },
+    {
+      "title": "Tango Class & Practice",
+      "venue": "db",
+      "detail": "Tango class for two levels and milonga.",
+      "start": "16:30",
+      "end": "18:20",
+      "kind": "taster"
+    },
+    {
+      "title": "Cultivating Awareness in Your Body",
+      "venue": "lb",
+      "detail": "We'll strengthen the connection to our bodies by sensing presence and leveraging various mindfulness techniques. Appropriate for anyone who wants to practice presence in their bodies, a key skill you'll hear professional dancers talk about.",
+      "start": "17:00",
+      "end": "18:00",
+      "kind": "special"
+    },
+    {
+      "title": "Body Percussion Meets Authentic Jazz",
+      "location": "Small's Tent",
+      "detail": "We'll explore how body percussion can naturally become part of your Authentic Jazz movement. We'll begin with a playful warm-up, discovering body percussion through group-connecting rhythm game and simple coordination exercises. From there, we'll gradually integrate these rhythmic tools into Authentic Jazz vocabulary, exploring how movement, rhythm and sound can support and inspire one another. This workshop is open level and welcomes everyone interested in rhythm, movement and jazz dance. Previous body percussion experience is not required.",
+      "start": "17:30",
+      "end": "18:50",
+      "kind": "taster"
+    },
+    {
+      "title": "Crochet Club with Sugar & Barbara",
+      "location": "Lindy Hop Shop",
+      "detail": "Make an octopus for friday party or bring your own project.",
+      "start": "18:00",
+      "end": "19:00",
+      "kind": "special"
+    },
+    {
+      "title": "Tap Jam",
+      "venue": "db",
+      "start": "19:30",
+      "end": "20:30",
+      "kind": "jam"
+    }
+  ]
+}
