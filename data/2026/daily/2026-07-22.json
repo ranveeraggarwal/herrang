@@ -2,9 +2,24 @@
   "date": "2026-07-22",
   "weekday": "Wednesday",
   "title": "Wednesday's Activities",
-  "source": "Wednesday's Activities notice board",
-  "note": "Daytime side activities transcribed from the notice board; the evening program is ingested separately.",
-  "events": [],
+  "source": "Wednesday's Activities notice board + A day in Herräng daily poster",
+  "note": "Times read off the poster grid — treat mid-hour times as ±15 min. Night theme: R'nB.",
+  "events": [
+    {"title": "Cabaret / Variety Revue", "venues": ["fh", "db", "lb"], "start": "21:00", "end": "22:00", "kind": "show"},
+    {"title": "Library Talk — Mr. Chester Whitmore", "venues": ["fh"], "start": "22:00", "end": "23:00", "kind": "special"},
+    {"title": "DJ Steve", "venues": ["db"], "start": "22:00", "end": "23:30", "kind": "dj"},
+    {"title": "Al Minns Savoy Shim Sham — Part 2, with Marco Scherrer", "venues": ["ab"], "start": "22:00", "end": "23:00", "kind": "taster"},
+    {"title": "Ending Moves for Lindy Hop with Francesca & Davide", "venues": ["sp"], "start": "22:00", "end": "23:00", "kind": "taster"},
+    {"title": "Trickeration Part 1 with Irene Largo", "venues": ["sb"], "start": "22:00", "end": "23:00", "kind": "taster"},
+    {"title": "DJ Omar", "venues": ["fh"], "start": "23:00", "end": "03:30", "kind": "dj"},
+    {"title": "Guest DJ", "venues": ["db"], "start": "23:30", "end": "00:30", "kind": "dj"},
+    {"title": "DJ Victoria & DJ Maka", "venues": ["lb"], "start": "23:30", "end": "01:00", "kind": "dj", "theme": "R'nB"},
+    {"title": "DJ Christophe", "venues": ["db"], "start": "00:30", "end": "03:30", "kind": "dj"},
+    {"title": "DJ Deniz", "venues": ["lb"], "start": "01:00", "end": "02:30", "kind": "dj"},
+    {"title": "DJ Erdi", "venues": ["lb"], "start": "02:30", "kind": "dj", "openEnd": true},
+    {"title": "DJ Sam", "venues": ["db"], "start": "03:30", "kind": "dj", "openEnd": true},
+    {"title": "DJ Nii", "venues": ["fh"], "start": "03:30", "kind": "dj", "openEnd": true}
+  ],
   "specials": [
     {
       "title": "Bike Tour to the Church",
@@ -119,6 +134,38 @@
       "venue": "db",
       "start": "19:30",
       "end": "20:30",
+      "kind": "jam"
+    },
+    {
+      "title": "Special Class with Ms. Sugar",
+      "venue": "fh",
+      "start": "14:00",
+      "end": "15:10",
+      "kind": "special"
+    },
+    {
+      "title": "Mini Concert with Nicholle Rochelle",
+      "location": "Lindy Hop Shop",
+      "start": "15:00",
+      "end": "15:45",
+      "kind": "special"
+    },
+    {
+      "title": "Herräng Throw Down",
+      "location": "Savoy Tent",
+      "start": "19:00",
+      "kind": "jam"
+    },
+    {
+      "title": "Slow Down Contest",
+      "venue": "fh",
+      "start": "00:00",
+      "kind": "special"
+    },
+    {
+      "title": "Bedlam Jam",
+      "venue": "bar-bedlam",
+      "start": "01:00",
       "kind": "jam"
     }
   ]
