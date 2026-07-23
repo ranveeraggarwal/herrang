@@ -59,6 +59,7 @@ export function TodayView(props: {
   return (
     <div className="flex flex-col gap-3">
       <TodayViewBody {...props} />
+      <EmailDisclaimer />
       <WhereAreThings venues={props.data.venues} />
       <ThisWeekCard
         data={props.data}
@@ -69,6 +70,19 @@ export function TodayView(props: {
         onPickTracks={props.onPickTracks}
       />
     </div>
+  );
+}
+
+/** Herräng emails course groups about last-minute room swaps faster than
+ * this app can be re-ingested. A wrong venue here is worse than no venue —
+ * say so plainly rather than let the app look more authoritative than a
+ * camp email. */
+function EmailDisclaimer() {
+  return (
+    <p className="px-1 text-xs" style={{ color: 'var(--hg-soft)' }}>
+      Got an email from Herräng about a schedule change? Trust the email —
+      this app only knows what&apos;s been typed in.
+    </p>
   );
 }
 
