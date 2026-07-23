@@ -15,7 +15,7 @@
     {"title": "DJ Sam", "venues": ["db"], "start": "02:00", "end": "04:00", "kind": "dj"},
     {"title": "DJ Victoria", "venues": ["db"], "start": "04:00", "kind": "dj", "openEnd": true},
     {"title": "DJ Omar", "venues": ["lb"], "start": "23:00", "end": "01:00", "kind": "dj", "theme": "Blues"},
-    {"title": "Live Blues Jam", "venues": ["lb"], "start": "01:00", "kind": "jam", "openEnd": true}
+    {"title": "Live Blues Jam", "venues": ["lb"], "start": "01:00", "kind": "dj", "openEnd": true}
   ],
   "specials": [
     {"title": "Yoga", "venue": "fh", "start": "09:00", "end": "09:45", "kind": "special"},
