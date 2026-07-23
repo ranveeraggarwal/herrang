@@ -1,0 +1,35 @@
+{
+  "date": "2026-07-23",
+  "weekday": "Thursday",
+  "title": "Thursday's Activities",
+  "source": "A day in Herräng daily poster",
+  "note": "Times read off the poster grid — treat mid-hour times as ±15 min. Night theme: Blues.",
+  "events": [
+    {"title": "Variety Revue", "venues": ["fh", "db", "lb"], "start": "21:00", "end": "22:00", "kind": "show"},
+    {"title": "Library Talk — Briana Ashley Stuart", "venues": ["lb"], "start": "22:00", "end": "23:00", "kind": "special"},
+    {"title": "Guest DJ", "venues": ["fh"], "start": "22:00", "end": "00:00", "kind": "dj"},
+    {"title": "DJ Nii", "venues": ["fh"], "start": "00:00", "end": "02:00", "kind": "dj"},
+    {"title": "DJ Yulai", "venues": ["fh"], "start": "02:00", "end": "04:00", "kind": "dj"},
+    {"title": "DJ Christophe", "venues": ["fh"], "start": "04:00", "kind": "dj", "openEnd": true},
+    {"title": "DJ Simon", "venues": ["db"], "start": "00:00", "end": "02:00", "kind": "dj"},
+    {"title": "DJ Sam", "venues": ["db"], "start": "02:00", "end": "04:00", "kind": "dj"},
+    {"title": "DJ Victoria", "venues": ["db"], "start": "04:00", "kind": "dj", "openEnd": true},
+    {"title": "DJ Omar", "venues": ["lb"], "start": "23:00", "end": "01:00", "kind": "dj", "theme": "Blues"},
+    {"title": "Live Blues Jam", "venues": ["lb"], "start": "01:00", "kind": "dj", "openEnd": true}
+  ],
+  "specials": [
+    {"title": "Yoga", "venue": "fh", "start": "09:00", "end": "09:45", "kind": "special"},
+    {"title": "Reading a Music Chart for Beginners", "venue": "lb", "start": "14:00", "end": "15:00", "kind": "special"},
+    {"title": "Women & Non-Binary Music Jam", "location": "In front of Folkets Hus", "start": "15:00", "end": "16:30", "kind": "jam"},
+    {"title": "Men Discussion Group", "location": "Klubben", "start": "15:10", "end": "16:40", "kind": "special"},
+    {"title": "BIPOC Community Chit Chat", "location": "Klubben", "start": "16:50", "end": "17:50", "kind": "special"},
+    {"title": "DJ Meet Up", "location": "In front of Folkets Hus", "start": "17:00", "end": "18:00", "kind": "special"},
+    {"title": "Stretching", "venue": "fh", "start": "18:00", "end": "18:45", "kind": "special"},
+    {"title": "Round Table Talk: Organisers/Scene Leaders — Today's Challenges", "location": "Klubben", "start": "18:00", "end": "19:10", "kind": "special"},
+    {"title": "Herräng Tap Battle", "venue": "db", "start": "19:10", "end": "20:00", "kind": "jam"},
+    {"title": "Swing Rueda with Nathan", "start": "19:30", "end": "20:30", "kind": "taster"},
+    {"title": "Intuitive & Cross-Intuitive Arms' Movement in Solo Jazz with Marta", "start": "19:30", "end": "20:30", "kind": "taster"},
+    {"title": "Welcome to the Charleston Matrix with Patrick", "start": "19:30", "end": "20:30", "kind": "taster"},
+    {"title": "Pub Night", "location": "Wine Bar (Heaven's Kitchen if it rains)", "start": "22:00", "end": "23:30", "kind": "social"}
+  ]
+}
