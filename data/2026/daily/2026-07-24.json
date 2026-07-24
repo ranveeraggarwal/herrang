@@ -1,0 +1,30 @@
+{
+  "date": "2026-07-24",
+  "weekday": "Friday",
+  "title": "Friday's Activities",
+  "source": "A day in Herräng daily poster",
+  "note": "Times read off the poster grid — treat mid-hour times as ±15 min.",
+  "events": [
+    {"title": "DJ Victoria", "venues": ["fh"], "start": "21:00", "end": "23:00", "kind": "dj"},
+    {"title": "Guest DJ", "venues": ["fh"], "start": "23:00", "end": "01:00", "kind": "dj"},
+    {"title": "DJ Christophe", "venues": ["fh"], "start": "01:00", "end": "03:00", "kind": "dj"},
+    {"title": "DJ Maria", "venues": ["fh"], "start": "03:00", "end": "04:00", "kind": "dj"},
+    {"title": "Collab DJ", "venues": ["fh"], "start": "04:00", "end": "05:00", "openEnd": true, "kind": "dj"},
+    {"title": "DJ Nii", "venues": ["db"], "start": "21:00", "end": "23:00", "kind": "dj"},
+    {"title": "Siberian Palladites", "venues": ["db"], "start": "23:00", "end": "01:00", "kind": "show", "detail": "Band break: DJ Nii"},
+    {"title": "DJ Roo", "venues": ["db"], "start": "01:00", "end": "03:00", "kind": "dj"},
+    {"title": "DJ Yulai", "venues": ["db"], "start": "03:00", "end": "05:00", "openEnd": true, "kind": "dj"},
+    {"title": "DJ Sam", "venues": ["lb"], "start": "23:00", "end": "00:00", "kind": "dj", "detail": "Swing-Latin jazz"},
+    {"title": "DJ Gabs", "venues": ["lb"], "start": "00:00", "end": "01:00", "kind": "dj", "detail": "Latin jazz"},
+    {"title": "Latin Party", "venues": ["lb"], "start": "01:00", "end": "04:00", "kind": "dj", "detail": "Dembow · Reggaeton · Salsa Cumbia · Merengue"}
+  ],
+  "specials": [
+    {"title": "Yoga", "venue": "fh", "start": "09:00", "end": "09:45", "kind": "special"},
+    {"title": "Learn/Teach an Instrument", "location": "Folkets Hus Plaza", "start": "15:00", "end": "16:00", "kind": "special"},
+    {"title": "Music Practice Jam", "location": "Folkets Hus Plaza", "start": "16:00", "end": "17:30", "kind": "jam"},
+    {"title": "Tap Jam", "venue": "db", "start": "19:10", "end": "20:00", "kind": "jam"},
+    {"title": "Friday Party Festivities", "location": "Folkets Hus Plaza", "start": "21:00", "detail": "Performance, masked dancers, costume competition, deep poetry, treasure hunt.", "kind": "social"},
+    {"title": "Herräng Throw Down Finals", "venue": "db", "start": "00:00", "kind": "special"},
+    {"title": "Bedlam Jam", "venue": "bar-bedlam", "start": "01:00", "detail": "After the band", "kind": "jam"}
+  ]
+}
